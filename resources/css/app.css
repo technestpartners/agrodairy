@@ -6,56 +6,74 @@
 
 @layer base {
     :root {
-        --color-primary-900: #0a251a;
-        --color-primary-800: #0f3827;
-        --color-primary-700: #154c35;
-        --color-primary-600: #1a6345;
-        --color-primary-500: #23835c;
-        --color-gold-500: #c59b27;
-        --color-gold-600: #a98218;
-        --color-beige-50: #fbf9f5;
-        --color-beige-100: #f5efe4;
-        --color-beige-200: #ebe2d0;
-        --color-earth-800: #3c2a1e;
+        --color-primary-950: #072212;
+        --color-primary-900: #0b3f1d;
+        --color-primary-800: #13612e;
+        --color-primary-700: #287a37;
+        --color-primary-600: #4c9a3a;
+        --color-lime-500: #7dc242;
+        --color-gold-500: #f59e0b;
+        --color-gold-600: #d97706;
+        --color-gold-yellow: #ffc928;
+        --color-beige-50: #faf8f5;
+        --color-beige-100: #f7f4ec;
+        --color-beige-200: #ede7da;
     }
 
     body {
         font-family: 'Inter', system-ui, -apple-system, sans-serif;
         background-color: #faf8f5;
-        color: #1f2937;
+        color: #1a202c;
         overflow-x: hidden;
     }
 
     h1, h2, h3, h4, .font-heading {
         font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+        text-wrap: balance;
     }
 }
 
 /* Glassmorphism & Micro-Interactions */
 .glass-nav {
-    background: rgba(255, 255, 255, 0.94);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 }
 
 .glass-dark {
-    background: rgba(10, 37, 26, 0.88);
+    background: rgba(11, 63, 29, 0.88);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
 }
 
 .gold-gradient {
-    background: linear-gradient(135deg, #d4af37 0%, #aa771c 100%);
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
 }
 
 .gold-gradient-text {
-    background: linear-gradient(135deg, #e5c053 0%, #c49622 100%);
+    background: linear-gradient(135deg, #ffd15c 0%, #e6a11e 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .forest-gradient {
-    background: linear-gradient(135deg, #0f3827 0%, #061c13 100%);
+    background: linear-gradient(135deg, #0b3f1d 0%, #06200f 100%);
+}
+
+/* Section divider with subtle pill accent */
+.section-accent-pill {
+    position: relative;
+}
+.section-accent-pill::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #7dc242;
+    border-radius: 9999px;
 }
 
 /* Custom Scrollbar */
@@ -67,11 +85,11 @@
     background: #f1ede4;
 }
 ::-webkit-scrollbar-thumb {
-    background: #1b5e3f;
+    background: #13612e;
     border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #0f3827;
+    background: #0b3f1d;
 }
 
 /* Print Styles for Quotations */

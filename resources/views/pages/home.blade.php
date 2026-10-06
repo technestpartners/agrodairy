@@ -73,6 +73,88 @@
     </div>
 </section>
 
+<!-- Hero Floating Trust Strip (Negative Margin Overlap inspired by Elysium Agrico) -->
+<div class="relative z-20 -mt-10 sm:-mt-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+    <div class="bg-white rounded-2xl shadow-2xl border border-stone-200/90 p-6 sm:p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- 1. Full & Mixed Containers -->
+        <div class="flex items-start space-x-3.5">
+            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center shrink-0 border border-emerald-200/60 font-bold text-xl">
+                📦
+            </div>
+            <div>
+                <b class="text-sm font-bold text-emerald-950 font-heading block">Full & Mixed Containers</b>
+                <span class="text-xs text-stone-600 leading-relaxed block mt-0.5">Combine Peanuts, Sesame, Cumin, and Pulses in one 20ft/40ft container with separate marking.</span>
+            </div>
+        </div>
+
+        <!-- 2. Sortex Precision -->
+        <div class="flex items-start space-x-3.5">
+            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center shrink-0 border border-emerald-200/60 font-bold text-xl">
+                🔬
+            </div>
+            <div>
+                <b class="text-sm font-bold text-emerald-950 font-heading block">Buhler Sortex Precision</b>
+                <span class="text-xs text-stone-600 leading-relaxed block mt-0.5">Up to 99.95% purity grading with triple laser optical cameras and zero foreign admixture.</span>
+            </div>
+        </div>
+
+        <!-- 3. Port Proximity -->
+        <div class="flex items-start space-x-3.5">
+            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center shrink-0 border border-emerald-200/60 font-bold text-xl">
+                ⚓
+            </div>
+            <div>
+                <b class="text-sm font-bold text-emerald-950 font-heading block">Mundra & Pipavav Ports</b>
+                <span class="text-xs text-stone-600 leading-relaxed block mt-0.5">Direct highway access within 4-6 hours to India's premier deep-water container gateways.</span>
+            </div>
+        </div>
+
+        <!-- 4. Batch Traceability -->
+        <div class="flex items-start space-x-3.5">
+            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center shrink-0 border border-emerald-200/60 font-bold text-xl">
+                🔍
+            </div>
+            <div>
+                <b class="text-sm font-bold text-emerald-950 font-heading block">Batch Traceability</b>
+                <span class="text-xs text-stone-600 leading-relaxed block mt-0.5">Digital tracking from Saurashtra farm-gate cluster to vessel container seal & Phytosanitary COA.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Batch Traceability Search Widget on Homepage -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+    <div class="bg-gradient-to-r from-emerald-900 to-emerald-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-emerald-700/50 flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div class="max-w-xl">
+            <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Live Consignment Verification</span>
+            <h3 class="text-xl sm:text-2xl font-bold font-heading text-white mt-1">Verify Harvest Origin & Lab Assay by Lot Number</h3>
+            <p class="text-xs text-emerald-200 mt-2 leading-relaxed">
+                Enter your issued Agro Dairy export batch code to inspect cleaning date, moisture, aflatoxin ppm, container bolt seal, and phytosanitary certificate.
+            </p>
+        </div>
+        <div class="w-full lg:w-auto shrink-0">
+            <form action="{{ route('quality.traceability.lookup') }}" method="POST" class="flex flex-col sm:flex-row gap-2.5">
+                @csrf
+                <div class="relative">
+                    <input type="text" name="batch_code" id="home_batch_code" value="AGRO-PN-2026-0814" required
+                           placeholder="e.g. AGRO-PN-2026-0814"
+                           class="w-full sm:w-72 px-4 py-3 bg-white text-stone-900 font-mono text-xs uppercase font-bold rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                </div>
+                <button type="submit" class="px-6 py-3 bg-amber-500 hover:bg-amber-400 text-stone-950 font-extrabold text-xs rounded-xl transition shadow flex items-center justify-center space-x-1.5">
+                    <span>Authenticate Lot</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </button>
+            </form>
+            <div class="mt-2 text-[11px] text-emerald-300 flex items-center space-x-2">
+                <span>Demo verified codes:</span>
+                <button type="button" onclick="document.getElementById('home_batch_code').value='AGRO-PN-2026-0814'" class="underline text-amber-300 font-mono">AGRO-PN-2026-0814</button>
+                <span>•</span>
+                <button type="button" onclick="document.getElementById('home_batch_code').value='AGRO-SS-2026-0922'" class="underline text-amber-300 font-mono">AGRO-SS-2026-0922</button>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Company Value Proposition & Trust Pillars -->
 <section class="py-20 bg-stone-50 border-b border-stone-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -401,6 +483,91 @@
     </div>
 </section>
 
+<!-- Export Tools Spotlight (Calculators & Trade Utilities) -->
+<section class="py-20 bg-stone-100/80 border-t border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+            <span class="text-xs font-bold uppercase tracking-widest text-emerald-800">Operational Decision Tools</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-emerald-950 mt-2">
+                International Trade & Export Tools
+            </h2>
+            <p class="text-xs sm:text-sm text-stone-500 mt-2">
+                Instant calculations for logistics managers, procurement executives, and global trade desks.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- 1. Container Load Calculator -->
+            <a href="{{ route('tools.container_calculator') }}" class="group bg-white rounded-2xl p-6 border border-stone-200/90 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center font-bold text-xl mb-4 group-hover:bg-emerald-900 group-hover:text-white transition">
+                        🚢
+                    </div>
+                    <h3 class="text-base font-bold font-heading text-emerald-950 group-hover:text-emerald-800 transition">Container Load Calculator</h3>
+                    <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                        Calculate exact 20ft & 40ft stuffing capacities, bag counts (25kg / 50kg), gross weights, and payload utilization.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-emerald-800 group-hover:text-emerald-950">
+                    <span>Calculate Payload</span>
+                    <span class="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+            </a>
+
+            <!-- 2. Landed Cost Calculator -->
+            <a href="{{ route('tools.landed_cost') }}" class="group bg-white rounded-2xl p-6 border border-stone-200/90 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center font-bold text-xl mb-4 group-hover:bg-emerald-900 group-hover:text-white transition">
+                        💰
+                    </div>
+                    <h3 class="text-base font-bold font-heading text-emerald-950 group-hover:text-emerald-800 transition">Landed Cost (CIF) Estimator</h3>
+                    <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                        Compute FOB + Ocean Freight + Marine Insurance = CIF + Customs Duty to estimate your per-metric-ton landing price.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-emerald-800 group-hover:text-emerald-950">
+                    <span>Estimate CIF Cost</span>
+                    <span class="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+            </a>
+
+            <!-- 3. HS Code Finder -->
+            <a href="{{ route('tools.hs_codes') }}" class="group bg-white rounded-2xl p-6 border border-stone-200/90 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center font-bold text-xl mb-4 group-hover:bg-emerald-900 group-hover:text-white transition">
+                        📑
+                    </div>
+                    <h3 class="text-base font-bold font-heading text-emerald-950 group-hover:text-emerald-800 transition">HS Code Tariff Directory</h3>
+                    <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                        Search Indian Harmonized System commodity codes for Peanuts (1202), Sesame (1207), Cumin (0909), and Pulses.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-emerald-800 group-hover:text-emerald-950">
+                    <span>Search Tariffs</span>
+                    <span class="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+            </a>
+
+            <!-- 4. Indian Crop Calendar -->
+            <a href="{{ route('tools.crop_calendar') }}" class="group bg-white rounded-2xl p-6 border border-stone-200/90 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center font-bold text-xl mb-4 group-hover:bg-emerald-900 group-hover:text-white transition">
+                        📅
+                    </div>
+                    <h3 class="text-base font-bold font-heading text-emerald-950 group-hover:text-emerald-800 transition">Crop Harvest Calendar</h3>
+                    <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                        Track sowing, harvesting, and export dispatch availability for Kharif & Rabi crops across Gujarat agricultural belts.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-emerald-800 group-hover:text-emerald-950">
+                    <span>View Calendar</span>
+                    <span class="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
 <!-- Certifications Bar -->
 <section class="py-16 bg-white border-t border-stone-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -519,3 +686,24 @@
     </div>
 </section>
 @endsection
+
+@push('schema')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'FAQPage',
+    '@id' => url('/') . '#faq',
+    'mainEntity' => $faqs->map(function($faq) {
+        return [
+            '@type' => 'Question',
+            'name' => $faq->question,
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text' => strip_tags($faq->answer),
+            ]
+        ];
+    })->values()->all()
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
+</script>
+@endpush
+

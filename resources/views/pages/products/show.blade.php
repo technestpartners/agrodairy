@@ -211,3 +211,27 @@
     </div>
 </div>
 @endsection
+
+@push('schema')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'Product',
+    'name' => $product->name,
+    'description' => $product->meta_description ?? $product->short_description,
+    'image' => $product->main_image ? [url($product->main_image)] : [url('/images/logo.png')],
+    'sku' => $product->sku ?? ('AGRO-' . $product->id),
+    'mpn' => $product->hs_code ?? 'AGRO-HS',
+    'brand' => [
+        '@type' => 'Brand',
+        'name' => 'Agro Dairy Export LLP'
+    ],
+    'category' => $product->category->name,
+    'countryOfOrigin' => [
+        '@type' => 'Country',
+        'name' => 'India'
+    ]
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
+</script>
+@endpush
+
