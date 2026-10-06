@@ -1,0 +1,86 @@
+@import 'tailwindcss';
+
+@source '../views/**/*.blade.php';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@layer base {
+    :root {
+        --color-primary-900: #0a251a;
+        --color-primary-800: #0f3827;
+        --color-primary-700: #154c35;
+        --color-primary-600: #1a6345;
+        --color-primary-500: #23835c;
+        --color-gold-500: #c59b27;
+        --color-gold-600: #a98218;
+        --color-beige-50: #fbf9f5;
+        --color-beige-100: #f5efe4;
+        --color-beige-200: #ebe2d0;
+        --color-earth-800: #3c2a1e;
+    }
+
+    body {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        background-color: #faf8f5;
+        color: #1f2937;
+        overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .font-heading {
+        font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+    }
+}
+
+/* Glassmorphism & Micro-Interactions */
+.glass-nav {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-dark {
+    background: rgba(10, 37, 26, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.gold-gradient {
+    background: linear-gradient(135deg, #d4af37 0%, #aa771c 100%);
+}
+
+.gold-gradient-text {
+    background: linear-gradient(135deg, #e5c053 0%, #c49622 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.forest-gradient {
+    background: linear-gradient(135deg, #0f3827 0%, #061c13 100%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1ede4;
+}
+::-webkit-scrollbar-thumb {
+    background: #1b5e3f;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #0f3827;
+}
+
+/* Print Styles for Quotations */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    body {
+        background: white !important;
+        color: black !important;
+    }
+}
