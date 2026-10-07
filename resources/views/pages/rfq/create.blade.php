@@ -125,10 +125,10 @@
                         <div>
                             <label for="incoterm" class="block text-xs font-bold text-brand-forest-900 uppercase tracking-wider mb-2">Preferred Incoterm *</label>
                             <select name="incoterm" id="incoterm" class="w-full px-4 py-3 bg-brand-beige-50 border border-brand-beige-300 rounded-xl text-sm focus:ring-2 focus:ring-brand-forest-800">
-                                <option value="FOB" {{ old('incoterm') == 'FOB' ? 'selected' : '' }}>FOB Mundra / Kandla Port</option>
+                                <option value="FOB" {{ old('incoterm') == 'FOB' ? 'selected' : '' }}>FOB Mundra / Kandla / Pipavav / Hazira</option>
                                 <option value="CIF" {{ old('incoterm', 'CIF') == 'CIF' ? 'selected' : '' }}>CIF Discharge Port (Cost, Ins, Freight)</option>
                                 <option value="CFR" {{ old('incoterm') == 'CFR' ? 'selected' : '' }}>CFR Discharge Port (Cost & Freight)</option>
-                                <option value="EXW" {{ old('incoterm') == 'EXW' ? 'selected' : '' }}>EXW Factory (Rajkot, Gujarat)</option>
+                                <option value="EXW" {{ old('incoterm') == 'EXW' ? 'selected' : '' }}>EXW Gondal / Surat Terminal (Gujarat)</option>
                             </select>
                         </div>
 

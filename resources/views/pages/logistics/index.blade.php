@@ -34,7 +34,7 @@
                     <h3 class="text-2xl font-bold font-display text-brand-forest-900 mb-1">{{ $port->name }}</h3>
                     <p class="text-xs text-neutral-500 mb-4">{{ $port->country }} &bull; Gujarat Coastline</p>
                     <p class="text-sm text-neutral-600 leading-relaxed mb-6">
-                        Deep-water all-weather commercial port equipped with automated post-panamax gantry cranes, dedicated CFS facilities, and direct national highway connectivity from our Rajkot processing terminal.
+                        Deep-water all-weather commercial port equipped with automated post-panamax gantry cranes, dedicated CFS facilities, and direct national highway connectivity from our Gondal and Surat terminals.
                     </p>
                     <div class="pt-4 border-t border-brand-beige-100 flex items-center justify-between text-xs">
                         <span class="text-neutral-500">Transit from Plant: <strong>4.5 Hours</strong></span>

@@ -13,7 +13,7 @@
     <div class="max-w-md w-full">
         <!-- Logo & Title -->
         <div class="text-center mb-8">
-            <img src="/images/logo.png" alt="Agro Dairy Export LLP" class="h-16 w-auto mx-auto mb-4 brightness-110">
+            <img src="/images/logo-dark.png" alt="Agro Dairy Export LLP" class="h-16 w-auto mx-auto mb-4">
             <h1 class="text-2xl font-bold font-display text-white">Enterprise Export Portal</h1>
             <p class="text-xs text-brand-beige-300 mt-1">Authorized personnel only &bull; Agro Dairy Export LLP</p>
         </div>

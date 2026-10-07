@@ -15,11 +15,12 @@ class ContactController extends Controller
     public function index(): View
     {
         $faqs = Faq::active()->take(5)->get();
-        $headOffice = Setting::get('head_office_address');
-        $plantAddress = Setting::get('processing_plant_address');
-        $primaryEmail = Setting::get('primary_email', 'exports@agrodairy.com');
-        $primaryPhone = Setting::get('primary_phone', '+91 98250 12345');
-        $whatsApp = Setting::get('whatsapp_number', '+919825012345');
+        $headOffice = Setting::get('head_office_address', 'Office No. -701, THE FUTURE CORNER, Sarthana, Surat- 395013, Gujarat, India');
+        $plantAddress = Setting::get('processing_plant_address', 'Saurashtra Processing Terminal, GIDC Industrial Estate, Gondal - 360311, Dist. Rajkot, Gujarat, India');
+        $primaryEmail = Setting::get('primary_email', 'agrodairyexportllp@gmail.com');
+        $primaryPhone = Setting::get('primary_phone', '+91 90233 63680');
+        $whatsApp = Setting::get('whatsapp_number', '+919023363680');
+        $contactPerson = Setting::get('contact_person', 'J.P. Vora');
 
         return view('pages.contact.index', compact(
             'faqs',
@@ -27,7 +28,8 @@ class ContactController extends Controller
             'plantAddress',
             'primaryEmail',
             'primaryPhone',
-            'whatsApp'
+            'whatsApp',
+            'contactPerson'
         ));
     }
 

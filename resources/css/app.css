@@ -1,30 +1,93 @@
 @import 'tailwindcss';
 
+@theme {
+    --color-emerald-50: #effbf9;
+    --color-emerald-100: #d6f5f1;
+    --color-emerald-200: #aeeae3;
+    --color-emerald-300: #74dad0;
+    --color-emerald-400: #29c2b7;
+    --color-emerald-500: #00a79d;
+    --color-emerald-600: #008f86;
+    --color-emerald-700: #007068;
+    --color-emerald-800: #033e3a;
+    --color-emerald-900: #022b28;
+    --color-emerald-950: #011715;
+
+    --color-teal-50: #effbf9;
+    --color-teal-100: #d6f5f1;
+    --color-teal-200: #aeeae3;
+    --color-teal-300: #74dad0;
+    --color-teal-400: #29c2b7;
+    --color-teal-500: #00a79d;
+    --color-teal-600: #008f86;
+    --color-teal-700: #007068;
+    --color-teal-800: #033e3a;
+    --color-teal-900: #022b28;
+    --color-teal-950: #011715;
+
+    --color-brand-teal: #00a79d;
+    --color-brand-darkteal: #033e3a;
+    --color-brand-cyan: #00d9cc;
+
+    --color-brand-forest-500: #00a79d;
+    --color-brand-forest-600: #008f86;
+    --color-brand-forest-700: #007068;
+    --color-brand-forest-800: #033e3a;
+    --color-brand-forest-900: #022b28;
+    --color-brand-forest-950: #011715;
+
+    --color-brand-gold-400: #fbbf24;
+    --color-brand-gold-500: #f59e0b;
+    --color-brand-gold-600: #d97706;
+
+    --color-brand-beige-50: #f8fafa;
+    --color-brand-beige-100: #eff7f6;
+    --color-brand-beige-200: #d7ece9;
+    --color-brand-beige-300: #bce0dc;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source '../views/**/*.blade.php';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
 @layer base {
     :root {
-        --color-primary-950: #072212;
-        --color-primary-900: #0b3f1d;
-        --color-primary-800: #13612e;
-        --color-primary-700: #287a37;
-        --color-primary-600: #4c9a3a;
-        --color-lime-500: #7dc242;
+        --color-teal-500: #00a79d;
+        --color-teal-600: #008b82;
+        --color-teal-700: #007068;
+        --color-teal-800: #033e3a;
+        --color-teal-900: #022825;
+        --color-teal-950: #011715;
+        --color-mint-400: #00d9cc;
+        --color-mint-500: #00c4b8;
         --color-gold-500: #f59e0b;
         --color-gold-600: #d97706;
-        --color-gold-yellow: #ffc928;
-        --color-beige-50: #faf8f5;
-        --color-beige-100: #f7f4ec;
-        --color-beige-200: #ede7da;
     }
 
     body {
         font-family: 'Inter', system-ui, -apple-system, sans-serif;
-        background-color: #faf8f5;
-        color: #1a202c;
+        background-color: #f8fafa;
+        color: #1a2c2a;
         overflow-x: hidden;
+        transition: background-color 0.25s ease, color 0.25s ease;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    /* Fast, lag-free mobile taps (eliminates 300ms click delay) */
+    button, a, input, select, textarea {
+        touch-action: manipulation;
+    }
+
+    .dark body {
+        background-color: #061514;
+        color: #e2eeec;
     }
 
     h1, h2, h3, h4, .font-heading {
@@ -35,15 +98,32 @@
 
 /* Glassmorphism & Micro-Interactions */
 .glass-nav {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 }
 
+.dark .glass-nav {
+    background: rgba(6, 21, 20, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-color: rgba(19, 56, 52, 0.8) !important;
+}
+
 .glass-dark {
-    background: rgba(11, 63, 29, 0.88);
+    background: rgba(3, 62, 58, 0.88);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+}
+
+.teal-gradient {
+    background: linear-gradient(135deg, #00a79d 0%, #033e3a 100%);
+}
+
+.teal-gradient-text {
+    background: linear-gradient(135deg, #00d9cc 0%, #00a79d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .gold-gradient {
@@ -51,16 +131,12 @@
 }
 
 .gold-gradient-text {
-    background: linear-gradient(135deg, #ffd15c 0%, #e6a11e 100%);
+    background: linear-gradient(135deg, #ffd15c 0%, #00d9cc 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.forest-gradient {
-    background: linear-gradient(135deg, #0b3f1d 0%, #06200f 100%);
-}
-
-/* Section divider with subtle pill accent */
+/* Section divider with subtle teal pill accent */
 .section-accent-pill {
     position: relative;
 }
@@ -72,8 +148,31 @@
     transform: translateX(-50%);
     width: 80px;
     height: 4px;
-    background-color: #7dc242;
+    background-color: #00a79d;
     border-radius: 9999px;
+}
+
+/* Safe area for modern notched iPhones/Androids */
+.safe-area-pb {
+    padding-bottom: max(0.625rem, env(safe-area-inset-bottom, 0.625rem));
+}
+
+/* Smooth Touch-Friendly Table Scroller */
+.table-responsive-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+}
+
+/* Card Hover Micro-Lift */
+.hover-lift {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-lift:hover {
+    transform: translateY(-3px);
+}
+.hover-lift:active {
+    transform: translateY(-1px) scale(0.99);
 }
 
 /* Custom Scrollbar */
@@ -82,14 +181,17 @@
     height: 8px;
 }
 ::-webkit-scrollbar-track {
-    background: #f1ede4;
+    background: #edf3f2;
+}
+.dark ::-webkit-scrollbar-track {
+    background: #061514;
 }
 ::-webkit-scrollbar-thumb {
-    background: #13612e;
+    background: #00a79d;
     border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #0b3f1d;
+    background: #033e3a;
 }
 
 /* Print Styles for Quotations */

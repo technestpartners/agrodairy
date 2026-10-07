@@ -43,4 +43,10 @@ class CompanyController extends Controller
     {
         return view('pages.company.careers');
     }
+
+    public function verify(): View
+    {
+        $certifications = Certification::active()->orderBy('sort_order')->get();
+        return view('pages.company.verify', compact('certifications'));
+    }
 }

@@ -85,18 +85,36 @@ class ExportCalculatorService
 
         $utilizationPercent = min(100, round(($netWeightKg / $maxPayloadKg) * 100, 1));
 
+        $tareContainerKg = match($containerType) {
+            '40ft' => 3780,
+            '40ft_hc' => 3900,
+            default => 2230,
+        };
+        $totalVgm = $grossWeightMt + ($tareContainerKg / 1000);
+
         return [
             'container_name' => $container['name'],
             'bag_weight_kg' => $bagWeightKg,
             'total_bags' => $totalBags,
             'estimated_bags' => $totalBags,
             'net_weight_kg' => round($netWeightKg, 2),
+            'estimated_net_weight_kg' => round($netWeightKg, 2),
             'net_weight_mt' => round($netWeightMt, 3),
             'estimated_net_weight_mt' => round($netWeightMt, 3),
             'gross_weight_kg' => round($grossWeightKg, 2),
             'gross_weight_mt' => round($grossWeightMt, 3),
+            'estimated_gross_weight_mt' => round($grossWeightMt, 3),
+            'container_tare_kg' => $tareContainerKg,
+            'total_vgm_mt' => round($totalVgm, 3),
             'max_allowed_payload_mt' => $maxPayloadKg / 1000,
+            'max_payload_allowed_mt' => $maxPayloadKg / 1000,
+            'container_cbm' => $container['max_volume_cbm'] ?? 33.2,
             'payload_utilization_percent' => $utilizationPercent,
+            'assumptions' => [
+                'Payload calculated considering standard marine highway weight limits from Mundra & Kandla port berths.',
+                'Tare weight includes typical multi-ply paper or polypropylene bag construction.',
+                'Moisture content within standard export specification (under 7.0% - 8.0%).',
+            ],
             'disclaimer' => 'Loading capacity may vary slightly depending on bag packaging material (Jute/PP/Vacuum/Bulk), palletization, and destination port axle weight limitations.',
         ];
     }
@@ -132,16 +150,23 @@ class ExportCalculatorService
         return [
             'currency' => $currency,
             'quantity_mt' => $quantityMt,
+            'customs_duty_percent' => $customsDutyPercent,
             'fob_total' => round($fobTotal, 2),
+            'total_fob_price' => round($fobTotal, 2),
             'freight_total' => round($freightTotal, 2),
+            'total_freight' => round($freightTotal, 2),
             'insurance_total' => round($insuranceTotal, 2),
+            'total_insurance' => round($insuranceTotal, 2),
             'cif_total' => round($cifTotal, 2),
             'total_cif' => round($cifTotal, 2),
             'customs_duty_total' => round($customsDutyTotal, 2),
+            'total_duty' => round($customsDutyTotal, 2),
             'port_handling_total' => round($portHandlingTotal, 2),
+            'total_port_handling' => round($portHandlingTotal, 2),
             'grand_total' => round($totalLandedCost, 2),
             'total_landed_cost' => round($totalLandedCost, 2),
             'landed_cost_per_mt' => round($landedCostPerMt, 2),
+            'cost_per_mt' => round($landedCostPerMt, 2),
             'landed_cost_per_kg' => round($landedCostPerKg, 4),
             'total_in_local_currency' => round($totalInLocalCurrency, 2),
             'per_kg_in_local_currency' => round($perKgInLocalCurrency, 4),

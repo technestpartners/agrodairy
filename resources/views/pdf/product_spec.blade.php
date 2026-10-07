@@ -95,7 +95,7 @@
                 <div class="company-name">{{ $company['name'] }}</div>
                 <div style="font-size: 9px; color: #4a5568; margin-top: 3px;">
                     Agricultural Commodity Processing & Export Terminal<br>
-                    Rajkot, Gujarat, India &bull; Email: {{ $company['email'] }} &bull; Web: {{ $company['website'] }}
+                    {{ $company['address'] ?? 'Office No. -701, THE FUTURE CORNER, Sarthana, Surat- 395013, Gujarat, India' }} &bull; Phone: {{ $company['phone'] ?? '+91 90233 63680' }} &bull; Email: {{ $company['email'] }} &bull; Web: {{ $company['website'] }}
                 </div>
             </td>
             <td style="width: 40%;">

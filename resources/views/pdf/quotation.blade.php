@@ -126,7 +126,7 @@
                 <div class="company-meta">
                     {{ $company['address'] }}<br>
                     <strong>IEC:</strong> {{ $company['iec'] }} | <strong>GSTIN:</strong> {{ $company['gstin'] }} | <strong>APEDA:</strong> {{ $company['apeda_reg'] }}<br>
-                    <strong>Email:</strong> {{ $company['email'] }} | <strong>Web:</strong> {{ $company['website'] }}
+                    <strong>Phone:</strong> {{ $company['phone'] }} | <strong>Email:</strong> {{ $company['email'] }} | <strong>Web:</strong> {{ $company['website'] }}
                 </div>
             </td>
             <td class="quote-title-box" style="vertical-align: top; width: 40%;">

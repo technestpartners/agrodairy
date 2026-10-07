@@ -46,8 +46,11 @@ Route::prefix('company')->name('company.')->group(function () {
     Route::get('/trade-shows-exhibitions', [CompanyController::class, 'tradeShows'])->name('trade_shows');
     Route::get('/gallery', [CompanyController::class, 'gallery'])->name('gallery');
     Route::get('/careers', [CompanyController::class, 'careers'])->name('careers');
+    Route::get('/verify', [CompanyController::class, 'verify'])->name('verify');
 });
 Route::get('/about-us', [CompanyController::class, 'about'])->name('about');
+Route::get('/verify', [CompanyController::class, 'verify'])->name('verify.direct');
+Route::get('/verify-credentials', [CompanyController::class, 'verify'])->name('verify.credentials');
 
 // Product Catalogue
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');

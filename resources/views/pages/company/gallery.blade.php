@@ -76,9 +76,9 @@
             </div>
 
             <div class="rounded-2xl overflow-hidden border border-stone-200 shadow-sm group flex flex-col justify-center items-center p-8 bg-stone-50 text-center">
-                <span class="text-3xl text-emerald-800 font-bold mb-2 font-heading">Schedule a Visit</span>
-                <p class="text-xs text-stone-600 mb-4 max-w-xs">We welcome international buyers to inspect our processing and warehousing facilities in Rajkot / Gondal.</p>
-                <a href="{{ route('contact') }}" class="px-5 py-2.5 bg-emerald-900 hover:bg-emerald-950 text-white font-semibold text-xs rounded-xl shadow">Book Plant Audit</a>
+                <span class="text-3xl text-teal-800 dark:text-teal-400 font-bold mb-2 font-heading">Schedule a Visit</span>
+                <p class="text-xs text-stone-600 dark:text-stone-300 mb-4 max-w-xs">We welcome international buyers to inspect our processing, optical sorting, and warehousing facilities in Gondal & Surat, Gujarat.</p>
+                <a href="{{ route('contact') }}" class="px-5 py-2.5 bg-teal-800 hover:bg-teal-900 text-white font-semibold text-xs rounded-xl shadow">Book Plant Audit</a>
             </div>
         </div>
     </div>

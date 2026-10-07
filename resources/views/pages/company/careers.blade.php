@@ -38,7 +38,7 @@
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-10">
                 <h2 class="text-2xl md:text-3xl font-display font-bold text-brand-forest-900">Current Openings</h2>
-                <p class="text-neutral-600 mt-2">Explore active positions at our Rajkot corporate headquarters and processing plant.</p>
+                <p class="text-neutral-600 mt-2">Explore active positions at our Surat corporate headquarters and Gondal processing plant.</p>
             </div>
 
             <div class="space-y-4">
@@ -46,36 +46,36 @@
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="px-2.5 py-0.5 rounded text-xs font-semibold bg-emerald-100 text-emerald-800">Full Time</span>
-                            <span class="text-xs text-neutral-500">Rajkot HQ / Hybrid</span>
+                            <span class="text-xs text-neutral-500">Surat HQ / Hybrid</span>
                         </div>
                         <h4 class="text-lg font-bold text-brand-forest-900">International Agri-Commodity Sales Manager</h4>
                         <p class="text-sm text-neutral-600 mt-1">Responsible for oilseeds and spices export book to Middle East and European accounts. 4+ years experience required.</p>
                     </div>
-                    <a href="mailto:careers@agrodairy.com?subject=Application: International Sales Manager" class="inline-flex items-center justify-center px-5 py-2.5 bg-brand-forest-800 hover:bg-brand-forest-900 text-white font-medium text-sm rounded-xl transition shadow">Apply Now</a>
+                    <a href="mailto:agrodairyexportllp@gmail.com?subject=Application: International Sales Manager" class="inline-flex items-center justify-center px-5 py-2.5 bg-teal-800 hover:bg-teal-900 text-white font-medium text-sm rounded-xl transition shadow">Apply Now</a>
                 </div>
 
                 <div class="bg-white p-6 rounded-2xl border border-brand-beige-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-brand-forest-300 transition-colors">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="px-2.5 py-0.5 rounded text-xs font-semibold bg-emerald-100 text-emerald-800">Full Time</span>
-                            <span class="text-xs text-neutral-500">Processing Plant, Rajkot</span>
+                            <span class="text-xs text-neutral-500">Processing Plant, Gondal</span>
                         </div>
                         <h4 class="text-lg font-bold text-brand-forest-900">Quality Assurance & Lab Chemist (Aflatoxin / Micro)</h4>
                         <p class="text-sm text-neutral-600 mt-1">Lead pre-shipment sampling, HPLC aflatoxin quantification, and moisture/FFA analysis for container dispatch.</p>
                     </div>
-                    <a href="mailto:careers@agrodairy.com?subject=Application: QA Lab Chemist" class="inline-flex items-center justify-center px-5 py-2.5 bg-brand-forest-800 hover:bg-brand-forest-900 text-white font-medium text-sm rounded-xl transition shadow">Apply Now</a>
+                    <a href="mailto:agrodairyexportllp@gmail.com?subject=Application: QA Lab Chemist" class="inline-flex items-center justify-center px-5 py-2.5 bg-teal-800 hover:bg-teal-900 text-white font-medium text-sm rounded-xl transition shadow">Apply Now</a>
                 </div>
 
                 <div class="bg-white p-6 rounded-2xl border border-brand-beige-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-brand-forest-300 transition-colors">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="px-2.5 py-0.5 rounded text-xs font-semibold bg-emerald-100 text-emerald-800">Full Time</span>
-                            <span class="text-xs text-neutral-500">Rajkot / Mundra Port</span>
+                            <span class="text-xs text-neutral-500">Surat / Mundra Gateway</span>
                         </div>
                         <h4 class="text-lg font-bold text-brand-forest-900">Export Documentation & Logistics Executive</h4>
                         <p class="text-sm text-neutral-600 mt-1">Preparation of BL, Phyto certificates, COO, SGS inspection handovers, and customs clearing coordination.</p>
                     </div>
-                    <a href="mailto:careers@agrodairy.com?subject=Application: Export Documentation Executive" class="inline-flex items-center justify-center px-5 py-2.5 bg-brand-forest-800 hover:bg-brand-forest-900 text-white font-medium text-sm rounded-xl transition shadow">Apply Now</a>
+                    <a href="mailto:agrodairyexportllp@gmail.com?subject=Application: Export Documentation Executive" class="inline-flex items-center justify-center px-5 py-2.5 bg-teal-800 hover:bg-teal-900 text-white font-medium text-sm rounded-xl transition shadow">Apply Now</a>
                 </div>
             </div>
 

@@ -22,7 +22,7 @@ class HomeController extends Controller
         $featuredCategories = ProductCategory::active()
             ->featured()
             ->orderBy('sort_order')
-            ->take(6)
+            ->take(12)
             ->get();
 
         $featuredProducts = Product::active()

@@ -21,7 +21,7 @@
     <aside class="w-64 bg-gradient-to-b from-stone-950 via-emerald-950 to-stone-900 text-stone-300 flex flex-col shrink-0 border-r border-stone-800">
         <!-- Logo & Header -->
         <div class="p-5 border-b border-stone-800/80 flex items-center space-x-3">
-            <img src="/images/logo.png" alt="Logo" class="h-10 w-auto brightness-110">
+            <img src="/images/logo-dark.png" alt="Logo" class="h-10 w-auto">
             <div>
                 <span class="block text-xs font-bold text-white uppercase tracking-wider font-heading">Agro Dairy ERP</span>
                 <span class="block text-[10px] text-amber-400 font-medium">Export Management Portal</span>
