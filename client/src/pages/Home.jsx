@@ -480,46 +480,349 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Elysium Agrico Style FAQ Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <span className="font-ui text-xs font-bold text-elysium-green uppercase tracking-wider block mb-1">
-            Questions & Answers
-          </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-xs text-slate-500 mt-2">
-            Key answers on export orders, mixed containers, packaging, and shipping terms.
-          </p>
-        </div>
+      {/* Section 4: Why Importers Choose Agro Dairy */}
+      <section className="bg-[#edf2f7]/60 py-20 border-y border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <span className="font-serif text-xs font-bold uppercase tracking-wider text-elysium-green block mb-1">
+              Why Choose Us
+            </span>
+            <h2 className="font-serif font-bold text-3xl sm:text-4xl text-slate-900 tracking-tight">
+              Why Importers Choose Agro Dairy Export LLP
+            </h2>
+            <p className="text-xs text-slate-600 mt-2">
+              When you compare agricultural products exporters from India, you are checking quality, reliability and paperwork. Here is what you get with us.
+            </p>
+          </div>
 
-        <div className="space-y-3">
-          {FAQS.map((faq, idx) => {
-            const isOpen = openFaq === idx;
-            return (
-              <div 
-                key={idx} 
-                className="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm transition"
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenFaq(isOpen ? null : idx)}
-                  className="w-full text-left px-6 py-4 flex items-center justify-between gap-4 font-display font-bold text-sm text-slate-900 hover:text-elysium-green transition"
-                >
-                  <span>{faq.q}</span>
-                  <span className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center font-sans font-bold text-slate-500 shrink-0">
-                    {isOpen ? '−' : '+'}
-                  </span>
-                </button>
-                {isOpen && (
-                  <div className="px-6 pb-5 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-100 font-sans">
-                    {faq.a}
-                  </div>
-                )}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div>
+                <div className="w-14 h-14 rounded-2xl bg-elysium-tint flex items-center justify-center text-elysium-green mb-6">
+                  <ShieldCheck className="w-7 h-7" />
+                </div>
+                <h3 className="font-serif font-bold text-xl text-slate-900 mb-3">Strict Quality Control</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Each lot is cleaned, machine sorted, and Buhler optical Sortex graded. Every bag is checked for moisture, seed count, and foreign matter before stuffing, with third-party SGS or Geo-Chem lab reports on request.
+                </p>
               </div>
-            );
-          })}
+              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-2 text-[11px] font-bold text-elysium-green">
+                <Check className="w-4 h-4" /> Purity 98-99.9% Sortex Clean
+              </div>
+            </div>
+
+            <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div>
+                <div className="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-700 mb-6">
+                  <Package className="w-7 h-7" />
+                </div>
+                <h3 className="font-serif font-bold text-xl text-slate-900 mb-3">One Container, Many Products</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Order a mixed container with peanuts, millets, moong beans, and dairy ghee to match your exact sales volume, keep stocks fresh and test new product lines without committing to multiple full container loads.
+                </p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-2 text-[11px] font-bold text-amber-700">
+                <Check className="w-4 h-4" /> Customized FCL Allocations
+              </div>
+            </div>
+
+            <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div>
+                <div className="w-14 h-14 rounded-2xl bg-elysium-tint flex items-center justify-center text-elysium-green mb-6">
+                  <FileCheck2 className="w-7 h-7" />
+                </div>
+                <h3 className="font-serif font-bold text-xl text-slate-900 mb-3">Export Documents Handled</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Every consignment ships with clean B/L, Commercial Invoice, Packing List, Phytosanitary Certificate, Fumigation Certificate, and Certificate of Origin (COO) prepared to your destination port’s customs rules.
+                </p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-2 text-[11px] font-bold text-elysium-green">
+                <Check className="w-4 h-4" /> 100% Customs Clearance Guarantee
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 5: Export Track Record in Numbers (Green Band) */}
+      <section className="bg-[#13612e] text-white py-14">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="text-[#b5e08a] text-xs font-serif font-bold uppercase tracking-wider block mb-1">
+              Our Track Record
+            </span>
+            <h2 className="text-3xl font-serif font-bold text-white">Our Export Record in Numbers</h2>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 text-center">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm">
+              <span className="font-sans text-4xl sm:text-5xl font-extrabold text-white block">10+</span>
+              <span className="text-xs text-[#cfe3d2] mt-2 block font-ui">Years Agronomic Experience</span>
+            </div>
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm">
+              <span className="font-sans text-4xl sm:text-5xl font-extrabold text-white block">40+</span>
+              <span className="text-xs text-[#cfe3d2] mt-2 block font-ui">Countries Served</span>
+            </div>
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm">
+              <span className="font-sans text-4xl sm:text-5xl font-extrabold text-white block">150+</span>
+              <span className="text-xs text-[#cfe3d2] mt-2 block font-ui">Institutional Buyers</span>
+            </div>
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm">
+              <span className="font-sans text-4xl sm:text-5xl font-extrabold text-white block">1,800+</span>
+              <span className="text-xs text-[#cfe3d2] mt-2 block font-ui">Container FCL Dispatches</span>
+            </div>
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm col-span-2 lg:col-span-1">
+              <span className="font-sans text-4xl sm:text-5xl font-extrabold text-white block">50,000+</span>
+              <span className="text-xs text-[#cfe3d2] mt-2 block font-ui">Metric Tonnes Shipped</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 6: How We Work - Four Steps */}
+      <section className="bg-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-xl mx-auto mb-16">
+            <span className="font-serif text-xs font-bold uppercase tracking-wider text-elysium-green block mb-1">
+              How We Work
+            </span>
+            <h2 className="font-serif font-bold text-3xl sm:text-4xl text-slate-900">
+              From Farm to Your Port in Four Steps
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            <div className="text-center space-y-4">
+              <span className="font-serif font-black text-3xl text-elysium-green block">01</span>
+              <div className="w-16 h-16 mx-auto rounded-full border-2 border-elysium-green flex items-center justify-center text-elysium-green font-bold text-xl bg-white shadow-sm">
+                🌱
+              </div>
+              <h3 className="font-serif font-bold text-lg text-slate-900">Sourcing</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                We agree your grade, count and quantity, then buy matching lots from trusted farmer networks and mandis across Gujarat.
+              </p>
+            </div>
+
+            <div className="text-center space-y-4">
+              <span className="font-serif font-black text-3xl text-elysium-green block">02</span>
+              <div className="w-16 h-16 mx-auto rounded-full border-2 border-elysium-green flex items-center justify-center text-elysium-green font-bold text-xl bg-white shadow-sm">
+                ⚙️
+              </div>
+              <h3 className="font-serif font-bold text-lg text-slate-900">Processing</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Lots are de-stoned, cleaned, Sortex sorted, and lab-tested for moisture, aflatoxin, and foreign matter to your market’s limits.
+              </p>
+            </div>
+
+            <div className="text-center space-y-4">
+              <span className="font-serif font-black text-3xl text-elysium-green block">03</span>
+              <div className="w-16 h-16 mx-auto rounded-full border-2 border-elysium-green flex items-center justify-center text-elysium-green font-bold text-xl bg-white shadow-sm">
+                📦
+              </div>
+              <h3 className="font-serif font-bold text-lg text-slate-900">Packaging</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Packed in 25 kg/50 kg PP or jute bags, vacuum packs, or food tins, then containerized and professionally fumigated.
+              </p>
+            </div>
+
+            <div className="text-center space-y-4">
+              <span className="font-serif font-black text-3xl text-elysium-green block">04</span>
+              <div className="w-16 h-16 mx-auto rounded-full border-2 border-elysium-green flex items-center justify-center text-elysium-green font-bold text-xl bg-white shadow-sm">
+                🚢
+              </div>
+              <h3 className="font-serif font-bold text-lg text-slate-900">Delivery</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                We book the container vessel, issue the original B/L and export documents, and share live maritime tracking until destination.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 9: Shipping from Gujarat's Ports to Yours & Tools */}
+      <section className="bg-elysium-cream py-20 border-y border-amber-200/60">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <span className="font-serif text-xs font-bold uppercase tracking-wider text-elysium-green block mb-1">
+              Shipping & Logistics
+            </span>
+            <h2 className="font-serif font-bold text-3xl sm:text-4xl text-slate-900">
+              Shipping From Gujarat's Ports to Yours
+            </h2>
+            <p className="text-xs text-slate-600 mt-2">
+              Surat is connected to Hazira Port, Mundra, and Kandla. We route your cargo through the terminal offering the best ocean transit time and freight economics.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+              <Anchor className="w-6 h-6 text-elysium-green mb-3" />
+              <h3 className="font-serif font-bold text-base text-slate-900 mb-1">Ports</h3>
+              <p className="text-xs text-slate-600">Hazira, Mundra, Kandla (Deendayal) and Pipavav.</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+              <FileCheck2 className="w-6 h-6 text-elysium-green mb-3" />
+              <h3 className="font-serif font-bold text-base text-slate-900 mb-1">Incoterms</h3>
+              <p className="text-xs text-slate-600">FOB (Gujarat Ports), CFR, and CIF (Discharge Port).</p>
+            </div>
+
+            <Link to="/tools/container-calculator" className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition group">
+              <Layers className="w-6 h-6 text-elysium-green mb-3" />
+              <h3 className="font-serif font-bold text-base text-slate-900 mb-1">Container Calculator</h3>
+              <p className="text-xs text-slate-600 mb-2">Estimate 20ft / 40ft HC stuffing payload for grains, millets & ghee.</p>
+              <span className="text-xs font-bold text-elysium-green group-hover:underline">Open Tool →</span>
+            </Link>
+
+            <Link to="/tools/landed-cost-calculator" className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition group">
+              <Calculator className="w-6 h-6 text-elysium-green mb-3" />
+              <h3 className="font-serif font-bold text-base text-slate-900 mb-1">Landed Cost Estimator</h3>
+              <p className="text-xs text-slate-600 mb-2">FOB, ocean freight, insurance, and duty breakdown simulator.</p>
+              <span className="text-xs font-bold text-elysium-green group-hover:underline">Open Tool →</span>
+            </Link>
+
+            <Link to="/tools/hs-code-finder" className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition group">
+              <Search className="w-6 h-6 text-elysium-green mb-3" />
+              <h3 className="font-serif font-bold text-base text-slate-900 mb-1">HS Code Finder</h3>
+              <p className="text-xs text-slate-600 mb-2">Check 8-digit ITC-HS codes and export policies for Indian agri lines.</p>
+              <span className="text-xs font-bold text-elysium-green group-hover:underline">Open Tool →</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 11: Free Consultation / Talk to Our Export Desk Form */}
+      <section id="consultation" className="bg-elysium-cream py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <div className="lg:col-span-5 space-y-6">
+              <div>
+                <span className="font-serif text-xs font-bold uppercase tracking-wider text-elysium-green block mb-1">
+                  Free Consultation
+                </span>
+                <h2 className="font-serif font-bold text-3xl sm:text-4xl text-slate-900">
+                  Talk to Our Export Desk Before You Order
+                </h2>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                Tell us the product, specification, quantity, and destination port. We will suggest the right grade and packing, check whether a mixed container suits your order, and send you a firm FOB / CIF quote. There is no cost and no obligation.
+              </p>
+
+              <div className="space-y-3 pt-2">
+                <div className="flex items-start gap-3 text-xs text-slate-800">
+                  <CheckCircle2 className="w-5 h-5 text-elysium-green shrink-0 mt-0.5" />
+                  <span>Grade, purity, and count advice for your target destination</span>
+                </div>
+                <div className="flex items-start gap-3 text-xs text-slate-800">
+                  <CheckCircle2 className="w-5 h-5 text-elysium-green shrink-0 mt-0.5" />
+                  <span>Container stuffing loading plan for single or mixed commodities</span>
+                </div>
+                <div className="flex items-start gap-3 text-xs text-slate-800">
+                  <CheckCircle2 className="w-5 h-5 text-elysium-green shrink-0 mt-0.5" />
+                  <span>FOB Mundra/Hazira or CIF discharge port price quote</span>
+                </div>
+                <div className="flex items-start gap-3 text-xs text-slate-800">
+                  <CheckCircle2 className="w-5 h-5 text-elysium-green shrink-0 mt-0.5" />
+                  <span>Technical laboratory specification sheet and buyer packaging options</span>
+                </div>
+              </div>
+
+              <div className="p-4 bg-white rounded-2xl border border-amber-200 text-xs text-slate-700">
+                <strong>Direct Desk Contact:</strong> J.P. Vora · Phone / WhatsApp: <a href="tel:+919023363680" className="text-elysium-green font-bold">+91 90233 63680</a>
+              </div>
+            </div>
+
+            {/* Consultation Lead Form */}
+            <div className="lg:col-span-7 bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-sm">
+              <h3 className="font-serif font-bold text-xl text-slate-900 mb-2">Request Commercial Export Quote</h3>
+              <p className="text-xs text-slate-500 mb-6">Our trade managers will respond with binding container rates within 12 hours.</p>
+
+              <form onSubmit={handleBatchLookup} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Your Name *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. John Doe"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-full px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-elysium-green"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Company Name *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Global Agri Foods Ltd"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-full px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-elysium-green"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Business Email *</label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="buyer@company.com"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-full px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-elysium-green"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Phone / WhatsApp *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="+1 / +971 / +44..."
+                      className="w-full bg-slate-50 border border-slate-200 rounded-full px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-elysium-green"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Commodity Required *</label>
+                    <select className="w-full bg-slate-50 border border-slate-200 rounded-full px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-elysium-green">
+                      <option>Pure Cow & Buffalo Ghee</option>
+                      <option>Bold Peanut Kernels (38/42 to 70/80)</option>
+                      <option>Green Millet (Bajra)</option>
+                      <option>Sorghum (White / Yellow Jowar)</option>
+                      <option>Yellow / White Maize</option>
+                      <option>Green Moong & Moong Mogar</option>
+                      <option>Desi & Kabuli Chickpeas</option>
+                      <option>Mixed Container Consolidation</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Destination Port *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Jebel Ali / Rotterdam / Mersin"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-full px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-elysium-green"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Order Details & Specifications</label>
+                  <textarea
+                    rows="3"
+                    placeholder="Specify tonnage (e.g. 1x20ft FCL), packing type (25kg PP / 50kg Jute / Tins), or target delivery timeline..."
+                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs focus:outline-none focus:ring-2 focus:ring-elysium-green"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-elysium-yellow hover:bg-elysium-yellowhover text-slate-900 font-serif font-bold text-sm py-4 rounded-full shadow-md transition duration-200 border border-amber-300"
+                >
+                  Send Commercial RFQ to Export Desk →
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -577,29 +880,66 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Bottom CTA Card */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="bg-gradient-to-r from-elysium-dark via-elysium-green to-[#0b3f1d] text-white rounded-3xl p-8 sm:p-14 text-center max-w-4xl mx-auto shadow-xl space-y-6">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl">
-            Ready to import Indian Agricultural Commodities or Dairy Ghee?
+      {/* Elysium Agrico Style FAQ Section */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10">
+          <span className="font-serif text-xs font-bold text-elysium-green uppercase tracking-wider block mb-1">
+            Questions & Answers
+          </span>
+          <h2 className="font-serif font-bold text-3xl sm:text-4xl text-slate-900">
+            Frequently Asked Questions (FAQ)
           </h2>
-          <p className="text-slate-200 text-sm max-w-xl mx-auto leading-relaxed">
-            Contact J.P. Vora at our export desk today. We provide firm FOB / CIF quotations within 12 hours with complete laboratory grade specifications.
+          <p className="text-xs text-slate-500 mt-2">
+            Key answers on export orders, mixed containers, packaging, and shipping terms.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+        </div>
+
+        <div className="space-y-3">
+          {FAQS.map((faq, idx) => {
+            const isOpen = openFaq === idx;
+            return (
+              <div 
+                key={idx} 
+                className="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm transition"
+              >
+                <button
+                  type="button"
+                  onClick={() => setOpenFaq(isOpen ? null : idx)}
+                  className="w-full text-left px-6 py-4 flex items-center justify-between gap-4 font-serif font-bold text-sm text-slate-900 hover:text-elysium-green transition"
+                >
+                  <span>{faq.q}</span>
+                  <span className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center font-sans font-bold text-slate-500 shrink-0">
+                    {isOpen ? '−' : '+'}
+                  </span>
+                </button>
+                {isOpen && (
+                  <div className="px-6 pb-5 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-100 font-sans">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Export Banner Bottom Bar exactly like Elysium Agrico */}
+      <section className="bg-gradient-to-r from-[#f4e6cc] via-[#fbf6ec] to-[#f4e6cc] py-10 px-4 text-center border-t border-amber-200/50">
+        <div className="max-w-4xl mx-auto space-y-3">
+          <h2 className="font-serif font-bold text-2xl sm:text-3xl text-slate-900">
+            Premium Agricultural & Dairy Exports Worldwide
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-700 font-ui">
+            Pure Ghee · Green Millet · Sorghum · Yellow Maize · Bold Peanuts · Green Moong · Moong Mogar · Desi Chickpeas · Kabuli Chickpeas
+          </p>
+          <div className="pt-2">
             <Link
               to="/rfq"
-              className="w-full sm:w-auto bg-elysium-yellow hover:bg-elysium-yellowhover text-slate-900 font-display font-bold text-sm px-8 py-4 rounded-full shadow-lg transition"
+              className="inline-flex items-center gap-2 bg-[#ffc928] hover:bg-[#f5b800] text-slate-900 font-serif font-bold text-xs px-6 py-3 rounded-full shadow-md transition"
             >
-              Get a Quote Now →
+              <span>Request Container Quote (RFQ)</span>
+              <span>→</span>
             </Link>
-            <a
-              href="tel:+919023363680"
-              className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-ui font-semibold text-sm px-8 py-4 rounded-full border border-white/30 transition flex items-center justify-center gap-2"
-            >
-              <Phone className="w-4 h-4" />
-              <span>Call +91 90233 63680</span>
-            </a>
           </div>
         </div>
       </section>

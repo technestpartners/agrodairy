@@ -7,7 +7,7 @@ export default function FloatingActions() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowTop(window.scrollY > 400);
+      setShowTop(window.scrollY > 300);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -18,37 +18,37 @@ export default function FloatingActions() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3 pointer-events-none">
-      {/* Quick RFQ Pill */}
-      <Link
-        to="/rfq"
-        className="pointer-events-auto bg-agro-900 hover:bg-agro-950 text-white font-bold text-xs px-4 py-2.5 rounded-full shadow-lg border border-agro-700/60 flex items-center gap-2 hover:scale-105 transition duration-200"
-      >
-        <FileText className="w-4 h-4 text-gold-400" />
-        <span>Instant RFQ</span>
-      </Link>
-
-      {/* WhatsApp Floating Action */}
-      <a
-        href="https://wa.me/919023363680?text=Hello%20Agro%20Dairy%20Export%20Desk,%20I%20would%20like%20to%20inquire%20about%20commodity%20pricing%20and%20container%20shipment."
-        target="_blank"
-        rel="noopener noreferrer"
-        className="pointer-events-auto w-12 h-12 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition duration-200"
-        title="Chat with Export Manager J.P. Vora on WhatsApp"
-      >
-        <MessageSquare className="w-6 h-6 fill-current" />
-      </a>
-
-      {/* Back to top */}
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
+      {/* Scroll to Top */}
       {showTop && (
         <button
           onClick={scrollToTop}
-          className="pointer-events-auto w-10 h-10 bg-white/90 hover:bg-white text-slate-700 rounded-full shadow-md border border-slate-200 flex items-center justify-center hover:scale-105 transition duration-200"
+          className="pointer-events-auto w-12 h-12 rounded-full bg-[#6fa06f] hover:bg-[#5a8b5a] text-white flex items-center justify-center shadow-lg transition duration-200"
           aria-label="Back to top"
         >
           <ArrowUp className="w-5 h-5" />
         </button>
       )}
+
+      {/* Direct Phone Call Button */}
+      <a
+        href="tel:+919023363680"
+        className="pointer-events-auto w-12 h-12 rounded-full bg-[#13612e] hover:bg-[#0b3f1d] text-white flex items-center justify-center shadow-lg transition duration-200"
+        title="Call Export Director J.P. Vora"
+      >
+        <Phone className="w-5 h-5" />
+      </a>
+
+      {/* WhatsApp Chat Button */}
+      <a
+        href="https://wa.me/919023363680?text=Hello%20Agro%20Dairy%20Export%20LLP,%20I%20would%20like%20to%20inquire%20about%20commodity%20export%20and%20container%20pricing."
+        target="_blank"
+        rel="noopener noreferrer"
+        className="pointer-events-auto w-12 h-12 rounded-full bg-[#177a40] hover:bg-[#136636] text-white flex items-center justify-center shadow-xl transition duration-200 hover:scale-105"
+        title="Chat on WhatsApp"
+      >
+        <MessageSquare className="w-6 h-6 fill-current" />
+      </a>
     </div>
   );
 }
