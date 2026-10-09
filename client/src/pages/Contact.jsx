@@ -63,48 +63,48 @@ export default function Contact() {
         {/* Contact Info & Coordinates */}
         <div className="lg:col-span-5 space-y-6">
           <div className="bg-agro-900 text-white rounded-3xl p-8 space-y-6">
-            <h2 className="text-xl font-bold">Registered Office & Processing Plant</h2>
+            <h2 className="text-xl font-bold font-serif">Registered Office & Trade Desk</h2>
 
             <div className="space-y-5 text-xs text-agro-100">
               <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-gold-400 shrink-0 mt-0.5" />
+                <MapPin className="w-5 h-5 text-elysium-yellow shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-bold text-white block text-sm mb-0.5">Corporate & Facility Address</span>
-                  <span>Plot No. 42-45, Agro Industrial Corridor, NH-27, Gondal Road, Rajkot - 360002, Gujarat, India</span>
+                  <span className="font-bold text-white block text-sm mb-0.5">Corporate Headquarters</span>
+                  <span>Office no. -701, THE FUTURE CORNER, Sarthana, Surat- 395013, Gujarat, India</span>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-gold-400 shrink-0 mt-0.5" />
+                <Phone className="w-5 h-5 text-elysium-yellow shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-bold text-white block text-sm mb-0.5">Commercial Trade Desk</span>
-                  <span>+91 98250 12345 (Managing Director / Super Admin)</span>
-                  <span className="block mt-0.5">+91 98250 23456 (Head of International Trade)</span>
+                  <span className="font-bold text-white block text-sm mb-0.5">Commercial & Export Desk</span>
+                  <span>+91 90233 63680 (J.P. Vora - Partner / Export Director)</span>
+                  <span className="block mt-0.5 text-slate-300">Mon - Sat: 09:00 - 19:30 IST</span>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-gold-400 shrink-0 mt-0.5" />
+                <Mail className="w-5 h-5 text-elysium-yellow shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-bold text-white block text-sm mb-0.5">Direct Trade Emails</span>
-                  <span>trade@agrodairy.com</span>
-                  <span className="block mt-0.5">exports@agrodairy.com</span>
+                  <span className="font-bold text-white block text-sm mb-0.5">Direct Commercial Email</span>
+                  <span>agrodairyexportllp@gmail.com</span>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
-                <Clock className="w-5 h-5 text-gold-400 shrink-0 mt-0.5" />
+                <ShieldCheck className="w-5 h-5 text-elysium-yellow shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-bold text-white block text-sm mb-0.5">Operating Hours</span>
-                  <span>Monday - Saturday: 09:00 - 19:30 (IST / UTC+5:30)</span>
-                  <span className="block text-[11px] text-slate-300">24/7 WhatsApp monitored for active maritime vessel loadings</span>
+                  <span className="font-bold text-white block text-sm mb-0.5">Statutory & Port Coordinates</span>
+                  <span>IEC: 0817029381 • GSTIN: 24AAHFA3928L1Z9</span>
+                  <span className="block mt-0.5">FSSAI: 10722026000148 • APEDA Reg.</span>
+                  <span className="block mt-0.5 text-elysium-lime font-medium">Gateway Ports: Hazira • Mundra • Kandla • Pipavav</span>
                 </div>
               </div>
             </div>
 
             <div className="pt-4 border-t border-agro-800">
               <a
-                href="https://wa.me/919825012345?text=Hello%20Agro%20Dairy%20Export%20Desk,%20I%20would%20like%20to%20connect%20regarding%20commodity%20export."
+                href="https://wa.me/919023363680?text=Hello%20J.P.%20Vora,%20I%20would%20like%20to%20connect%20regarding%20Agro%20Dairy%20Export%20commodities."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs py-3 rounded-xl transition flex items-center justify-center gap-2 shadow-md"

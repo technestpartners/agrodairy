@@ -78,22 +78,27 @@ export default function Footer() {
           {/* Brand Bio */}
           <div className="lg:col-span-2 space-y-4">
             <Link to="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gold-500 flex items-center justify-center text-agro-950 font-extrabold text-lg">
-                AD
-              </div>
+              <img
+                src="/images/logo-dark.jpg"
+                alt="Agro Dairy Export LLP"
+                className="h-12 w-auto object-contain rounded-lg bg-white p-1 shadow"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                }}
+              />
               <div>
-                <span className="font-black text-xl text-white tracking-tight">AGRO DAIRY</span>
-                <span className="block text-[10px] text-gold-400 uppercase tracking-widest font-semibold">
-                  Export Platform • India
+                <span className="font-serif font-black text-xl text-white tracking-tight">AGRO DAIRY</span>
+                <span className="block text-[10px] text-elysium-lime uppercase tracking-widest font-semibold">
+                  Export LLP • Gujarat, India
                 </span>
               </div>
             </Link>
             <p className="text-sm text-slate-300 leading-relaxed max-w-md">
-              Leading processor and bulk exporter of premium Indian agricultural commodities and dairy derivatives. 
-              Delivering containerized and bulk vessel shipments to 40+ destinations worldwide with farm-to-port traceability.
+              Premier processor and merchant exporter of certified Indian agricultural commodities and pure dairy fats. 
+              Specializing in full container loads (FCL) and customized mixed containers with direct ocean sailings from Gujarat ports.
             </p>
             <div className="flex flex-wrap gap-2 pt-2">
-              {['APEDA Certified', 'FSSAI Licensed', 'ISO 22000', 'HACCP Compliant', 'Halal Verified', 'Kosher Certified'].map((cert) => (
+              {['IEC: 0817029381', 'GST: 24AAHFA3928L1Z9', 'FSSAI: 10722026000148', 'APEDA Registered', 'HACCP / ISO Compliant'].map((cert) => (
                 <span key={cert} className="text-xs bg-agro-900/80 border border-agro-800 text-slate-300 px-2.5 py-1 rounded-md">
                   {cert}
                 </span>
@@ -104,26 +109,29 @@ export default function Footer() {
           {/* Quick Links */}
           <div>
             <h4 className="text-white text-sm font-bold uppercase tracking-wider mb-4 border-b border-agro-800 pb-2">
-              Export Lines
+              Core Commodities
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/products?category=peanuts" className="hover:text-gold-300 transition">Peanuts & Kernels</Link>
+                <Link to="/products?category=dairy-ghee" className="hover:text-elysium-lime transition">Pure Cow & Buffalo Ghee</Link>
               </li>
               <li>
-                <Link to="/products?category=sesame-seeds" className="hover:text-gold-300 transition">Sesame Seeds (Hulled & Natural)</Link>
+                <Link to="/products?category=grains-cereals" className="hover:text-elysium-lime transition">Green Millet (Pearl & Foxtail)</Link>
               </li>
               <li>
-                <Link to="/products?category=whole-spices" className="hover:text-gold-300 transition">Whole & Ground Spices</Link>
+                <Link to="/products?category=grains-cereals" className="hover:text-elysium-lime transition">Sorghum (White / Yellow Jowar)</Link>
               </li>
               <li>
-                <Link to="/products?category=pulses-beans" className="hover:text-gold-300 transition">Chickpeas & Pulses</Link>
+                <Link to="/products?category=grains-cereals" className="hover:text-elysium-lime transition">Yellow & White Maize</Link>
               </li>
               <li>
-                <Link to="/products?category=grains-cereals" className="hover:text-gold-300 transition">Grains & Basmati Rice</Link>
+                <Link to="/products?category=peanuts-groundnuts" className="hover:text-elysium-lime transition">Bold Peanut Kernels (38/42 to 70/80)</Link>
               </li>
               <li>
-                <Link to="/products?category=dairy-derivatives" className="hover:text-gold-300 transition">Dairy Powders & Ghee</Link>
+                <Link to="/products?category=pulses-beans" className="hover:text-elysium-lime transition">Moong Beans & Moong Mogar</Link>
+              </li>
+              <li>
+                <Link to="/products?category=pulses-beans" className="hover:text-elysium-lime transition">Desi & Kabuli Chickpeas</Link>
               </li>
             </ul>
           </div>
@@ -135,22 +143,19 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/tools/container-calculator" className="hover:text-gold-300 transition">Container Load Calculator</Link>
+                <Link to="/tools/container-calculator" className="hover:text-elysium-lime transition">Container Load Calculator</Link>
               </li>
               <li>
-                <Link to="/tools/landed-cost-calculator" className="hover:text-gold-300 transition">Landed Cost Estimator</Link>
+                <Link to="/tools/landed-cost-calculator" className="hover:text-elysium-lime transition">Landed Cost Estimator</Link>
               </li>
               <li>
-                <Link to="/tools/crop-calendar" className="hover:text-gold-300 transition">Crop Harvest Calendar</Link>
+                <Link to="/tools/crop-calendar" className="hover:text-elysium-lime transition">Crop Harvest Calendar</Link>
               </li>
               <li>
-                <Link to="/tools/hs-code-finder" className="hover:text-gold-300 transition">HS Code Trade Reference</Link>
+                <Link to="/tools/hs-code-finder" className="hover:text-elysium-lime transition">HS Code Trade Reference</Link>
               </li>
               <li>
-                <Link to="/quality/traceability" className="hover:text-gold-300 transition">Verify QR / Batch Code</Link>
-              </li>
-              <li>
-                <Link to="/quality/certifications" className="hover:text-gold-300 transition">Verify Certificates</Link>
+                <Link to="/quality/certifications" className="hover:text-elysium-lime transition">Verified Export Licenses</Link>
               </li>
             </ul>
           </div>
@@ -158,25 +163,28 @@ export default function Footer() {
           {/* Contact & Desk */}
           <div>
             <h4 className="text-white text-sm font-bold uppercase tracking-wider mb-4 border-b border-agro-800 pb-2">
-              Trade Desk
+              Export Desk
             </h4>
             <div className="space-y-3 text-sm text-slate-300">
               <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-gold-400 shrink-0 mt-1" />
-                <span>NH-27 Agro Industrial Corridor, Rajkot - 360002, Gujarat, India</span>
+                <MapPin className="w-4 h-4 text-elysium-lime shrink-0 mt-1" />
+                <span>Office no. -701, THE FUTURE CORNER, Sarthana, Surat- 395013, Gujarat, India</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-gold-400 shrink-0" />
-                <span>+91 98250 12345 (Sales Desk)</span>
+                <Phone className="w-4 h-4 text-elysium-lime shrink-0" />
+                <span>+91 90233 63680 (J.P. Vora)</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-gold-400 shrink-0" />
-                <span>exports@agrodairy.com</span>
+                <Mail className="w-4 h-4 text-elysium-lime shrink-0" />
+                <span>agrodairyexportllp@gmail.com</span>
+              </div>
+              <div className="text-xs text-slate-400 pt-1">
+                Loading Ports: Hazira • Mundra • Kandla • Pipavav
               </div>
               <div className="pt-2">
                 <Link
                   to="/rfq"
-                  className="inline-flex items-center gap-1.5 text-gold-300 hover:text-gold-200 font-bold text-xs uppercase tracking-wider"
+                  className="inline-flex items-center gap-1.5 text-elysium-yellow hover:underline font-bold text-xs uppercase tracking-wider"
                 >
                   Submit Formal RFQ <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
@@ -188,13 +196,13 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div>
-            &copy; {new Date().getFullYear()} Agro Dairy Export Platform. All global rights reserved. Powered by Node.js & React.
+            &copy; {new Date().getFullYear()} AGRO DAIRY EXPORT LLP. All rights reserved. Registered under Ministry of Commerce & Industry, Govt. of India.
           </div>
           <div className="flex items-center gap-6">
-            <Link to="/admin/login" className="hover:text-gold-300 transition">Staff Portal</Link>
             <Link to="/company/about" className="hover:text-slate-200 transition">About Us</Link>
-            <Link to="/logistics" className="hover:text-slate-200 transition">Port Terminals</Link>
-            <Link to="/contact" className="hover:text-slate-200 transition">Compliance Inquiry</Link>
+            <Link to="/products" className="hover:text-slate-200 transition">Commodity Catalog</Link>
+            <Link to="/contact" className="hover:text-slate-200 transition">Contact Trade Desk</Link>
+            <Link to="/admin/login" className="hover:text-elysium-lime transition">Staff Portal</Link>
           </div>
         </div>
       </div>

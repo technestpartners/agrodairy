@@ -30,11 +30,11 @@ export default function FloatingActions() {
 
       {/* WhatsApp Floating Action */}
       <a
-        href="https://wa.me/919825012345?text=Hello%20Agro%20Dairy%20Export%20Desk,%20I%20would%20like%20to%20inquire%20about%20commodity%20pricing%20and%20container%20shipment."
+        href="https://wa.me/919023363680?text=Hello%20Agro%20Dairy%20Export%20Desk,%20I%20would%20like%20to%20inquire%20about%20commodity%20pricing%20and%20container%20shipment."
         target="_blank"
         rel="noopener noreferrer"
         className="pointer-events-auto w-12 h-12 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition duration-200"
-        title="Chat with Export Manager on WhatsApp"
+        title="Chat with Export Manager J.P. Vora on WhatsApp"
       >
         <MessageSquare className="w-6 h-6 fill-current" />
       </a>

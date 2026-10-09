@@ -10,11 +10,15 @@ const CONTAINER_TYPES = {
     tare_kg: 2230,
     standard_bag_capacity_mt: {
       peanuts: 19.0,
+      pulses: 25.0,
+      grains: 24.5,
+      millets: 24.5,
+      sorghum: 24.5,
+      maize: 24.0,
+      chickpeas: 25.0,
+      dairy: 18.0,
       sesame: 19.0,
       spices: 15.0,
-      pulses: 24.0,
-      grains: 25.0,
-      chickpeas: 24.0,
       dehydrated: 12.0,
       feed: 20.0
     }
@@ -26,11 +30,15 @@ const CONTAINER_TYPES = {
     tare_kg: 3780,
     standard_bag_capacity_mt: {
       peanuts: 26.0,
+      pulses: 26.0,
+      grains: 25.5,
+      millets: 25.5,
+      sorghum: 25.5,
+      maize: 25.5,
+      chickpeas: 26.0,
+      dairy: 24.0,
       sesame: 26.0,
       spices: 22.0,
-      pulses: 26.0,
-      grains: 26.0,
-      chickpeas: 26.0,
       dehydrated: 20.0,
       feed: 26.0
     }
@@ -42,11 +50,15 @@ const CONTAINER_TYPES = {
     tare_kg: 3900,
     standard_bag_capacity_mt: {
       peanuts: 27.0,
+      pulses: 27.0,
+      grains: 26.0,
+      millets: 26.0,
+      sorghum: 26.0,
+      maize: 26.0,
+      chickpeas: 27.0,
+      dairy: 26.0,
       sesame: 27.0,
       spices: 25.0,
-      pulses: 27.0,
-      grains: 27.0,
-      chickpeas: 27.0,
       dehydrated: 24.0,
       feed: 27.0
     }
