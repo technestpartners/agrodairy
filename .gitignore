@@ -25,3 +25,8 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+/client/node_modules
+/server/node_modules
+/server/.env
+/client/dist
