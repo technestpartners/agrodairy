@@ -75,52 +75,111 @@ export default function Home() {
 
   return (
     <div className="space-y-16 lg:space-y-24">
-      {/* Hero Section - Elysium Agrico Style */}
-      <section className="relative bg-gradient-to-br from-elysium-dark via-elysium-green to-[#0b3f1d] text-white pt-16 pb-28 lg:pt-20 lg:pb-36 overflow-hidden">
-        {/* Subtle grid pattern overlay */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#7dc242_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+      {/* Hero Section - Elysium Agrico Style with Animated Glow & Luxury Typography */}
+      <section className="relative mesh-agro-pattern text-white pt-16 pb-28 lg:pt-24 lg:pb-36 overflow-hidden">
+        {/* Animated Radial Glow Orbs */}
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-elysium-lime/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+        <div className="absolute bottom-10 right-0 w-96 h-96 bg-elysium-yellow/15 rounded-full blur-3xl pointer-events-none animate-float" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-elysium-lime text-xs font-bold uppercase tracking-wider backdrop-blur-sm font-ui">
-              <ShieldCheck className="w-4 h-4 text-elysium-lime" />
-              <span>Agricultural Products & Dairy Exporter from India</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left Content Column */}
+            <div className="lg:col-span-8 space-y-6">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-elysium-lime text-xs font-bold uppercase tracking-wider backdrop-blur-md font-ui shadow-sm animate-fade-in">
+                <span className="w-2 h-2 rounded-full bg-elysium-lime animate-ping" />
+                <ShieldCheck className="w-4 h-4 text-elysium-lime" />
+                <span>Govt. Registered Exporter • Surat, Gujarat</span>
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-[1.15] text-white animate-fade-in-up">
+                Origin-Direct <span className="text-elysium-yellow drop-shadow-sm">Peanuts</span>, Grains, Pulses & <span className="text-elysium-lime drop-shadow-sm">Pure Dairy Ghee</span>
+              </h1>
+
+              <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-sans max-w-2xl animate-fade-in-up delay-100">
+                <strong>Agro Dairy Export LLP:</strong> Processor and international merchant exporter of Bold Peanuts, Green Millet, Sorghum, Yellow Maize, Green Moong, Desi Chickpeas, and Pure Cow & Buffalo Ghee. Direct container loading from Hazira, Mundra, and Kandla ports.
+              </p>
+
+              {/* Elysium Action CTAs */}
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-3 animate-fade-in-up delay-200">
+                <Link
+                  to="/rfq"
+                  className="bg-elysium-yellow hover:bg-elysium-yellowhover text-slate-900 font-display font-bold text-sm px-8 py-4 rounded-full shadow-lg hover:shadow-glow-yellow transition-all duration-300 flex items-center gap-2 border border-amber-300 active:scale-95 group"
+                >
+                  <span>Get a Quote</span>
+                  <span className="font-sans text-base group-hover:translate-x-1 transition-transform">→</span>
+                </Link>
+
+                <Link
+                  to="/products"
+                  className="bg-white/10 hover:bg-white/20 text-white border border-white/30 font-ui font-semibold text-sm px-7 py-4 rounded-full backdrop-blur-md transition-all duration-300 flex items-center gap-2 hover:border-white active:scale-95"
+                >
+                  <span>Browse Catalog</span>
+                </Link>
+
+                <a
+                  href="https://wa.me/919023363680?text=Hello%20J.P.%20Vora,%20I%20am%20interested%20in%20Agro%20Dairy%20export%20commodities."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-emerald-600 hover:bg-emerald-500 text-white font-ui font-bold text-xs sm:text-sm px-6 py-4 rounded-full transition-all duration-300 flex items-center gap-2 shadow-md hover:shadow-emerald-500/30 active:scale-95"
+                >
+                  <Phone className="w-4 h-4 text-white" />
+                  <span>WhatsApp Trade Desk</span>
+                </a>
+              </div>
+
+              {/* Quick Trust Credentials Ticker */}
+              <div className="pt-4 flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-slate-300 font-ui">
+                <div className="flex items-center gap-1.5">
+                  <Check className="w-4 h-4 text-elysium-lime" />
+                  <span>IEC: 0817029381</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Check className="w-4 h-4 text-elysium-lime" />
+                  <span>FSSAI: 10722026000148</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Check className="w-4 h-4 text-elysium-lime" />
+                  <span>APEDA RCMC Certified</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Check className="w-4 h-4 text-elysium-lime" />
+                  <span>Port Direct: Hazira & Mundra</span>
+                </div>
+              </div>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-[1.18] text-white">
-              Origin-Direct <span className="text-elysium-yellow">Peanuts</span>, Grains, Pulses & <span className="text-elysium-lime">Pure Dairy Ghee</span>
-            </h1>
+            {/* Right Interactive Highlights Card */}
+            <div className="hidden lg:block lg:col-span-4">
+              <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 text-white space-y-4 shadow-2xl relative overflow-hidden animate-float">
+                <div className="absolute top-0 right-0 transform translate-x-4 -translate-y-4 w-32 h-32 bg-elysium-lime/20 rounded-full blur-2xl" />
+                <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                  <span className="font-ui font-bold text-xs uppercase tracking-wider text-elysium-yellow">Containerized Ocean FCL</span>
+                  <span className="text-[10px] bg-elysium-lime/20 text-elysium-lime px-2 py-0.5 rounded-full font-bold">20ft / 40ft HC</span>
+                </div>
 
-            <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-sans max-w-2xl">
-              Agro Dairy Export LLP, Surat: direct exporter of Bold Peanuts, Green Millet, Sorghum, Maize, Green Moong, Chickpeas, and Pure Cow & Buffalo Ghee. Machine cleaned, Sortex sorted, and shipped in full or mixed containers from Gujarat ports.
-            </p>
+                <div className="space-y-3 text-xs font-sans">
+                  <div className="flex justify-between items-center bg-white/5 p-2.5 rounded-xl border border-white/5">
+                    <span className="font-bold text-slate-200">Green Millet / Sorghum:</span>
+                    <span className="font-mono text-elysium-yellow font-bold">24–25 MT (20ft)</span>
+                  </div>
+                  <div className="flex justify-between items-center bg-white/5 p-2.5 rounded-xl border border-white/5">
+                    <span className="font-bold text-slate-200">Bold Peanuts (Counts):</span>
+                    <span className="font-mono text-elysium-yellow font-bold">19 MT (20ft) / 27 MT (40ft)</span>
+                  </div>
+                  <div className="flex justify-between items-center bg-white/5 p-2.5 rounded-xl border border-white/5">
+                    <span className="font-bold text-slate-200">Pure Dairy Ghee:</span>
+                    <span className="font-mono text-elysium-yellow font-bold">16–18 MT (Food Grade)</span>
+                  </div>
+                  <div className="flex justify-between items-center bg-white/5 p-2.5 rounded-xl border border-white/5">
+                    <span className="font-bold text-slate-200">Moong & Chickpeas:</span>
+                    <span className="font-mono text-elysium-yellow font-bold">25 MT (20ft) / 27 MT (40ft)</span>
+                  </div>
+                </div>
 
-            {/* Elysium CTAs */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <Link
-                to="/rfq"
-                className="bg-elysium-yellow hover:bg-elysium-yellowhover text-slate-900 font-display font-bold text-sm px-8 py-4 rounded-full shadow-lg transition flex items-center gap-2 border border-amber-300"
-              >
-                <span>Get a Quote</span>
-                <span className="font-sans text-base">→</span>
-              </Link>
-
-              <Link
-                to="/products"
-                className="bg-white/10 hover:bg-white/20 text-white border border-white/30 font-ui font-semibold text-sm px-7 py-4 rounded-full backdrop-blur-sm transition flex items-center gap-2"
-              >
-                <span>Browse All Commodities</span>
-              </Link>
-
-              <a
-                href="https://wa.me/919023363680?text=Hello%20J.P.%20Vora,%20I%20am%20interested%20in%20Agro%20Dairy%20export%20commodities."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-ui font-bold text-xs px-5 py-4 rounded-full transition flex items-center gap-2 shadow-md"
-              >
-                <Phone className="w-3.5 h-3.5" />
-                <span>WhatsApp: +91 90233 63680</span>
-              </a>
+                <div className="pt-2 text-[11px] text-slate-300 leading-snug">
+                  ✨ Custom mixed containers available with individual lot quarantine certificates.
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -128,55 +187,55 @@ export default function Home() {
 
       {/* Signature Negative Margin Floating Strip (The signature Elysium feature!) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 lg:-mt-24 relative z-20">
-        <div className="bg-white rounded-2xl shadow-xl border border-slate-200/90 p-6 sm:p-8">
+        <div className="bg-white rounded-3xl shadow-soft-xl border border-slate-200/90 p-6 sm:p-8 backdrop-blur-md">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Strip Item 1 */}
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-elysium-tint text-elysium-green flex items-center justify-center shrink-0 font-bold">
+            <div className="flex items-start gap-4 p-3 rounded-2xl hover:bg-elysium-tint/50 transition-colors duration-200">
+              <div className="w-12 h-12 rounded-2xl bg-elysium-tint text-elysium-green flex items-center justify-center shrink-0 font-bold shadow-sm">
                 <Building2 className="w-6 h-6" />
               </div>
               <div>
                 <h3 className="font-display font-bold text-sm text-elysium-green">Direct Mandi Sourcing</h3>
-                <p className="font-display text-xs text-slate-600 mt-0.5 leading-relaxed">
+                <p className="font-sans text-xs text-slate-600 mt-1 leading-relaxed">
                   Primary procurement from farmer networks in Gujarat & Saurashtra mandis.
                 </p>
               </div>
             </div>
 
             {/* Strip Item 2 */}
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-elysium-tint text-elysium-green flex items-center justify-center shrink-0 font-bold">
+            <div className="flex items-start gap-4 p-3 rounded-2xl hover:bg-elysium-tint/50 transition-colors duration-200">
+              <div className="w-12 h-12 rounded-2xl bg-elysium-tint text-elysium-green flex items-center justify-center shrink-0 font-bold shadow-sm">
                 <CheckCircle2 className="w-6 h-6" />
               </div>
               <div>
                 <h3 className="font-display font-bold text-sm text-elysium-green">Buhler Optical Sortex</h3>
-                <p className="font-display text-xs text-slate-600 mt-0.5 leading-relaxed">
+                <p className="font-sans text-xs text-slate-600 mt-1 leading-relaxed">
                   98-99% Machine & 99% Sortex purity across millets, maize & peanuts.
                 </p>
               </div>
             </div>
 
             {/* Strip Item 3 */}
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-elysium-tint text-elysium-green flex items-center justify-center shrink-0 font-bold">
+            <div className="flex items-start gap-4 p-3 rounded-2xl hover:bg-elysium-tint/50 transition-colors duration-200">
+              <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center shrink-0 font-bold shadow-sm">
                 <Package className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-display font-bold text-sm text-elysium-green">Mixed Containers</h3>
-                <p className="font-display text-xs text-slate-600 mt-0.5 leading-relaxed">
+                <h3 className="font-display font-bold text-sm text-amber-900">Mixed Containers</h3>
+                <p className="font-sans text-xs text-slate-600 mt-1 leading-relaxed">
                   Consolidate grains, pulses, peanuts & dairy ghee in a single 20ft container.
                 </p>
               </div>
             </div>
 
             {/* Strip Item 4 */}
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-elysium-tint text-elysium-green flex items-center justify-center shrink-0 font-bold">
+            <div className="flex items-start gap-4 p-3 rounded-2xl hover:bg-elysium-tint/50 transition-colors duration-200">
+              <div className="w-12 h-12 rounded-2xl bg-elysium-tint text-elysium-green flex items-center justify-center shrink-0 font-bold shadow-sm">
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <div>
                 <h3 className="font-display font-bold text-sm text-elysium-green">APEDA & FSSAI Certified</h3>
-                <p className="font-display text-xs text-slate-600 mt-0.5 leading-relaxed">
+                <p className="font-sans text-xs text-slate-600 mt-1 leading-relaxed">
                   IEC: 0817029381 • Full Phytosanitary, Fumigation & COA with every B/L.
                 </p>
               </div>

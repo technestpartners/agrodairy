@@ -10,6 +10,7 @@ import { productsService } from '../services/api';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -18,6 +19,12 @@ export default function Navbar() {
         if (res.success) setCategories(res.data);
       })
       .catch(err => console.error(err));
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -25,36 +32,44 @@ export default function Navbar() {
   }, [location]);
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-slate-200 transition-all">
-      {/* Top Bar - Elysium Style Lime Green Banner */}
-      <div className="bg-elysium-lime text-elysium-dark text-xs py-2 px-4 font-ui font-semibold">
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${
+      scrolled 
+        ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-slate-200/80' 
+        : 'bg-white shadow-sm border-b border-slate-200'
+    }`}>
+      {/* Top Bar - Elysium Style Lime Green Banner with Live Indicator */}
+      <div className="bg-gradient-to-r from-[#74b93b] via-elysium-lime to-[#6db336] text-elysium-dark text-xs py-2 px-4 font-ui font-semibold shadow-inner">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-          <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
+          <div className="flex items-center gap-3 flex-wrap justify-center sm:justify-start">
             <span className="flex items-center gap-1.5 font-bold text-slate-900">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-900 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-slate-900"></span>
+              </span>
               <ShieldCheck className="w-3.5 h-3.5 text-elysium-dark" />
               AGRO DAIRY EXPORT LLP • Surat, Gujarat, India
             </span>
-            <span className="hidden md:inline-block text-elysium-green">|</span>
-            <span className="hidden md:inline-block text-slate-800">
+            <span className="hidden md:inline-block text-elysium-green/60">|</span>
+            <span className="hidden md:inline-block text-slate-800 text-[11px]">
               Direct Shipments via Mundra, Kandla & Hazira Ports
             </span>
           </div>
 
-          <div className="flex items-center gap-4 text-slate-900">
+          <div className="flex items-center gap-3 sm:gap-4 text-slate-900 text-[11px] sm:text-xs">
             <a 
               href="tel:+919023363680" 
-              className="hover:text-white transition flex items-center gap-1 font-bold"
+              className="hover:text-white transition-colors flex items-center gap-1 font-bold"
             >
               <Phone className="w-3 h-3 text-elysium-dark" />
-              +91 90233 63680 (J.P. Vora)
+              <span>+91 90233 63680 <span className="hidden sm:inline font-normal">(J.P. Vora)</span></span>
             </a>
-            <span className="text-elysium-green">|</span>
+            <span className="text-elysium-green/60">|</span>
             <a 
               href="mailto:agrodairyexportllp@gmail.com" 
-              className="hover:text-white transition flex items-center gap-1 font-bold"
+              className="hover:text-white transition-colors flex items-center gap-1 font-bold truncate max-w-[200px] sm:max-w-none"
             >
               <Mail className="w-3 h-3 text-elysium-dark" />
-              agrodairyexportllp@gmail.com
+              <span>agrodairyexportllp@gmail.com</span>
             </a>
           </div>
         </div>
@@ -287,14 +302,14 @@ export default function Navbar() {
             </Link>
           </nav>
 
-          {/* Action CTAs - Elysium Signature Round Yellow Button */}
+          {/* Action CTAs - Elysium Signature Round Yellow Button with Glow */}
           <div className="hidden lg:flex items-center gap-3">
             <Link
               to="/rfq"
-              className="bg-elysium-yellow hover:bg-elysium-yellowhover text-slate-900 font-display font-bold px-6 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all text-sm flex items-center gap-2 border border-amber-300"
+              className="relative group bg-elysium-yellow hover:bg-elysium-yellowhover text-slate-900 font-display font-bold px-6 py-2.5 rounded-full shadow-md hover:shadow-glow-yellow transition-all duration-300 text-sm flex items-center gap-2 border border-amber-300 active:scale-95"
             >
               <span>Get a Quote</span>
-              <span className="font-sans text-base">→</span>
+              <span className="font-sans text-base transition-transform group-hover:translate-x-1">→</span>
             </Link>
           </div>
 
@@ -302,60 +317,63 @@ export default function Navbar() {
           <div className="lg:hidden flex items-center gap-2">
             <Link
               to="/rfq"
-              className="bg-elysium-yellow text-slate-900 text-xs font-bold px-4 py-2 rounded-full border border-amber-300"
+              className="bg-elysium-yellow text-slate-900 text-xs font-bold px-3.5 py-1.5 rounded-full border border-amber-300 shadow-sm"
             >
-              Get Quote
+              Quote
             </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition"
+              className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition active:scale-95"
               aria-label="Toggle menu"
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? <X className="w-6 h-6 text-slate-900" /> : <Menu className="w-6 h-6 text-slate-900" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer with smooth animation */}
       {isOpen && (
-        <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 max-h-[85vh] overflow-y-auto custom-scrollbar">
-          <nav className="flex flex-col gap-1 font-ui font-semibold text-sm">
-            <Link to="/" className="px-3 py-2 rounded-lg text-slate-800 hover:bg-elysium-tint">
-              Home
+        <div className="lg:hidden bg-white/98 backdrop-blur-xl border-b border-slate-200 px-4 pt-3 pb-6 max-h-[85vh] overflow-y-auto custom-scrollbar animate-fade-in shadow-xl">
+          <nav className="flex flex-col gap-1.5 font-ui font-semibold text-sm">
+            <Link to="/" className="px-3 py-2.5 rounded-xl text-slate-800 hover:bg-elysium-tint flex items-center justify-between">
+              <span>Home</span>
+              <span className="text-xs text-slate-400">→</span>
             </Link>
-            <Link to="/products" className="px-3 py-2 rounded-lg text-slate-800 hover:bg-elysium-tint">
-              All Commodities
+            <Link to="/products" className="px-3 py-2.5 rounded-xl text-slate-800 hover:bg-elysium-tint flex items-center justify-between">
+              <span>All Commodities</span>
+              <span className="text-xs text-slate-400">→</span>
             </Link>
-            <Link to="/products?category=dairy-products" className="px-3 py-2 rounded-lg text-elysium-green hover:bg-elysium-tint">
-              • Pure Cow & Buffalo Ghee
+            <div className="bg-elysium-tint/50 rounded-2xl p-2.5 space-y-1 my-1 border border-elysium-tintborder/50">
+              <span className="text-[10px] font-bold uppercase text-slate-400 px-2 block">Quick Commodities</span>
+              <Link to="/products?category=dairy-products" className="px-3 py-1.5 rounded-lg text-elysium-green hover:bg-white text-xs block font-bold">
+                • Pure Cow & Buffalo Ghee
+              </Link>
+              <Link to="/products?category=grains-millets" className="px-3 py-1.5 rounded-lg text-elysium-green hover:bg-white text-xs block">
+                • Green Millet, Sorghum & Maize
+              </Link>
+              <Link to="/products?category=peanuts" className="px-3 py-1.5 rounded-lg text-elysium-green hover:bg-white text-xs block">
+                • Bold Peanut Kernels (38/42 to 70/80)
+              </Link>
+              <Link to="/products?category=pulses-beans" className="px-3 py-1.5 rounded-lg text-elysium-green hover:bg-white text-xs block">
+                • Green Moong, Mogar & Chickpeas
+              </Link>
+            </div>
+            <Link to="/#mixed-containers" className="px-3 py-2.5 rounded-xl text-elysium-green font-bold bg-amber-50/60 border border-amber-200/50 flex items-center gap-2">
+              <Package className="w-4 h-4 text-elysium-lime" />
+              <span>Mixed Containers (FCL)</span>
             </Link>
-            <Link to="/products?category=grains-millets" className="px-3 py-2 rounded-lg text-elysium-green hover:bg-elysium-tint">
-              • Green Millet, Sorghum & Maize
-            </Link>
-            <Link to="/products?category=peanuts" className="px-3 py-2 rounded-lg text-elysium-green hover:bg-elysium-tint">
-              • Bold Peanut Kernels (38/42 to 70/80)
-            </Link>
-            <Link to="/products?category=pulses-beans" className="px-3 py-2 rounded-lg text-elysium-green hover:bg-elysium-tint">
-              • Green Moong, Mogar & Chickpeas
-            </Link>
-            <Link to="/quality/certifications" className="px-3 py-2 rounded-lg text-slate-800 hover:bg-elysium-tint">
+            <Link to="/quality/certifications" className="px-3 py-2.5 rounded-xl text-slate-800 hover:bg-elysium-tint">
               Verify Agro Dairy & Licenses
             </Link>
-            <Link to="/quality/traceability" className="px-3 py-2 rounded-lg text-slate-800 hover:bg-elysium-tint">
-              Lot Traceability System
-            </Link>
-            <Link to="/tools/container-calculator" className="px-3 py-2 rounded-lg text-slate-800 hover:bg-elysium-tint">
+            <Link to="/tools/container-calculator" className="px-3 py-2.5 rounded-xl text-slate-800 hover:bg-elysium-tint">
               Container Load Calculator
             </Link>
-            <Link to="/logistics" className="px-3 py-2 rounded-lg text-slate-800 hover:bg-elysium-tint">
-              Ports & Shipping Logistics
+            <Link to="/contact" className="px-3 py-2.5 rounded-xl text-slate-800 hover:bg-elysium-tint">
+              Contact Trade Desk (J.P. Vora)
             </Link>
-            <Link to="/contact" className="px-3 py-2 rounded-lg text-slate-800 hover:bg-elysium-tint">
-              Contact Desk (J.P. Vora)
-            </Link>
-            <Link to="/rfq" className="mt-3 w-full bg-elysium-yellow text-slate-900 font-bold py-3 rounded-full text-center shadow-md">
-              Request Commercial Quotation (RFQ) →
+            <Link to="/rfq" className="mt-2 w-full bg-elysium-yellow hover:bg-elysium-yellowhover text-slate-900 font-bold py-3.5 rounded-full text-center shadow-md border border-amber-300">
+              Request Commercial RFQ →
             </Link>
           </nav>
         </div>

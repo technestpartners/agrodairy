@@ -46,9 +46,50 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['"Roboto"', '"Inter"', 'system-ui', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', '"Inter"', 'system-ui', 'sans-serif'],
+        serif: ['"Merriweather"', 'Georgia', 'serif'],
         display: ['"Merriweather"', 'Georgia', 'serif'],
-        ui: ['"Quicksand"', '"Inter"', 'sans-serif'],
+        ui: ['"Outfit"', '"Plus Jakarta Sans"', 'sans-serif'],
+      },
+      keyframes: {
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(24px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-8px)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        pulseGlow: {
+          '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+          '50%': { opacity: '0.8', transform: 'scale(1.05)' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        }
+      },
+      animation: {
+        'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'fade-in': 'fadeIn 0.5s ease-out forwards',
+        'float': 'float 4s ease-in-out infinite',
+        'shimmer': 'shimmer 2.5s infinite linear',
+        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+        'marquee': 'marquee 25s linear infinite',
+      },
+      boxShadow: {
+        'glow-lime': '0 0 25px -5px rgba(125, 194, 66, 0.35)',
+        'glow-yellow': '0 0 25px -5px rgba(255, 201, 40, 0.45)',
+        'soft-xl': '0 20px 40px -15px rgba(11, 63, 29, 0.08)',
+        'card-hover': '0 22px 35px -10px rgba(15, 76, 36, 0.15)',
       }
     },
   },

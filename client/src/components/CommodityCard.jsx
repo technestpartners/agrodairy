@@ -8,61 +8,68 @@ export default function CommodityCard({ product }) {
     : '/images/products/bold-peanuts.jpg';
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-agro-400/60 transition-all duration-300 flex flex-col overflow-hidden group">
-      {/* Image Thumbnail */}
-      <div className="relative h-48 bg-slate-100 overflow-hidden">
+    <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-card-hover hover:border-elysium-lime/60 transition-all duration-300 flex flex-col overflow-hidden group hover:-translate-y-1.5 relative">
+      {/* Image Thumbnail with zoom effect */}
+      <div className="relative h-52 sm:h-48 overflow-hidden bg-slate-100">
         <img
           src={imageUrl}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = '/images/about-commodities.jpg';
           }}
         />
-        {product.is_featured === 1 && (
-          <span className="absolute top-3 left-3 bg-gold-500/95 backdrop-blur-sm text-agro-950 font-bold text-[11px] px-2.5 py-1 rounded-full shadow-md">
-            Prime Export
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+
+        {/* Top Badges */}
+        <div className="absolute top-3 inset-x-3 flex items-center justify-between gap-2 pointer-events-none">
+          <span className="bg-elysium-dark/85 backdrop-blur-md text-white font-ui font-semibold text-[11px] px-3 py-1 rounded-full border border-white/10 shadow-sm flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-elysium-lime animate-pulse" />
+            {product.category_name || 'Agro Commodity'}
           </span>
-        )}
-        <span className="absolute top-3 right-3 bg-agro-900/80 backdrop-blur-sm text-white text-[11px] font-medium px-2.5 py-1 rounded-full">
-          {product.category_name || 'Agro Commodity'}
-        </span>
+
+          {product.is_featured === 1 && (
+            <span className="bg-elysium-yellow text-slate-900 font-display font-extrabold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full shadow-md border border-amber-300">
+              Prime Export
+            </span>
+          )}
+        </div>
+
+        {/* Origin Pill Bottom of Image */}
+        <div className="absolute bottom-3 left-3 flex items-center gap-1.5 text-xs text-white/90 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full">
+          <MapPin className="w-3 h-3 text-elysium-lime" />
+          <span className="text-[11px] font-medium">{product.origin || 'Gujarat, India'}</span>
+        </div>
       </div>
 
       {/* Card Content */}
-      <div className="p-5 flex-1 flex flex-col justify-between">
+      <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
         <div>
-          <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-1.5">
-            <MapPin className="w-3.5 h-3.5 text-agro-600 shrink-0" />
-            <span className="truncate">{product.origin || 'Gujarat, India'}</span>
-            {product.hs_code && (
-              <>
-                <span className="text-slate-300">•</span>
-                <span className="font-mono text-[11px]">HS: {product.hs_code}</span>
-              </>
-            )}
+          <div className="flex items-center justify-between text-[11px] text-slate-400 font-mono mb-1">
+            <span>{product.hs_code ? `HS Code: ${product.hs_code}` : 'Verified Export Standard'}</span>
+            <span className="text-elysium-green font-bold font-sans">Sortex 99%+</span>
           </div>
 
-          <h3 className="font-bold text-lg text-slate-900 group-hover:text-agro-800 transition line-clamp-1 mb-2">
-            <Link to={`/products/${product.slug}`}>
+          <h3 className="font-display font-bold text-lg text-slate-900 group-hover:text-elysium-green transition-colors line-clamp-1 mb-2">
+            <Link to={`/products/${product.slug}`} className="hover:underline">
               {product.name}
             </Link>
           </h3>
 
-          <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-4">
-            {product.short_description || 'Certified export grade with certified purity, Sortex-cleaned, and moisture controlled under international standards.'}
+          <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+            {product.short_description || 'Certified export quality with purity analysis, Sortex sorting, and controlled moisture under international phytosanitary standards.'}
           </p>
 
-          {/* Quick Specs Chips */}
-          <div className="grid grid-cols-2 gap-2 text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100 mb-4">
+          {/* Quick Specifications Strip */}
+          <div className="grid grid-cols-2 gap-2 text-xs text-slate-600 bg-elysium-tint/60 p-3 rounded-2xl border border-elysium-tintborder/60 mt-3">
             <div>
-              <span className="text-[10px] text-slate-400 block uppercase font-medium">Min Order (MOQ)</span>
-              <span className="font-semibold text-slate-800">{product.moq} {product.moq_unit || 'MT'}</span>
+              <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider block">Min Order (MOQ)</span>
+              <span className="font-bold text-slate-900 font-ui text-sm">{product.moq || 20} {product.moq_unit || 'MT'}</span>
             </div>
             <div>
-              <span className="text-[10px] text-slate-400 block uppercase font-medium">Grade / Spec</span>
-              <span className="font-semibold text-slate-800 truncate block">{product.grade_variety || 'Export Grade 99%+'}</span>
+              <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider block">Grade / Standard</span>
+              <span className="font-bold text-elysium-dark truncate block font-ui text-sm">{product.grade_variety || 'Export Grade'}</span>
             </div>
           </div>
         </div>
@@ -71,16 +78,16 @@ export default function CommodityCard({ product }) {
         <div className="flex items-center gap-2 pt-2 border-t border-slate-100">
           <Link
             to={`/products/${product.slug}`}
-            className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs py-2.5 rounded-xl text-center transition"
+            className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-800 font-ui font-semibold text-xs py-2.5 rounded-full text-center transition"
           >
             Specs & COA
           </Link>
           <Link
             to={`/rfq?product_id=${product.id}`}
-            className="flex-1 bg-agro-800 hover:bg-agro-900 text-white font-bold text-xs py-2.5 rounded-xl text-center transition flex items-center justify-center gap-1 shadow-sm"
+            className="flex-1 bg-elysium-green hover:bg-elysium-dark text-white font-ui font-bold text-xs py-2.5 rounded-full text-center transition flex items-center justify-center gap-1.5 shadow-sm group/btn"
           >
-            Get Quote
-            <ArrowRight className="w-3 h-3 text-gold-400" />
+            <span>Quote</span>
+            <ArrowRight className="w-3.5 h-3.5 text-elysium-lime group-hover/btn:translate-x-1 transition-transform" />
           </Link>
         </div>
       </div>

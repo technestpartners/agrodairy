@@ -3,15 +3,43 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
-    @apply bg-slate-50 text-slate-800 antialiased font-sans;
+    @apply bg-[#fbfdfa] text-slate-800 antialiased font-sans selection:bg-elysium-lime selection:text-elysium-dark;
+  }
+  h1, h2, h3, h4 {
+    @apply tracking-tight font-display text-slate-900;
   }
 }
 
-.bg-pattern {
-  background-color: #0f4c3a;
-  background-image: radial-gradient(#166534 1px, transparent 1px);
-  background-size: 24px 24px;
+/* Luxury Glassmorphism & Micro-effects */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-dark {
+  background: rgba(11, 63, 29, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(125, 194, 66, 0.2);
+}
+
+.gradient-border-emerald {
+  border-image: linear-gradient(to right, #7dc242, #ffc928) 1;
+}
+
+/* Subtle Animated Grain / Mesh background */
+.mesh-agro-pattern {
+  background-color: #0b3f1d;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(125, 194, 66, 0.22) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(255, 201, 40, 0.15) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(19, 97, 46, 0.8) 0px, transparent 100%);
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -27,4 +55,14 @@
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* Text Shimmer Effect */
+.text-shimmer {
+  background: linear-gradient(90deg, #ffffff 0%, #ffc928 50%, #ffffff 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
 }
