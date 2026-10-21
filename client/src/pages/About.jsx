@@ -5,6 +5,7 @@ import {
   MapPin, CheckCircle2, ArrowRight
 } from 'lucide-react';
 import { companyService } from '../services/api';
+import { RealProductSectionFlanks } from '../components/ProductBackgroundDecorations';
 
 export default function About() {
   const [team, setTeam] = useState([]);
@@ -16,7 +17,10 @@ export default function About() {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16 overflow-hidden">
+      {/* Real commodity photographic background elements */}
+      <RealProductSectionFlanks leftType="chickpeas" rightType="real-grains" opacity="opacity-25 lg:opacity-35" />
+
       {/* Header */}
       <div>
         <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">

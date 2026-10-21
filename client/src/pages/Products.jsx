@@ -3,6 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { Search, Filter, Layers, ArrowUpDown, ChevronRight } from 'lucide-react';
 import { productsService } from '../services/api';
 import CommodityCard from '../components/CommodityCard';
+import { RealProductSectionFlanks } from '../components/ProductBackgroundDecorations';
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -58,7 +59,10 @@ export default function Products() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 overflow-hidden">
+      {/* Real commodity photographic background elements */}
+      <RealProductSectionFlanks leftType="pearl-millet" rightType="shelled-peanuts" opacity="opacity-25 lg:opacity-35" />
+
       {/* Breadcrumb & Header */}
       <div>
         <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
