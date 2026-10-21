@@ -5,13 +5,14 @@ import {
   Calculator, Search, Award, Clock, FileCheck2,
   ChevronRight, ChevronLeft, Building2, Truck, Package, Phone, Mail, MapPin, Check,
   Star, Leaf, Scale, ChevronDown, ChevronUp, TrendingUp, Users, HeartHandshake,
-  Ship, Factory, Wheat, Droplets, FlaskConical, BadgeCheck
+  Ship, Factory, Wheat, Droplets, FlaskConical, BadgeCheck, MessageCircle
 } from 'lucide-react';
 import { productsService, inquiriesService } from '../services/api';
 import CommodityCard from '../components/CommodityCard';
 import { 
   HeroProductDecorations, 
   SectionProductWatermark,
+  RealProductSectionFlanks,
   WheatStalkSvg,
   PeanutPodSvg,
   DairyGheeDropletSvg,
@@ -75,10 +76,46 @@ const CATEGORIES_STATIC = [
 ];
 
 const PROCESS_STEPS = [
-  { num: '01', icon: Leaf, label: 'Sourcing', desc: 'We source matching lots from trusted farmer networks and mandis across Gujarat & Saurashtra to your exact grade, count and quantity.', image: '/images/bg/pearl-millet.jpg', tag: 'Green Pearl Millet' },
-  { num: '02', icon: Factory, label: 'Processing', desc: 'Lots are de-stoned, cleaned, Sortex sorted, and lab-tested for moisture, aflatoxin, and foreign matter to your market requirements.', image: '/images/bg/real-ghee.jpg', tag: 'Pure Cow Ghee' },
-  { num: '03', icon: Package, label: 'Packaging', desc: 'Packed in 25 kg/50 kg PP or Jute bags, vacuum packs, or food-grade tins, then containerized and professionally fumigated.', image: '/images/bg/shelled-peanuts.jpg', tag: 'Shelled Bold Peanuts' },
-  { num: '04', icon: Ship, label: 'Shipping', desc: 'We book the container vessel, issue original B/L and export documents, and share live maritime tracking until your destination port.', image: '/images/bg/chickpeas.jpg', tag: 'Desi & Kabuli Chickpeas' },
+  {
+    num: '01',
+    stage: 'Origination',
+    title: 'Farmgate Sourcing',
+    location: 'Saurashtra & Gujarat Mandis',
+    desc: 'Direct primary procurement from vetted farmer collectives and APMC mandis. Moisture, foreign matter, and seed counts are pre-sampled before purchase.',
+    timeline: 'Day 1–3',
+    icon: Leaf,
+    tag: 'APEDA Origin Direct',
+  },
+  {
+    num: '02',
+    stage: 'Refinement',
+    title: 'Sortex Optical QC',
+    location: 'Purity 98%–99.9% Clean',
+    desc: 'Buhler optical color sorting, de-stoning, and gravity grading. Independent laboratory testing validates aflatoxin levels, moisture, and purity specs.',
+    timeline: 'Day 4–6',
+    icon: FlaskConical,
+    tag: 'Buhler Sortex Clean',
+  },
+  {
+    num: '03',
+    stage: 'Preservation',
+    title: 'Export Packaging',
+    location: 'Custom Buyer Stenciling',
+    desc: 'Sealed in 25/50kg multi-wall PP, Jute bags, or food-grade tins. Professional phytosanitary fumigation protects cargo against moisture and pest ingress.',
+    timeline: 'Day 7–8',
+    icon: Package,
+    tag: 'Phytosanitary Sealed',
+  },
+  {
+    num: '04',
+    stage: 'Fulfillment',
+    title: 'Ocean Freight',
+    location: 'Mundra, Kandla & Hazira',
+    desc: 'Supervised stuffing into 20ft & 40ft HC containers at Gujarat sea ports. Rapid export customs clearance, B/L issuance, and live satellite vessel tracking.',
+    timeline: 'Day 9+ Sailing',
+    icon: Ship,
+    tag: 'FCL & Mixed Loads',
+  },
 ];
 
 const WHY_CARDS = [
@@ -113,11 +150,66 @@ const WHY_CARDS = [
 ];
 
 const STATS = [
-  { value: 10, suffix: '+', label: 'Years Experience', icon: Clock },
-  { value: 40, suffix: '+', label: 'Countries Served', icon: Globe2 },
-  { value: 150, suffix: '+', label: 'Institutional Buyers', icon: Users },
-  { value: 1800, suffix: '+', label: 'FCL Dispatches', icon: Truck },
-  { value: 50000, suffix: '+', label: 'Metric Tonnes Shipped', icon: Scale },
+  {
+    value: 10,
+    suffix: '+',
+    label: 'Years of Excellence',
+    sub: 'Export Operations Since 2014',
+    tag: 'Est. 2014',
+    highlight: 'Global Trust',
+    icon: Clock,
+    glow: 'from-amber-400/20 via-amber-400/5 to-transparent',
+    accentText: 'text-amber-300',
+    borderHover: 'hover:border-amber-400/40',
+  },
+  {
+    value: 40,
+    suffix: '+',
+    label: 'Countries Served',
+    sub: 'GCC, SEA, Europe & Africa',
+    tag: '5 Continents',
+    highlight: 'Worldwide Reach',
+    icon: Globe2,
+    glow: 'from-teal-400/20 via-teal-400/5 to-transparent',
+    accentText: 'text-teal-300',
+    borderHover: 'hover:border-teal-400/40',
+  },
+  {
+    value: 150,
+    suffix: '+',
+    label: 'Institutional Buyers',
+    sub: 'Millers, Packers & Importers',
+    tag: '94% Repeat Orders',
+    highlight: 'Direct Clients',
+    icon: Users,
+    glow: 'from-emerald-400/20 via-emerald-400/5 to-transparent',
+    accentText: 'text-emerald-300',
+    borderHover: 'hover:border-emerald-400/40',
+  },
+  {
+    value: 1800,
+    suffix: '+',
+    label: 'FCL Dispatches',
+    sub: 'Full 20ft & 40ft Food-Grade HC',
+    tag: 'Direct Port Loadings',
+    highlight: 'Zero Disputes',
+    icon: Truck,
+    glow: 'from-cyan-400/20 via-cyan-400/5 to-transparent',
+    accentText: 'text-cyan-300',
+    borderHover: 'hover:border-cyan-400/40',
+  },
+  {
+    value: 50000,
+    suffix: '+',
+    label: 'Metric Tonnes Shipped',
+    sub: 'Peanuts, Grains, Pulses & Ghee',
+    tag: 'SGS/Intertek Verified',
+    highlight: 'Bulk & Bagged',
+    icon: Scale,
+    glow: 'from-emerald-300/20 via-emerald-300/5 to-transparent',
+    accentText: 'text-emerald-200',
+    borderHover: 'hover:border-emerald-300/40',
+  },
 ];
 
 const CERTS = [
@@ -163,16 +255,52 @@ function useCountUp(target, duration, running) {
 /* ===========================
    SUB-COMPONENTS
    =========================== */
-function StatCard({ stat, running }) {
+function StatCard({ stat, running, index }) {
   const n = useCountUp(stat.value, 1800, running);
   const Icon = stat.icon;
   return (
-    <div className="text-center p-6 rounded-2xl bg-white/8 border border-white/10 backdrop-blur-sm">
-      <Icon className="w-6 h-6 text-brand-gold/80 mx-auto mb-2" />
-      <span className="block text-4xl sm:text-5xl font-display font-extrabold text-white tracking-tight stat-number">
-        {n.toLocaleString()}{stat.suffix}
-      </span>
-      <span className="block text-xs text-white/60 mt-1.5 font-ui font-medium">{stat.label}</span>
+    <div
+      className={`group relative overflow-hidden rounded-2xl bg-white/[0.06] hover:bg-white/[0.10] border border-white/10 ${stat.borderHover} p-5 sm:p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 shadow-[0_12px_32px_rgba(0,0,0,0.28)] flex flex-col justify-between`}
+    >
+      {/* Top glowing accent gradient line */}
+      <div className={`absolute top-0 inset-x-6 h-[2px] bg-gradient-to-r from-transparent via-current to-transparent ${stat.accentText} opacity-40 group-hover:opacity-100 transition-opacity duration-300`} />
+
+      {/* Subtle radial corner glow */}
+      <div className={`absolute -top-12 -right-12 w-28 h-28 bg-gradient-to-br ${stat.glow} rounded-full blur-2xl pointer-events-none group-hover:scale-150 transition-transform duration-500`} />
+
+      {/* Card Header: Icon Emblem + Micro-badge */}
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-brand-gold group-hover:scale-110 group-hover:bg-brand-primary/25 group-hover:text-emerald-300 transition-all duration-300 shadow-inner">
+            <Icon className="w-6 h-6 transition-transform duration-300 group-hover:rotate-6" />
+          </div>
+          <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-white/75 group-hover:text-white group-hover:border-white/30 transition-colors">
+            {stat.highlight}
+          </span>
+        </div>
+
+        {/* Counter Number */}
+        <div className="space-y-1">
+          <span className="block text-3xl sm:text-4xl lg:text-[2.65rem] font-display font-black text-white tracking-tight leading-none stat-number drop-shadow-sm">
+            {n.toLocaleString()}{stat.suffix}
+          </span>
+          <h3 className="text-sm sm:text-base font-semibold text-white/95 tracking-wide pt-1">
+            {stat.label}
+          </h3>
+          <p className="text-xs text-white/60 leading-relaxed font-sans line-clamp-1">
+            {stat.sub}
+          </p>
+        </div>
+      </div>
+
+      {/* Micro-tag footer */}
+      <div className="mt-4 pt-3.5 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-emerald-300/85 tracking-wide uppercase">
+        <span className="flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 group-hover:animate-ping" />
+          {stat.tag}
+        </span>
+        <span className="text-white/40 text-[10px] font-mono">0{index + 1}</span>
+      </div>
     </div>
   );
 }
@@ -367,15 +495,18 @@ function QuoteForm({ defaultProduct = '' }) {
         type="submit"
         disabled={status === 'submitting'}
         id="submit-rfq-btn"
-        className="w-full bg-brand-gold hover:bg-yellow-500 disabled:opacity-60 text-brand-deep font-display font-bold text-sm py-4 rounded-xl shadow-md transition duration-200 flex items-center justify-center gap-2"
+        className="w-full bg-brand-primary hover:bg-brand-primary-dark disabled:opacity-60 text-white font-ui font-bold text-sm py-4 rounded-xl shadow-md shadow-brand-primary/25 transition-all flex items-center justify-center gap-2 group"
       >
         {status === 'submitting' ? (
           <>
-            <span className="w-4 h-4 border-2 border-brand-deep/30 border-t-brand-deep rounded-full animate-spin" />
-            Submitting...
+            <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            <span>Submitting RFQ...</span>
           </>
         ) : (
-          <>Submit Export Inquiry <ArrowRight className="w-4 h-4" /></>
+          <>
+            <span>Submit Quotation Request</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </>
         )}
       </button>
     </form>
@@ -574,21 +705,21 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════
-          SECTION 2: ABOUT AGRO EXPORT
+          SECTION 2: ABOUT AGRO EXPORT (Origin-Direct Maritime Trade)
           ═══════════════════════════════════════ */}
-      <section id="about" className="relative pt-10 pb-16 sm:pt-12 sm:pb-20 lg:pt-14 lg:pb-20 bg-[#F4F9F8] overflow-hidden" ref={aboutRef}>
-        {/* Real photographic background watermarks (Whole Peanuts & Pearl Millet) */}
-        <SectionProductWatermark type="peanuts" position="right" />
-        <SectionProductWatermark type="pearl-millet" position="left" />
+      <section id="about" className="relative pt-12 pb-16 sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24 bg-[#F4F9F8] overflow-hidden border-b border-[#D4ECE9]" ref={aboutRef}>
+        {/* Floating Agricultural Commodity Elements (Pearl Millet & Bold Peanuts) */}
+        <RealProductSectionFlanks leftType="pearl-millet" rightType="peanuts" position="both" />
+
         <div className="section-container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Left Image with 50,000+ MT Floating Badge (5 cols) */}
+            {/* Left Image with Maritime Port Badge (5 cols) */}
             <div className={`lg:col-span-5 relative transition-all duration-700 ${aboutVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-              <div className="rounded-3xl overflow-hidden shadow-xl border border-brand-border bg-white">
+              <div className="rounded-3xl overflow-hidden shadow-xl border border-brand-border bg-white group">
                 <img
                   src="/images/cargo-ship.jpg"
                   alt="Container cargo vessel exporting commodities globally"
-                  className="w-full h-[400px] lg:h-[460px] object-cover"
+                  className="w-full h-[420px] lg:h-[480px] object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                   onError={(e) => {
                     e.target.onerror = null;
@@ -597,14 +728,20 @@ export default function Home() {
                 />
               </div>
 
-              {/* Floating green badge in corner */}
-              <div className="absolute bottom-6 left-6 bg-brand-deep text-white rounded-2xl px-5 py-3.5 shadow-xl border border-white/20 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5 text-brand-gold" />
+              {/* Floating Top Port Gateway Tag */}
+              <div className="absolute top-5 left-5 bg-white/95 backdrop-blur-md text-[#0C2422] rounded-full px-4 py-1.5 shadow-md border border-[#D4ECE9] flex items-center gap-2 text-xs font-mono font-bold">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>MUNDRA &amp; KANDLA GATEWAY</span>
+              </div>
+
+              {/* Floating Annual Volume Badge in Corner */}
+              <div className="absolute bottom-6 left-6 right-6 sm:right-auto bg-[#0C2422]/95 backdrop-blur-md text-white rounded-2xl px-5 py-4 shadow-2xl border border-white/15 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-brand-primary/20 border border-brand-primary/40 flex items-center justify-center shrink-0">
+                  <TrendingUp className="w-6 h-6 text-brand-gold" />
                 </div>
                 <div>
-                  <div className="font-display font-black text-2xl leading-none text-white">50,000+</div>
-                  <div className="text-[11px] font-ui text-white/80 mt-0.5">MT Exported Annually</div>
+                  <div className="font-display font-black text-2xl sm:text-3xl leading-none text-white tracking-tight">50,000+ <span className="text-sm font-ui font-semibold text-brand-gold">MT</span></div>
+                  <div className="text-xs font-ui text-emerald-200/90 mt-1">Exported Annually to 40+ Nations</div>
                 </div>
               </div>
             </div>
@@ -612,36 +749,57 @@ export default function Home() {
             {/* Right Content (7 cols) */}
             <div className={`lg:col-span-7 space-y-6 transition-all duration-700 delay-100 ${aboutVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
               <div>
-                <span className="text-xs font-ui font-bold uppercase tracking-wider text-brand-primary block mb-2">
-                  — ABOUT AGRO EXPORT
-                </span>
-                <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#0C2422] leading-tight">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#BBE5E1] text-brand-primary text-xs font-mono font-bold shadow-sm mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-primary" />
+                  <span>ORIGIN EXPORT PARTNER • GUJARAT, INDIA</span>
+                </div>
+                <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[2.65rem] text-[#0C2422] leading-tight tracking-tight">
                   Your Trusted Partner for Agricultural &amp; Dairy Exports
                 </h2>
               </div>
 
-              <p className="text-[#4D6765] text-sm sm:text-base leading-relaxed">
-                We are a leading exporter of Peanuts, Grains, Pulses and Dairy Ghee from India, supplying high-quality agricultural products to international markets. With a strong supply chain, strict quality control and customer-centric approach, we ensure consistency, reliability and long-term partnerships.
+              <p className="text-[#4D6765] text-sm sm:text-base leading-relaxed font-sans">
+                Agro Dairy Export LLP is an origin-direct exporter of Sortex-cleaned Peanuts, Grains, Pulses, and Pure Dairy Ghee from Gujarat, India. By uniting farmer aggregations across fertile crop belts with direct ocean gateway access at Mundra and Hazira ports, we provide global importers with guaranteed specifications, verified phytosanitary clearance, and uninterrupted supply.
               </p>
 
-              {/* 4 Feature Items */}
-              <div className="grid grid-cols-2 gap-4 pt-2">
+              {/* 4 Feature Cards Matrix */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
                 {[
-                  { Icon: BadgeCheck, title: 'Quality Assurance' },
-                  { Icon: Globe2, title: 'Global Reach' },
-                  { Icon: TrendingUp, title: 'Competitive Pricing' },
-                  { Icon: HeartHandshake, title: 'Long-Term Partnerships' },
-                ].map(({ Icon, title }, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#E6F7F5] text-brand-primary flex items-center justify-center shrink-0">
-                      <Icon className="w-5 h-5" />
+                  { 
+                    Icon: BadgeCheck, 
+                    title: 'Origin-Direct Procurement', 
+                    desc: 'Direct farm gate aggregations across Saurashtra crop belts.' 
+                  },
+                  { 
+                    Icon: FlaskConical, 
+                    title: 'Sortex Optical Cleaning', 
+                    desc: 'Bichromatic optical sorting with 99.5% minimum purity.' 
+                  },
+                  { 
+                    Icon: Ship, 
+                    title: 'Multi-Port Logistics', 
+                    desc: 'Dedicated container slots at Mundra, Kandla & Hazira.' 
+                  },
+                  { 
+                    Icon: FileCheck2, 
+                    title: 'Institutional Compliance', 
+                    desc: 'APEDA, FSSAI & third-party laboratory SGS/COA certificates.' 
+                  },
+                ].map(({ Icon, title, desc }, i) => (
+                  <div key={i} className="p-4 rounded-2xl bg-white border border-[#D4ECE9] shadow-sm hover:border-brand-primary/40 hover:shadow-md transition-all group">
+                    <div className="flex items-center gap-3 mb-1.5">
+                      <div className="w-8 h-8 rounded-lg bg-[#E6F7F5] text-brand-primary flex items-center justify-center shrink-0 group-hover:bg-brand-primary group-hover:text-white transition-colors">
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <h3 className="font-ui font-bold text-sm text-[#0C2422] leading-snug">{title}</h3>
                     </div>
-                    <span className="font-ui font-bold text-sm text-[#0C2422]">{title}</span>
+                    <p className="text-xs text-[#4D6765] leading-relaxed pl-11">{desc}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="pt-3">
+              {/* CTAs and Direct Link */}
+              <div className="pt-2 flex flex-wrap items-center gap-4">
                 <Link
                   to="/company/about"
                   id="about-know-more-btn"
@@ -650,6 +808,13 @@ export default function Home() {
                   <span>Know More About Us</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
+
+                <a
+                  href="#rfq-section"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white hover:bg-[#E6F7F5] text-[#0C2422] font-ui font-bold text-sm border border-[#D4ECE9] shadow-sm transition-all"
+                >
+                  <span>Inquire Container Load</span>
+                </a>
               </div>
             </div>
           </div>
@@ -657,26 +822,29 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════
-          SECTION 3: EXPORT COMMODITIES CATALOG
+          SECTION 3: EXPORT COMMODITIES CATALOG (Origin-Direct Specifications)
           ═══════════════════════════════════════ */}
-      <section id="products" className="relative py-20 bg-white overflow-hidden">
-        {/* Real photographic yellow corn & chickpeas background watermarks */}
-        <SectionProductWatermark type="yellow-corn" position="left" />
-        <SectionProductWatermark type="chickpeas" position="right" />
+      <section id="products" className="relative py-20 lg:py-24 bg-white overflow-hidden">
+        {/* Floating Agricultural Commodity Elements (Yellow Corn & Kabuli Chickpeas) */}
+        <RealProductSectionFlanks leftType="yellow-corn" rightType="chickpeas" position="both" />
+
         <div className="section-container relative z-10">
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <div>
-              <span className="text-xs font-ui font-bold uppercase tracking-wider text-brand-primary block mb-1">
-                — OUR PRODUCTS
-              </span>
-              <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#0C2422]">Export Commodities Catalog</h2>
-              <p className="text-sm text-[#4D6765] mt-2 max-w-xl">
-                High-quality Indian agricultural products, sourced directly from farms and processed for global markets.
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E6F7F5] border border-[#BBE5E1] text-brand-primary text-xs font-mono font-bold shadow-sm mb-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-primary" />
+                <span>EXPORT READY INVENTORY • FCL &amp; CONSOLIDATED SHIPMENTS</span>
+              </div>
+              <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-[#0C2422] tracking-tight">
+                Export Commodities Catalog
+              </h2>
+              <p className="text-sm text-[#4D6765] mt-2 max-w-xl font-sans">
+                Premium Indian agricultural commodities directly aggregated from Gujarat farms, optical Sortex processed, and lab tested for international port dispatch.
               </p>
             </div>
-            <Link to="/products" id="catalog-view-all-btn" className="text-brand-primary hover:text-brand-deep font-display font-bold text-sm flex items-center gap-1 shrink-0">
-              View All Products <ChevronRight className="w-4 h-4" />
+            <Link to="/products" id="catalog-view-all-btn" className="text-brand-primary hover:text-brand-deep font-display font-bold text-sm flex items-center gap-1.5 shrink-0 px-4 py-2 rounded-full border border-brand-primary/30 hover:bg-[#E6F7F5] transition-all">
+              <span>View All Specifications</span> <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
 
@@ -755,24 +923,68 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════
-          SECTION 4: OUR EXPORT RECORD IN NUMBERS (Logo Deep Pine)
+          SECTION 4: OUR EXPORT RECORD IN NUMBERS (Unique Global Trade Showcase)
           ═══════════════════════════════════════ */}
-      <section ref={statsRef} className="bg-brand-deep py-16 text-white relative overflow-hidden border-y border-brand-primary/20 bg-agro-decor-deep">
-        {/* Ambient grain and peanut background silhouettes */}
-        <div className="absolute -left-8 top-1/2 -translate-y-1/2 transform -rotate-12 pointer-events-none">
-          <WheatStalkSvg className="w-48 h-48 text-brand-primary" opacity="0.08" />
-        </div>
-        <div className="absolute -right-8 top-1/2 -translate-y-1/2 transform rotate-12 pointer-events-none">
-          <PeanutPodSvg className="w-44 h-44 text-brand-gold" opacity="0.10" />
-        </div>
+      <section 
+        ref={statsRef} 
+        className="relative py-16 sm:py-20 lg:py-24 text-white overflow-hidden border-y border-[#00A79D]/30 bg-gradient-to-br from-[#021814] via-[#052b23] to-[#011410]"
+      >
+        {/* Subtle geometric dot grid pattern */}
+        <div 
+          className="absolute inset-0 bg-[radial-gradient(#00A79D_1px,transparent_1px)] [background-size:28px_28px] opacity-15 pointer-events-none" 
+          aria-hidden="true" 
+        />
+
+        {/* Ambient atmospheric radial glow orbs */}
+        <div 
+          className="absolute -top-32 -left-32 w-96 h-96 bg-[#00A79D]/20 rounded-full blur-3xl pointer-events-none" 
+          aria-hidden="true" 
+        />
+        <div 
+          className="absolute -bottom-32 -right-32 w-96 h-96 bg-[#F5B800]/12 rounded-full blur-3xl pointer-events-none" 
+          aria-hidden="true" 
+        />
+
         <div className="section-container relative z-10">
-          <div className="text-center mb-10">
-            <h2 className="font-display font-bold text-2xl sm:text-3xl text-white">Our Export Record in Numbers</h2>
+          {/* Section Header: Pill Badge + Gradient Heading + Subtitle */}
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md text-xs font-mono uppercase tracking-wider text-emerald-300 shadow-sm mb-3.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Certified Agro &amp; Dairy Exporter • Verified Performance</span>
+            </div>
+
+            <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-100 to-[#5EEAD4] tracking-tight">
+              Our Export Record in Numbers
+            </h2>
+
+            <p className="mt-3 text-sm sm:text-base text-emerald-100/75 max-w-2xl mx-auto font-sans leading-relaxed">
+              A transparent decade of origin-direct farmgate sourcing, precision sortex processing, and prompt containerized shipping across the globe.
+            </p>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
+
+          {/* 5 Stats Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
             {STATS.map((stat, i) => (
-              <StatCard key={i} stat={stat} running={statsVisible} />
+              <StatCard key={i} stat={stat} index={i} running={statsVisible} />
             ))}
+          </div>
+
+          {/* Direct Port Logistics & Pre-Shipment Inspection Strip */}
+          <div className="mt-10 pt-7 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs text-white/70">
+            <div className="flex items-center gap-2.5">
+              <Ship className="w-4 h-4 text-brand-gold shrink-0" />
+              <span className="font-semibold text-white">Direct Sea Freight Gateways:</span>
+              <span className="text-emerald-100/80">Mundra Port (INMUN1) • Kandla Port (INIXY1) • Hazira Port (INHZA1)</span>
+            </div>
+            <div className="flex items-center gap-4 text-[11px] font-mono text-emerald-300">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> 100% Pre-Shipment Inspection
+              </span>
+              <span className="hidden sm:inline-block text-white/30">•</span>
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> APEDA &amp; FSSAI Licensed
+              </span>
+            </div>
           </div>
         </div>
       </section>
@@ -780,73 +992,97 @@ export default function Home() {
       {/* ═══════════════════════════════════════
           SECTION 5: GLOBAL QUALITY. INDIAN ROOTS. (WHY CHOOSE US)
           ═══════════════════════════════════════ */}
-      <section id="why-us" ref={whyRef} className="relative py-20 bg-[#F4F9F8] border-y border-brand-border overflow-hidden">
-        {/* Real background green moong & dairy ghee watermarks */}
-        <SectionProductWatermark type="green-moong" position="left" />
-        <SectionProductWatermark type="ghee" position="right" />
+      <section id="why-us" ref={whyRef} className="relative py-20 lg:py-24 bg-[#F4F9F8] border-y border-[#D4ECE9] overflow-hidden">
+        {/* Floating Agricultural Commodity Elements (Green Moong & Pure Dairy Ghee) */}
+        <RealProductSectionFlanks leftType="green-moong" rightType="ghee" position="both" />
+
         <div className="section-container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Left 4 Cards (7 cols) */}
             <div className={`lg:col-span-7 space-y-6 transition-all duration-700 ${whyVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               <div>
-                <span className="text-xs font-ui font-bold uppercase tracking-wider text-brand-primary block mb-2">
-                  — WHY CHOOSE US
-                </span>
-                <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#0C2422] leading-tight">
-                  Global Quality. Indian Roots.
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#BBE5E1] text-brand-primary text-xs font-mono font-bold shadow-sm mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-primary" />
+                  <span>PROVEN EXPORT FOUNDATION • INSTITUTIONAL RELIABILITY</span>
+                </div>
+                <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[2.65rem] text-[#0C2422] leading-tight tracking-tight">
+                  Global Quality Standards.<br />
+                  Deep Indian Agricultural Roots.
                 </h2>
-                <p className="text-sm text-[#4D6765] mt-2 max-w-lg">
-                  We combine deep industry expertise with a strong supply chain to deliver the best agricultural products to your market.
+                <p className="text-sm sm:text-base text-[#4D6765] mt-2 max-w-xl font-sans">
+                  We unite grassroots farmer aggregations with industrial-grade Sortex optical cleaning, accredited testing, and seamless ocean container dispatch.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
                 {[
                   {
                     icon: Leaf,
+                    tag: '100% Origin Traceable',
                     title: 'Direct Farm Sourcing',
-                    desc: 'Fresh & pure agro products directly from Indian farms.',
+                    desc: 'Direct harvest procurement across verified Gujarat farm clusters with zero middlemen adulteration.',
                   },
                   {
                     icon: FlaskConical,
-                    title: 'Strict Quality Control',
-                    desc: 'Multiple quality checks before dispatch.',
+                    tag: '< 1% Aflatoxin Strict',
+                    title: 'Dual Sortex Cleaning',
+                    desc: 'Optical color sorting, double gravity separation, and accredited SGS pre-shipment COA.',
                   },
                   {
                     icon: Ship,
-                    title: 'Global Shipping',
-                    desc: 'Reliable & on-time delivery worldwide.',
+                    tag: '3 Western Gateways',
+                    title: 'Ocean Freight Execution',
+                    desc: 'Fast containerized dispatch via Mundra, Kandla, and Hazira ports with competitive transit times.',
                   },
                   {
                     icon: HeartHandshake,
-                    title: 'Customer Support',
-                    desc: 'Dedicated export support team for smooth transactions.',
+                    tag: '< 2h Response SLA',
+                    title: 'Dedicated Trade Desk',
+                    desc: 'Direct WhatsApp and phone assistance with experienced export officers for transparent cargo milestones.',
                   },
-                ].map(({ icon: Icon, title, desc }, i) => (
-                  <div key={i} className="p-5 bg-white rounded-2xl border border-brand-border shadow-sm hover:shadow-md transition-all">
-                    <div className="w-10 h-10 rounded-xl bg-[#E6F7F5] text-brand-primary flex items-center justify-center mb-3">
-                      <Icon className="w-5 h-5" />
+                ].map(({ icon: Icon, tag, title, desc }, i) => (
+                  <div key={i} className="p-5 bg-white rounded-2xl border border-[#D4ECE9] shadow-sm hover:border-brand-primary/40 hover:shadow-md transition-all group">
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <div className="w-9 h-9 rounded-xl bg-[#E6F7F5] text-brand-primary flex items-center justify-center shrink-0 group-hover:bg-brand-primary group-hover:text-white transition-colors">
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#E6F7F5] text-brand-primary border border-[#BBE5E1]">
+                        {tag}
+                      </span>
                     </div>
-                    <h3 className="font-display font-bold text-base text-[#0C2422] mb-1">{title}</h3>
-                    <p className="text-xs text-[#4D6765] leading-relaxed">{desc}</p>
+                    <h3 className="font-display font-bold text-base text-[#0C2422] mb-1.5">{title}</h3>
+                    <p className="text-xs text-[#4D6765] leading-relaxed font-sans">{desc}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Right Image with Hands & Grains (5 cols) */}
+            {/* Right Image with Verified Sourcing Badges (5 cols) */}
             <div className={`lg:col-span-5 relative transition-all duration-700 delay-150 ${whyVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-              <div className="rounded-3xl overflow-hidden shadow-xl border border-brand-border bg-white">
+              <div className="rounded-3xl overflow-hidden shadow-xl border border-brand-border bg-white group">
                 <img
                   src="/images/farm-sourcing.jpg"
                   alt="Indian farmer holding pure harvest grains"
-                  className="w-full h-[400px] object-cover"
+                  className="w-full h-[420px] lg:h-[460px] object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                 />
               </div>
-              <div className="absolute bottom-6 right-6 bg-white/95 backdrop-blur-md rounded-2xl px-4 py-2.5 shadow-lg border border-brand-border flex items-center gap-2 text-xs font-ui font-bold text-brand-primary">
-                <Leaf className="w-4 h-4 text-brand-primary" />
-                <span>From Indian farms to global markets</span>
+
+              {/* Floating Top Badge */}
+              <div className="absolute top-5 left-5 bg-white/95 backdrop-blur-md rounded-full px-4 py-1.5 shadow-md border border-[#D4ECE9] flex items-center gap-2 text-xs font-mono font-bold text-[#0C2422]">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>ORIGIN HARVEST GUARANTEE</span>
+              </div>
+
+              {/* Floating Bottom Trust Badge */}
+              <div className="absolute bottom-6 left-6 right-6 bg-[#0C2422]/95 backdrop-blur-md text-white rounded-2xl p-4 shadow-xl border border-white/15 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-brand-primary/20 text-brand-gold flex items-center justify-center shrink-0 border border-brand-primary/30">
+                  <ShieldCheck className="w-5 h-5 text-emerald-400" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-white leading-tight">APEDA &amp; FSSAI Licensed Origin Supply</div>
+                  <div className="text-[11px] text-white/70 mt-0.5">100% compliant export documentation &amp; phytosanitary release</div>
+                </div>
               </div>
             </div>
           </div>
@@ -854,103 +1090,193 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════
-          SECTION 6: FROM FARM TO YOUR PORT IN FOUR STEPS
+          SECTION 6: OUR EXPORT PROCESS (Minimalist Editorial Architecture)
           ═══════════════════════════════════════ */}
-      <section id="process" ref={processRef} className="relative py-20 bg-white overflow-hidden">
-        {/* Real background wheat ears & yellow corn watermarks */}
-        <SectionProductWatermark type="wheat" position="right" />
-        <SectionProductWatermark type="yellow-corn" position="left" />
-        <div className="section-container relative z-10">
-          <div className="text-center max-w-xl mx-auto mb-14">
-            <span className="text-xs font-ui font-bold uppercase tracking-wider text-brand-primary block mb-2">
-              — OUR EXPORT PROCESS
-            </span>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#0C2422]">
-              From Farm to Your Port in Four Steps
-            </h2>
-            <p className="text-sm text-[#4D6765] mt-2">
-              A simple and transparent process to ensure the best quality and timely delivery.
-            </p>
+      <section id="process" ref={processRef} className="py-20 lg:py-28 bg-white border-y border-brand-border overflow-hidden">
+        <div className="section-container">
+          {/* Minimalist Editorial Header */}
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-12 sm:pb-16 border-b border-[#D4ECE9]">
+            <div className="max-w-2xl">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-primary block mb-3">
+                — EXPORT METHODOLOGY
+              </span>
+              <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-[#0C2422] tracking-tight leading-[1.12]">
+                From Indian Soil to Your Destination Port
+              </h2>
+            </div>
+            <div className="max-w-md">
+              <p className="text-sm text-[#4D6765] leading-relaxed font-sans">
+                A transparent, four-stage export framework engineered for optical purity, compliant phytosanitary documentation, and reliable ocean transit.
+              </p>
+              <div className="flex items-center gap-2 mt-3 text-xs font-mono text-brand-primary font-semibold">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Standardized 9-Day Dispatch Workflow</span>
+              </div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-            {PROCESS_STEPS.map(({ num, label, desc, image, tag }, i) => (
-              <div
-                key={i}
-                className={`group relative bg-[#F4F9F8] hover:bg-white rounded-3xl p-6 border border-[#D4ECE9] hover:border-brand-primary/40 shadow-sm hover:shadow-xl transition-all duration-300 text-center flex flex-col items-center ${processVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-                style={{ transitionDelay: `${i * 100}ms` }}
-              >
-                {/* Real photographic commodity preview thumbnail */}
-                <div className="relative w-20 h-20 rounded-2xl overflow-hidden border-2 border-white shadow-md mb-3.5 group-hover:scale-105 transition-transform duration-300 bg-white">
-                  <img src={image} alt={tag} className="w-full h-full object-cover filter contrast-105" />
-                  <div className="absolute top-1 left-1 w-6 h-6 rounded-full bg-brand-primary text-white text-[11px] font-bold flex items-center justify-center shadow">
-                    {num}
+          {/* 4 Open Architectural Columns (No boxy cards) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#D4ECE9] border-b border-[#D4ECE9]">
+            {PROCESS_STEPS.map((step, i) => {
+              const Icon = step.icon;
+              return (
+                <div
+                  key={i}
+                  className={`group relative py-10 lg:py-14 ${i === 0 ? 'lg:pl-0 lg:pr-8' : i === 3 ? 'lg:pl-8 lg:pr-0' : 'lg:px-8'} transition-all duration-300 flex flex-col justify-between hover:bg-[#F4F9F8]/40`}
+                >
+                  <div>
+                    {/* Top Header: Ghost Number + Timeline SLA */}
+                    <div className="flex items-baseline justify-between mb-6">
+                      <span className="font-display font-black text-5xl sm:text-6xl lg:text-7xl text-brand-primary/20 group-hover:text-brand-primary transition-colors duration-500 tracking-tighter select-none leading-none">
+                        {step.num}
+                      </span>
+                      <span className="text-[11px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#E6F7F5] text-brand-primary font-bold border border-[#BBE5E1]">
+                        {step.timeline}
+                      </span>
+                    </div>
+
+                    {/* Interactive Animated Hover Line */}
+                    <div className="w-full h-[2px] bg-slate-100 rounded-full mb-6 overflow-hidden">
+                      <div className="w-0 group-hover:w-full h-full bg-brand-primary transition-all duration-500 rounded-full" />
+                    </div>
+
+                    {/* Stage Eyebrow & Title */}
+                    <span className="text-[11px] font-mono uppercase tracking-widest text-brand-primary/80 font-bold block mb-1.5">
+                      Stage {step.num} • {step.stage}
+                    </span>
+                    <h3 className="font-display font-bold text-xl sm:text-2xl text-[#0C2422] group-hover:text-brand-primary transition-colors leading-snug mb-2.5">
+                      {step.title}
+                    </h3>
+                    
+                    {/* Location / Hub */}
+                    <div className="flex items-center gap-1.5 text-xs font-semibold text-[#0C2422]/70 mb-3.5">
+                      <Icon className="w-3.5 h-3.5 text-brand-primary shrink-0" />
+                      <span>{step.location}</span>
+                    </div>
+
+                    {/* Clean Narrative */}
+                    <p className="text-xs sm:text-sm text-[#4D6765] leading-relaxed font-sans">
+                      {step.desc}
+                    </p>
+                  </div>
+
+                  {/* Bottom Minimal Tag */}
+                  <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] font-mono text-[#334E4C]">
+                    <span className="text-brand-primary font-semibold">{step.tag}</span>
+                    <span className="text-slate-300 group-hover:text-brand-primary group-hover:translate-x-1 transition-all">→</span>
                   </div>
                 </div>
+              );
+            })}
+          </div>
 
-                <div className="inline-block px-2.5 py-0.5 rounded-full bg-[#E6F7F5] text-brand-primary text-[10px] font-ui font-bold uppercase tracking-wider mb-1">
-                  {tag}
-                </div>
-                <h3 className="font-display font-bold text-lg text-[#0C2422]">{label}</h3>
-                <p className="text-xs text-[#4D6765] leading-relaxed max-w-[220px] mx-auto mt-1">{desc}</p>
+          {/* Minimalist Visual Logistics Stream Bar */}
+          <div className="mt-12 sm:mt-16">
+            <div className="bg-[#F4F9F8] rounded-2xl p-6 sm:p-8 border border-[#D4ECE9] flex flex-col lg:flex-row items-center justify-between gap-6">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-xs sm:text-sm font-semibold text-[#0C2422]">
+                <span className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                  Origin: Gujarat &amp; Saurashtra Mandis
+                </span>
+                <span className="text-slate-300 hidden sm:inline">•</span>
+                <span className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-brand-primary" />
+                  Processing: Optical Sortex Clean
+                </span>
+                <span className="text-slate-300 hidden sm:inline">•</span>
+                <span className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-amber-500" />
+                  Packaging: PP Bags, Jute &amp; Tins
+                </span>
+                <span className="text-slate-300 hidden sm:inline">•</span>
+                <span className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-cyan-500" />
+                  Gateways: Mundra, Kandla &amp; Hazira
+                </span>
               </div>
-            ))}
+
+              <a
+                href="#rfq-section"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-primary hover:bg-brand-primary-dark text-white font-ui font-bold text-xs shadow-md shadow-brand-primary/20 transition-all shrink-0 group"
+              >
+                <span>Request Shipment Schedule</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════
-          SECTION 7: SHIPPING & REQUEST A QUOTE (Side-by-side)
+          SECTION 7: SHIPPING & REQUEST A QUOTE (Side-by-side Port & RFQ)
           ═══════════════════════════════════════ */}
-      <section id="rfq-section" className="relative py-20 bg-[#F4F9F8] overflow-hidden">
-        {/* Real background chickpeas watermark behind RFQ section */}
-        <SectionProductWatermark type="chickpeas" position="right" />
-        <div className="section-container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      <section id="rfq-section" className="relative py-20 lg:py-24 bg-[#F4F9F8] overflow-hidden border-b border-[#D4ECE9]">
+        {/* Floating Agricultural Commodity Elements (Kabuli Chickpeas) */}
+        <RealProductSectionFlanks rightType="chickpeas" position="right" />
+
+        <div className="section-container relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
             {/* Left: Shipping from Gujarat Ports (5 cols) */}
-            <div className="lg:col-span-5 relative rounded-3xl overflow-hidden shadow-xl min-h-[460px] flex flex-col justify-end p-8 text-white">
+            <div className="lg:col-span-5 relative rounded-3xl overflow-hidden shadow-xl min-h-[480px] flex flex-col justify-between p-7 sm:p-8 text-white group">
               <img
                 src="/images/port-aerial.jpg"
                 alt="Gujarat port container terminal at sunset"
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/95 via-brand-deep/50 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0C2422]/95 via-[#0C2422]/50 to-transparent" />
 
-              <div className="relative z-10 bg-brand-deep/95 backdrop-blur-md rounded-2xl p-6 border border-brand-primary/30 space-y-3">
+              {/* Floating Top Port Badge */}
+              <div className="relative z-10 self-start bg-white/95 backdrop-blur-md text-[#0C2422] rounded-full px-4 py-1.5 shadow-md border border-[#D4ECE9] flex items-center gap-2 text-xs font-mono font-bold">
+                <Anchor className="w-3.5 h-3.5 text-brand-primary" />
+                <span>DIRECT WEST COAST OCEAN GATEWAYS</span>
+              </div>
+
+              {/* Bottom Information Card */}
+              <div className="relative z-10 bg-[#0C2422]/95 backdrop-blur-md rounded-2xl p-6 border border-brand-primary/30 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 font-semibold">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>Mundra • Kandla • Hazira</span>
+                </div>
                 <h3 className="font-display font-bold text-xl sm:text-2xl text-white leading-tight">
-                  Shipping From Gujarat's Ports to Yours
+                  Shipping From Gujarat's Maritime Ports to Your Destination
                 </h3>
-                <p className="text-white/80 text-xs sm:text-sm leading-relaxed">
-                  We export from major ports including Mundra, Kandla and Hazira.
+                <p className="text-white/80 text-xs sm:text-sm leading-relaxed font-sans">
+                  Fast containerized loading with weekly direct feeder lines connecting Mundra and Kandla to Jebel Ali, Rotterdam, Mersin, Haiphong, and beyond.
                 </p>
-                <Link
-                  to="/logistics"
-                  className="inline-flex items-center gap-2 text-xs font-ui font-bold text-brand-primary hover:text-white transition-colors pt-1"
-                >
-                  <span>Learn More</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+                <div className="pt-1">
+                  <Link
+                    to="/logistics"
+                    className="inline-flex items-center gap-2 text-xs font-ui font-bold text-brand-gold hover:text-white transition-colors"
+                  >
+                    <span>Explore Ocean Logistics Capabilities</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
               </div>
             </div>
 
             {/* Right: Request a Quote / Export Inquiry Form (7 cols) */}
-            <div className="lg:col-span-7 bg-white rounded-3xl p-7 sm:p-10 border border-brand-border shadow-sm flex flex-col justify-between">
+            <div className="lg:col-span-7 bg-white rounded-3xl p-7 sm:p-10 border border-[#D4ECE9] shadow-sm flex flex-col justify-between">
               <div>
-                <span className="text-xs font-ui font-bold uppercase tracking-wider text-brand-primary block mb-1">
-                  — GET A QUOTE
-                </span>
-                <h3 className="font-display font-bold text-2xl text-[#0C2422] mb-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E6F7F5] border border-[#BBE5E1] text-brand-primary text-xs font-mono font-bold shadow-sm mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-primary" />
+                  <span>RAPID EXPORT DESK • QUOTES WITHIN 2 HOURS</span>
+                </div>
+                <h3 className="font-display font-bold text-2xl sm:text-3xl text-[#0C2422] tracking-tight mb-2">
                   Talk to Our Export Desk Before You Order
                 </h3>
+                <p className="text-xs sm:text-sm text-[#4D6765] mb-5 font-sans">
+                  Receive origin spot pricing, container load formulation, and current ocean freight estimates.
+                </p>
 
                 {/* 4 Checkmark Points */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-6 text-xs text-[#4D6765]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-6 text-xs text-[#4D6765] font-sans">
                   {[
-                    'Latest pricing and product availability',
-                    'Customized packaging options',
-                    'Export documentation support',
-                    'Reliable shipping and logistics',
+                    'Spot pricing & crop arrival availability',
+                    'Customized multi-wall PP/Jute packaging',
+                    'Full Phytosanitary & SGS COA support',
+                    'FOB & CIF freight rate negotiation',
                   ].map((pt, i) => (
                     <div key={i} className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-brand-primary shrink-0" />
@@ -968,41 +1294,84 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════
-          SECTION 8: VERIFY AGRO EXPORT LLP
+          SECTION 8: VERIFY AGRO DAIRY EXPORT LLP (Verified Trust & Compliance Suite)
           ═══════════════════════════════════════ */}
-      <section ref={certsRef} className="py-14 bg-[#E8F6F4] border-y border-[#CCEBE7]">
-        <div className="section-container">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+      <section ref={certsRef} className="py-16 sm:py-20 bg-white border-b border-[#D4ECE9] relative overflow-hidden">
+        {/* Floating Agricultural Commodity Elements (Grains & Pulses) */}
+        <RealProductSectionFlanks leftType="grains" rightType="pulses" position="both" />
+
+        <div className="section-container relative z-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <div>
-              <h2 className="font-display font-bold text-2xl sm:text-3xl text-[#0C2422]">Verify Agro Export LLP</h2>
-              <p className="text-xs text-[#4D6765] mt-1">Check our certification, export license and compliance documents.</p>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E6F7F5] border border-[#BBE5E1] text-brand-primary text-xs font-mono font-bold shadow-sm mb-3">
+                <ShieldCheck className="w-3.5 h-3.5 text-brand-primary" />
+                <span>GOVERNMENT ACCREDITED EXPORTER • ZERO RISK COMPLIANCE</span>
+              </div>
+              <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#0C2422] tracking-tight">
+                Verify Agro Dairy Export LLP
+              </h2>
+              <p className="text-xs sm:text-sm text-[#4D6765] mt-2 font-sans max-w-xl">
+                Independently verifiable statutory export licenses, registration certificates, and food safety accreditations issued by Government of India authorities.
+              </p>
             </div>
             <Link
               to="/certifications"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-deep hover:bg-brand-primary text-white font-ui font-bold text-xs shadow-md transition-all shrink-0"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0C2422] hover:bg-brand-primary text-white font-ui font-bold text-xs shadow-md transition-all shrink-0 group"
             >
-              <span>View All Certificates</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <span>View All Inspection Certificates</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { label: 'IEC Certificate', sub: 'Verified 0817029381' },
-              { label: 'APEDA Registered', sub: 'Verified Exporter' },
-              { label: 'GST Compliant', sub: 'Verified 24AAHFA3928L1Z9' },
-              { label: 'Export Documentation', sub: 'Verified & Certified' },
-            ].map(({ label, sub }, i) => (
+              {
+                title: 'IEC License',
+                authority: 'DGFT, Ministry of Commerce',
+                code: '0817029381',
+                badge: 'Verified Exporter',
+              },
+              {
+                title: 'APEDA Registration',
+                authority: 'Agri & Processed Food Authority',
+                code: 'APEDA/RCMC/2026',
+                badge: 'Active RCMC',
+              },
+              {
+                title: 'GSTIN Registered',
+                authority: 'CBIC, Govt. of India',
+                code: '24AAHFA3928L1Z9',
+                badge: 'State Certified',
+              },
+              {
+                title: 'FSSAI Central License',
+                authority: 'Food Safety Authority of India',
+                code: '10722026000148',
+                badge: 'Food Safety Grade',
+              },
+            ].map((cert, i) => (
               <div
                 key={i}
-                className="bg-white rounded-2xl p-4 sm:p-5 border border-[#CCEBE7] shadow-sm flex items-center gap-3"
+                className="bg-[#F4F9F8] rounded-2xl p-5 border border-[#D4ECE9] shadow-sm hover:border-brand-primary/40 hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col justify-between"
               >
-                <div className="w-8 h-8 rounded-full bg-[#E6F7F5] text-brand-primary flex items-center justify-center shrink-0">
-                  <Check className="w-4 h-4 text-brand-primary stroke-[3]" />
-                </div>
                 <div>
-                  <div className="font-ui font-bold text-xs sm:text-sm text-[#0C2422]">{label}</div>
-                  <div className="text-[11px] text-[#4D6765] mt-0.5">{sub}</div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-9 h-9 rounded-xl bg-white text-brand-primary flex items-center justify-center border border-[#D4ECE9] shadow-xs group-hover:bg-brand-primary group-hover:text-white transition-colors">
+                      <ShieldCheck className="w-5 h-5 text-brand-primary group-hover:text-white" />
+                    </div>
+                    <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold uppercase text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      {cert.badge}
+                    </span>
+                  </div>
+
+                  <h3 className="font-display font-bold text-base text-[#0C2422] mb-1">{cert.title}</h3>
+                  <p className="text-[11px] text-[#4D6765] font-sans mb-3">{cert.authority}</p>
+                </div>
+
+                <div className="pt-2 border-t border-[#D4ECE9]/60">
+                  <div className="text-[10px] uppercase font-mono text-[#4D6765] mb-0.5">Registration Code</div>
+                  <div className="font-mono font-bold text-xs text-[#0C2422] tracking-wider select-all">{cert.code}</div>
                 </div>
               </div>
             ))}
@@ -1011,28 +1380,68 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════
-          SECTION 9: FREQUENTLY ASKED QUESTIONS (FAQ)
+          SECTION 9: FREQUENTLY ASKED QUESTIONS (FAQ & Trade Advisory Hub)
           ═══════════════════════════════════════ */}
-      <section id="faq" className="py-20 bg-white">
-        <div className="section-container">
+      <section id="faq" className="py-20 lg:py-24 bg-[#F4F9F8] relative overflow-hidden">
+        {/* Floating Agricultural Commodity Elements (Shelled Peanuts) */}
+        <RealProductSectionFlanks rightType="shelled-peanuts" position="right" />
+
+        <div className="section-container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Left Decorative Image (4 cols) */}
-            <div className="lg:col-span-4 hidden lg:block">
-              <div className="sticky top-28 rounded-3xl overflow-hidden shadow-lg border border-brand-border">
+            {/* Left Decorative Image & Direct Advisory Hub (4 cols) */}
+            <div className="lg:col-span-4 space-y-4">
+              <div className="rounded-3xl overflow-hidden shadow-lg border border-[#D4ECE9] bg-white group">
                 <img
                   src="/images/hero-commodities.jpg"
                   alt="Pure Indian export commodities"
-                  className="w-full h-[480px] object-cover"
+                  className="w-full h-[280px] lg:h-[320px] object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = '/images/about-commodities.jpg';
+                  }}
                 />
+              </div>
+
+              {/* Direct Partner Advisory Box */}
+              <div className="p-6 rounded-3xl bg-[#0C2422] text-white shadow-xl border border-white/10 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-mono text-emerald-300 font-semibold">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>DIRECT TRADE DESK</span>
+                </div>
+                <h4 className="font-display font-bold text-lg text-white leading-snug">
+                  Have a Custom Commodity Spec or Mixed Container Requirement?
+                </h4>
+                <p className="text-white/70 text-xs leading-relaxed font-sans">
+                  Speak directly with Managing Partner J.P. Vora for customized grain count formulas, FOB port slots, and private labeling.
+                </p>
+                <div className="pt-2">
+                  <a
+                    href="https://wa.me/919023363680?text=Hello%20Agro%20Dairy%20Export%2C%20I%20have%20an%20export%20commodity%20inquiry."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-ui font-bold text-xs shadow-md transition-colors"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>WhatsApp Export Partner (+91 90233 63680)</span>
+                  </a>
+                </div>
               </div>
             </div>
 
             {/* Right FAQ Accordion (8 cols) */}
             <div className="lg:col-span-8">
               <div className="mb-8">
-                <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#0C2422]">Frequently Asked Questions (FAQ)</h2>
-                <p className="text-sm text-[#4D6765] mt-2">Quick answers to common questions about our export process, products and services.</p>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#BBE5E1] text-brand-primary text-xs font-mono font-bold shadow-sm mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-primary" />
+                  <span>TRANSPARENT EXPORT ANSWERS</span>
+                </div>
+                <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#0C2422] tracking-tight">
+                  Frequently Asked Questions (FAQ)
+                </h2>
+                <p className="text-sm text-[#4D6765] mt-2 font-sans">
+                  Clear answers to key questions about our origin aggregation, minimum orders, Incoterms, and dispatch workflows.
+                </p>
               </div>
 
               <div className="space-y-3" role="list">
@@ -1051,57 +1460,58 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════
-          SECTION 10: PRE-FOOTER CTA BANNER
+          SECTION 10: PRE-FOOTER CALL TO ACTION (Split Modern Trade Showcase)
           ═══════════════════════════════════════ */}
-      <section className="py-16 sm:py-20 bg-[#F4F9F8] relative overflow-hidden border-t border-[#D4ECE9]">
-        {/* Real photographic background watermarks */}
-        <SectionProductWatermark type="wheat" position="right" />
-        <SectionProductWatermark type="peanuts" position="left" />
+      <section className="py-20 lg:py-24 bg-[#F4F9F8] relative overflow-hidden border-t border-[#D4ECE9]">
+        {/* Subtle ambient light blurs */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-primary/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
 
         <div className="section-container relative z-10">
-          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#07211E] via-[#0C2E2A] to-[#0A2421] p-8 sm:p-12 lg:p-14 text-white shadow-2xl border border-white/10">
-            {/* Ambient decorative blurs inside card */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#009688]/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
-            <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-gold/15 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
-
-            <div className="relative z-10 max-w-3xl mx-auto text-center space-y-6">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[#5EEAD4] text-xs font-ui font-semibold shadow-sm">
-                <Leaf className="w-3.5 h-3.5 text-[#5EEAD4] shrink-0" />
-                <span>Direct Gujarat Sourcing • Worldwide Port Shipments</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+            
+            {/* Left Column: Heading, Assurances, CTAs (7 cols) */}
+            <div className="lg:col-span-7 space-y-6">
+              {/* Eyebrow Badge */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#BBE5E1] text-brand-primary text-xs font-ui font-bold shadow-sm">
+                <Leaf className="w-3.5 h-3.5 text-brand-primary shrink-0" />
+                <span>DIRECT GUJARAT ORIGIN • GLOBAL PORT SHIPMENTS</span>
               </div>
 
-              {/* Headline */}
-              <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-[1.18]">
+              {/* Main Headline */}
+              <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-[2.75rem] text-[#0C2422] tracking-tight leading-[1.15]">
                 Ready to Source Premium Indian Agricultural &amp; Dairy Commodities?
               </h2>
 
               {/* Subtitle */}
-              <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-sans">
-                Partner with Agro Dairy Export LLP for farm-fresh peanuts, precision-sorted grains, pulses, and pure dairy ghee. Get verified export specs, customized packaging, and competitive container FOB/CIF quotes.
+              <p className="text-sm sm:text-base text-[#4D6765] leading-relaxed font-sans max-w-xl">
+                Partner with Agro Dairy Export LLP for origin-direct Bold Peanuts, precision-sorted Grains, Pulses, and Pure Dairy Ghee. Get verified export specifications, customized packaging, and competitive container FOB/CIF quotes.
               </p>
 
-              {/* Feature Highlights Pills */}
-              <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+              {/* 4 Trade Highlights Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 {[
-                  { text: '50,000+ MT Export Capacity' },
-                  { text: 'APEDA & FSSAI Certified' },
-                  { text: 'Mundra & Hazira Direct Loading' },
-                  { text: 'Mixed Containers Supported' },
-                ].map(({ text }, i) => (
-                  <div key={i} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-white/90 text-xs font-ui font-medium border border-white/10">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#5EEAD4]" />
-                    <span>{text}</span>
+                  { title: '50,000+ MT Export Capacity', desc: 'Annual multi-commodity volume' },
+                  { title: 'APEDA & FSSAI Certified', desc: 'Accredited lab quality testing' },
+                  { title: 'Mundra & Hazira Direct Loading', desc: 'Fast customs & port dispatch' },
+                  { title: 'Mixed Containers Supported', desc: 'Peanuts, ghee & grains in 1 FCL' },
+                ].map(({ title, desc }, i) => (
+                  <div key={i} className="flex items-start gap-2.5 p-3.5 rounded-2xl bg-white border border-[#D4ECE9] shadow-sm">
+                    <CheckCircle2 className="w-4 h-4 text-brand-primary shrink-0 mt-0.5" />
+                    <div>
+                      <div className="text-xs font-bold text-[#0C2422]">{title}</div>
+                      <div className="text-[11px] text-[#4D6765]">{desc}</div>
+                    </div>
                   </div>
                 ))}
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+              <div className="flex flex-wrap items-center gap-4 pt-4">
                 <a
                   href="#rfq-section"
                   id="cta-get-quote-btn"
-                  className="px-8 py-4 rounded-full bg-brand-primary hover:bg-brand-primary-dark text-white font-ui font-bold text-sm shadow-lg shadow-brand-primary/30 transition-all flex items-center gap-2 group"
+                  className="px-8 py-4 rounded-full bg-brand-primary hover:bg-brand-primary-dark text-white font-ui font-bold text-sm shadow-md shadow-brand-primary/25 hover:shadow-lg transition-all flex items-center gap-2 group"
                 >
                   <span>Request Container Quote (RFQ)</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -1111,13 +1521,96 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                   id="cta-whatsapp-btn"
-                  className="px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white font-ui font-bold text-sm border border-white/25 backdrop-blur-sm transition-all flex items-center gap-2"
+                  className="px-7 py-4 rounded-full bg-[#25D366] hover:bg-[#1fb857] text-white font-ui font-bold text-sm shadow-md shadow-[#25D366]/20 transition-all flex items-center gap-2"
                 >
-                  <Phone className="w-4 h-4 text-[#5EEAD4]" />
+                  <MessageCircle className="w-4 h-4 fill-current" />
                   <span>Chat on WhatsApp (+91 90233 63680)</span>
                 </a>
               </div>
             </div>
+
+            {/* Right Column: Visual Export Desk Card (5 cols) */}
+            <div className="lg:col-span-5">
+              <div className="bg-white rounded-3xl overflow-hidden border border-[#D4ECE9] shadow-xl p-2.5">
+                {/* Visual Header Image */}
+                <div className="relative rounded-2xl overflow-hidden h-48 sm:h-52">
+                  <img
+                    src="/images/port-aerial.jpg"
+                    alt="Gujarat port container terminal at Mundra and Hazira"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = '/images/cargo-ship.jpg';
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0C2422]/90 via-[#0C2422]/40 to-transparent" />
+                  <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white">
+                    <div className="flex items-center gap-1.5 text-xs font-mono font-bold">
+                      <Ship className="w-3.5 h-3.5 text-brand-gold" />
+                      <span>Direct Sea Gateways</span>
+                    </div>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-brand-primary text-white font-bold">
+                      INMUN1 • INIXY1 • INHZA1
+                    </span>
+                  </div>
+                </div>
+
+                {/* Desk Details */}
+                <div className="p-5 sm:p-6 space-y-4">
+                  <div className="flex items-center justify-between pb-3 border-b border-[#D4ECE9]">
+                    <div>
+                      <div className="text-xs font-mono uppercase tracking-wider text-brand-primary font-bold">
+                        Corporate Export Desk
+                      </div>
+                      <div className="text-base font-display font-bold text-[#0C2422]">
+                        J.P. Vora (Managing Partner)
+                      </div>
+                    </div>
+                    <div className="w-9 h-9 rounded-full bg-[#E6F7F5] text-brand-primary flex items-center justify-center">
+                      <Phone className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 text-xs text-[#4D6765]">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[#0C2422]/70">Average RFQ Response:</span>
+                      <span className="font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                        &lt; 2 Hours
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[#0C2422]/70">Direct Telephone:</span>
+                      <a href="tel:+919023363680" className="font-mono font-bold text-[#0C2422] hover:text-brand-primary">
+                        +91 90233 63680
+                      </a>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[#0C2422]/70">Commercial Desk Email:</span>
+                      <a href="mailto:agrodairyexportllp@gmail.com" className="font-mono font-semibold text-brand-primary hover:underline">
+                        agrodairyexportllp@gmail.com
+                      </a>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[#0C2422]/70">Registered Office:</span>
+                      <span className="font-semibold text-[#0C2422]">Surat, Gujarat, India</span>
+                    </div>
+                  </div>
+
+                  {/* 1-Click Fast Inquire Strip */}
+                  <div className="pt-3 border-t border-[#D4ECE9]">
+                    <a
+                      href="#rfq-section"
+                      className="w-full py-3 rounded-xl bg-[#F4F9F8] hover:bg-[#E6F7F5] border border-[#D4ECE9] text-brand-primary font-ui font-bold text-xs flex items-center justify-center gap-2 transition-colors"
+                    >
+                      <span>Inquire About Current Lot Availability</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>

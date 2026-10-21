@@ -164,7 +164,7 @@
 
 /* ===== SECTION CONTAINERS ===== */
 .section-container {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  @apply max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8;
 }
 
 /* ===== CATEGORY FILTER ACTIVE ===== */
@@ -221,7 +221,7 @@
   background: linear-gradient(90deg, #00A79D, #E6F7F5);
 }
 
-/* ===== HERO IMAGE FLOAT ===== */
+/* ===== HERO IMAGE FLOAT & AUTO FLOAT ===== */
 @keyframes heroFloat {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
   33% { transform: translateY(-6px) rotate(0.3deg); }
@@ -229,6 +229,33 @@
 }
 .hero-float {
   animation: heroFloat 6s ease-in-out infinite;
+}
+
+@keyframes autoFloatA {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-16px) rotate(1.5deg);
+  }
+}
+
+@keyframes autoFloatB {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(16px) rotate(-1.5deg);
+  }
+}
+
+@keyframes autoFloatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(0.8deg);
+  }
 }
 
 /* ===== TRUST BADGE ===== */
