@@ -64,10 +64,11 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', '"Inter"', 'system-ui', 'sans-serif'],
-        serif: ['"Merriweather"', 'Georgia', 'serif'],
-        display: ['"Playfair Display"', '"Merriweather"', 'Georgia', 'serif'],
-        ui: ['"Outfit"', '"Plus Jakarta Sans"', 'sans-serif'],
+        sans: ['"Gabarito"', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        display: ['"Gabarito"', '"Outfit"', 'system-ui', 'sans-serif'],
+        ui: ['"Gabarito"', '"Outfit"', '"Plus Jakarta Sans"', 'sans-serif'],
+        serif: ['"Gabarito"', 'Georgia', 'serif'],
+        gabarito: ['"Gabarito"', 'sans-serif'],
       },
       keyframes: {
         fadeInUp: {

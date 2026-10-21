@@ -10,13 +10,16 @@ import {
 import { productsService, inquiriesService } from '../services/api';
 import CommodityCard from '../components/CommodityCard';
 import { 
+  HeroBgDecorations,
+  AboutBgDecorations,
+  CatalogBgDecorations,
+  WhyUsBgDecorations,
+  RfqBgDecorations,
+  CertificationsBgDecorations,
+  FaqBgDecorations,
   HeroProductDecorations, 
   SectionProductWatermark,
-  RealProductSectionFlanks,
-  WheatStalkSvg,
-  PeanutPodSvg,
-  DairyGheeDropletSvg,
-  PulseChickpeaPodSvg
+  RealProductSectionFlanks
 } from '../components/ProductBackgroundDecorations';
 
 /* ===========================
@@ -555,8 +558,8 @@ export default function Home() {
           HERO SECTION — Logo Palette (Teal & Deep Pine)
           ═══════════════════════════════════════ */}
       <section className="relative bg-[#F4F9F8] text-brand-text pt-8 pb-10 sm:pt-12 sm:pb-12 lg:pt-14 lg:pb-12 overflow-hidden border-b border-[#D4ECE9]">
-        {/* Custom Agricultural & Dairy Product Motifs in Background (Peanuts, Grains, Pulses, Dairy Ghee) */}
-        <HeroProductDecorations />
+        {/* Unique Hero Background: Golden Wheat, Shelled Peanuts & Moong with trade dot grid */}
+        <HeroBgDecorations />
 
         {/* Subtle decorative botanical blurs */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-accent/40 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
@@ -708,8 +711,8 @@ export default function Home() {
           SECTION 2: ABOUT AGRO EXPORT (Origin-Direct Maritime Trade)
           ═══════════════════════════════════════ */}
       <section id="about" className="relative pt-12 pb-16 sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24 bg-[#F4F9F8] overflow-hidden border-b border-[#D4ECE9]" ref={aboutRef}>
-        {/* Floating Agricultural Commodity Elements (Pearl Millet & Bold Peanuts) */}
-        <RealProductSectionFlanks leftType="pearl-millet" rightType="peanuts" position="both" />
+        {/* Unique About Background: Maritime Navigation Ring + Pearl Millet & Bold Peanuts */}
+        <AboutBgDecorations />
 
         <div className="section-container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -825,8 +828,8 @@ export default function Home() {
           SECTION 3: EXPORT COMMODITIES CATALOG (Origin-Direct Specifications)
           ═══════════════════════════════════════ */}
       <section id="products" className="relative py-20 lg:py-24 bg-white overflow-hidden">
-        {/* Floating Agricultural Commodity Elements (Yellow Corn & Kabuli Chickpeas) */}
-        <RealProductSectionFlanks leftType="yellow-corn" rightType="chickpeas" position="both" />
+        {/* Unique Catalog Background: Diagonal Yellow Corn & Kabuli Chickpeas with Quality Tags */}
+        <CatalogBgDecorations />
 
         <div className="section-container relative z-10">
           {/* Header */}
@@ -993,8 +996,8 @@ export default function Home() {
           SECTION 5: GLOBAL QUALITY. INDIAN ROOTS. (WHY CHOOSE US)
           ═══════════════════════════════════════ */}
       <section id="why-us" ref={whyRef} className="relative py-20 lg:py-24 bg-[#F4F9F8] border-y border-[#D4ECE9] overflow-hidden">
-        {/* Floating Agricultural Commodity Elements (Green Moong & Pure Dairy Ghee) */}
-        <RealProductSectionFlanks leftType="green-moong" rightType="ghee" position="both" />
+        {/* Unique Why Choose Us Background: Golden Cow Ghee Aura & Green Moong Cluster */}
+        <WhyUsBgDecorations />
 
         <div className="section-container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -1211,8 +1214,8 @@ export default function Home() {
           SECTION 7: SHIPPING & REQUEST A QUOTE (Side-by-side Port & RFQ)
           ═══════════════════════════════════════ */}
       <section id="rfq-section" className="relative py-20 lg:py-24 bg-[#F4F9F8] overflow-hidden border-b border-[#D4ECE9]">
-        {/* Floating Agricultural Commodity Elements (Kabuli Chickpeas) */}
-        <RealProductSectionFlanks rightType="chickpeas" position="right" />
+        {/* Unique RFQ & Shipping Background: Ocean Route Trajectory & Kabuli Chickpeas */}
+        <RfqBgDecorations />
 
         <div className="section-container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
@@ -1297,8 +1300,8 @@ export default function Home() {
           SECTION 8: VERIFY AGRO DAIRY EXPORT LLP (Verified Trust & Compliance Suite)
           ═══════════════════════════════════════ */}
       <section ref={certsRef} className="py-16 sm:py-20 bg-white border-b border-[#D4ECE9] relative overflow-hidden">
-        {/* Floating Agricultural Commodity Elements (Grains & Pulses) */}
-        <RealProductSectionFlanks leftType="grains" rightType="pulses" position="both" />
+        {/* Unique Certifications Background: Government Security Guilloche Seal & Harvest Pulses */}
+        <CertificationsBgDecorations />
 
         <div className="section-container relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
@@ -1383,8 +1386,8 @@ export default function Home() {
           SECTION 9: FREQUENTLY ASKED QUESTIONS (FAQ & Trade Advisory Hub)
           ═══════════════════════════════════════ */}
       <section id="faq" className="py-20 lg:py-24 bg-[#F4F9F8] relative overflow-hidden">
-        {/* Floating Agricultural Commodity Elements (Shelled Peanuts) */}
-        <RealProductSectionFlanks rightType="shelled-peanuts" position="right" />
+        {/* Unique FAQ Background: Amber Ghee & Shelled Peanuts Vignette */}
+        <FaqBgDecorations />
 
         <div className="section-container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
