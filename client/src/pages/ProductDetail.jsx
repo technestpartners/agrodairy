@@ -50,7 +50,7 @@ export default function ProductDetail() {
   }
 
   const mainImageUrl = activeImage
-    ? (activeImage.startsWith('http') ? activeImage : `/images/${activeImage}`)
+    ? (activeImage.startsWith('http') || activeImage.startsWith('/') ? activeImage : `/${activeImage}`)
     : '/images/products/bold-peanuts.jpg';
 
   return (
