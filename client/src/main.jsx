@@ -9,26 +9,36 @@ class ErrorBoundary extends React.Component {
     super(props);
     this.state = { hasError: false, error: null };
   }
-
   static getDerivedStateFromError(error) {
     return { hasError: true, error };
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error("UI Error caught by boundary:", error, errorInfo);
+    console.error("ErrorBoundary caught an error:", error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
       return (
-        <div style={{ padding: 40, fontFamily: 'system-ui, sans-serif', maxWidth: 800, margin: '40px auto', background: '#fff1f2', border: '1px solid #fecdd3', borderRadius: 12 }}>
-          <h2 style={{ color: '#9f1239', marginTop: 0 }}>Rendering Exception Detected</h2>
-          <p style={{ color: '#881337', fontSize: 14 }}>{this.state.error?.toString()}</p>
-          <button 
+        <div style={{ padding: '2rem', textAlign: 'center', fontFamily: 'sans-serif' }}>
+          <h2 style={{ color: '#003732' }}>Something went wrong loading Agro Dairy Export</h2>
+          <p style={{ color: '#4D6765', fontSize: '14px' }}>
+            {this.state.error?.message || 'An unexpected error occurred.'}
+          </p>
+          <button
             onClick={() => window.location.reload()}
-            style={{ padding: '8px 16px', background: '#13612e', color: '#fff', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 'bold' }}
+            style={{
+              marginTop: '1rem',
+              backgroundColor: '#00A79D',
+              color: '#fff',
+              border: 'none',
+              padding: '10px 20px',
+              borderRadius: '9999px',
+              cursor: 'pointer',
+              fontWeight: 'bold'
+            }}
           >
-            Reload Page
+            Reload Website
           </button>
         </div>
       );

@@ -5,6 +5,7 @@ import {
   Award, FileText, Calendar, ExternalLink
 } from 'lucide-react';
 import { qualityService } from '../services/api';
+import { RealProductSectionFlanks } from '../components/ProductBackgroundDecorations';
 
 export default function Certifications() {
   const [certifications, setCertifications] = useState([]);
@@ -43,7 +44,10 @@ export default function Certifications() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12 overflow-hidden">
+      {/* Real commodity photographic background elements */}
+      <RealProductSectionFlanks leftType="green-moong" rightType="yellow-corn" opacity="opacity-25 lg:opacity-35" />
+
       {/* Header */}
       <div>
         <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">

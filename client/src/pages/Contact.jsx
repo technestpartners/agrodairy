@@ -62,12 +62,12 @@ export default function Contact() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         {/* Contact Info & Coordinates */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="bg-agro-900 text-white rounded-3xl p-8 space-y-6">
+          <div className="bg-brand-deep text-white rounded-3xl p-8 space-y-6 shadow-xl border border-brand-primary/20">
             <h2 className="text-xl font-bold font-serif">Registered Office & Trade Desk</h2>
 
-            <div className="space-y-5 text-xs text-agro-100">
+            <div className="space-y-5 text-xs text-slate-200">
               <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-elysium-yellow shrink-0 mt-0.5" />
+                <MapPin className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-white block text-sm mb-0.5">Corporate Headquarters</span>
                   <span>Office no. -701, THE FUTURE CORNER, Sarthana, Surat- 395013, Gujarat, India</span>
@@ -75,7 +75,7 @@ export default function Contact() {
               </div>
 
               <div className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-elysium-yellow shrink-0 mt-0.5" />
+                <Phone className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-white block text-sm mb-0.5">Commercial & Export Desk</span>
                   <span>+91 90233 63680 (J.P. Vora - Partner / Export Director)</span>
@@ -84,7 +84,7 @@ export default function Contact() {
               </div>
 
               <div className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-elysium-yellow shrink-0 mt-0.5" />
+                <Mail className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-white block text-sm mb-0.5">Direct Commercial Email</span>
                   <span>agrodairyexportllp@gmail.com</span>
@@ -92,22 +92,22 @@ export default function Contact() {
               </div>
 
               <div className="flex items-start gap-3">
-                <ShieldCheck className="w-5 h-5 text-elysium-yellow shrink-0 mt-0.5" />
+                <ShieldCheck className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-white block text-sm mb-0.5">Statutory & Port Coordinates</span>
                   <span>IEC: 0817029381 • GSTIN: 24AAHFA3928L1Z9</span>
                   <span className="block mt-0.5">FSSAI: 10722026000148 • APEDA Reg.</span>
-                  <span className="block mt-0.5 text-elysium-lime font-medium">Gateway Ports: Hazira • Mundra • Kandla • Pipavav</span>
+                  <span className="block mt-0.5 text-brand-primary font-medium">Gateway Ports: Hazira • Mundra • Kandla • Pipavav</span>
                 </div>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-agro-800">
+            <div className="pt-4 border-t border-white/10">
               <a
                 href="https://wa.me/919023363680?text=Hello%20J.P.%20Vora,%20I%20would%20like%20to%20connect%20regarding%20Agro%20Dairy%20Export%20commodities."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs py-3 rounded-xl transition flex items-center justify-center gap-2 shadow-md"
+                className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold text-xs py-3 rounded-xl transition flex items-center justify-center gap-2 shadow-md"
               >
                 <MessageSquare className="w-4 h-4" />
                 <span>Instant WhatsApp Trade Chat</span>
@@ -117,24 +117,24 @@ export default function Contact() {
         </div>
 
         {/* Message Form */}
-        <div className="lg:col-span-7 bg-white rounded-3xl p-8 border border-slate-200/90 shadow-sm space-y-6">
+        <div className="lg:col-span-7 bg-white rounded-3xl p-8 border border-brand-border/60 shadow-sm space-y-6">
           <div>
-            <h2 className="text-xl font-bold text-slate-900">Send Commercial Inquiry</h2>
-            <p className="text-xs text-slate-500 mt-1">
-              For binding CIF container quotes, we recommend using our dedicated <Link to="/rfq" className="text-agro-800 font-bold underline">RFQ form</Link>.
+            <h2 className="text-xl font-bold text-brand-text">Send Commercial Inquiry</h2>
+            <p className="text-xs text-brand-muted mt-1">
+              For binding CIF container quotes, we recommend using our dedicated <Link to="/rfq" className="text-brand-primary font-bold underline">RFQ form</Link>.
             </p>
           </div>
 
           {submitted ? (
-            <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl p-6 text-center space-y-3">
-              <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
+            <div className="bg-brand-accent/50 border border-brand-primary/30 text-brand-text rounded-2xl p-6 text-center space-y-3">
+              <CheckCircle2 className="w-12 h-12 text-brand-primary mx-auto" />
               <h3 className="font-bold text-lg">Message Transmitted</h3>
-              <p className="text-xs max-w-md mx-auto">
+              <p className="text-xs max-w-md mx-auto text-brand-muted">
                 Thank you for contacting Agro Dairy Export. Our trade merchandising team will reach out to you within a few hours.
               </p>
               <button
                 onClick={() => setSubmitted(false)}
-                className="bg-emerald-700 text-white font-bold text-xs px-4 py-2 rounded-xl mt-2"
+                className="bg-brand-primary text-white font-bold text-xs px-4 py-2 rounded-xl mt-2"
               >
                 Send Another Message
               </button>
@@ -156,7 +156,7 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-agro-600"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
                   />
                 </div>
                 <div>
@@ -166,7 +166,7 @@ export default function Contact() {
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-agro-600"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
                   />
                 </div>
               </div>
@@ -180,7 +180,7 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-agro-600"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
                   />
                 </div>
                 <div>
@@ -190,7 +190,7 @@ export default function Contact() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-agro-600"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
                   />
                 </div>
               </div>
@@ -202,7 +202,7 @@ export default function Contact() {
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-agro-600"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
                 />
               </div>
 
@@ -215,17 +215,17 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   placeholder="Inquire about commodity availability, sample dispatch, or export agency..."
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-agro-600"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-agro-800 hover:bg-agro-900 text-white font-bold text-sm py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-md"
+                className="w-full bg-brand-primary hover:bg-brand-deep text-white font-bold text-sm py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-md"
               >
                 {loading ? 'Sending...' : 'Transmit Message to Trade Desk'}
-                <Send className="w-4 h-4 text-gold-400" />
+                <Send className="w-4 h-4 text-brand-gold" />
               </button>
             </form>
           )}

@@ -19,6 +19,7 @@ import Logistics from './pages/Logistics';
 import Markets from './pages/Markets';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Gallery from './pages/Gallery';
 import Blogs from './pages/Blogs';
 import BlogDetail from './pages/BlogDetail';
 import AdminLogin from './pages/AdminLogin';
@@ -69,6 +70,9 @@ export default function App() {
 
       {/* Company & Content */}
       <Route path="/company/about" element={<Layout><About /></Layout>} />
+      <Route path="/about" element={<Layout><About /></Layout>} />
+      <Route path="/gallery" element={<Layout><Gallery /></Layout>} />
+      <Route path="/certificates" element={<Layout><Certifications /></Layout>} />
       <Route path="/contact" element={<Layout><Contact /></Layout>} />
       <Route path="/blogs" element={<Layout><Blogs /></Layout>} />
       <Route path="/blogs/:slug" element={<Layout><BlogDetail /></Layout>} />

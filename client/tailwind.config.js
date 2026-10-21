@@ -7,30 +7,48 @@ export default {
   theme: {
     extend: {
       colors: {
-        elysium: {
-          dark: '#0b3f1d',
-          green: '#13612e',
-          lightgreen: '#287a37',
-          lime: '#7dc242',
-          yellow: '#ffc928',
-          yellowhover: '#f5b800',
-          orange: '#e07f0b',
-          cream: '#f7f4ec',
-          tint: '#f3f9ef',
-          tintborder: '#cfe3d2',
+        // Logo color palette (sampled directly from logo.png: #00A79D Teal & #003732 Deep Pine)
+        brand: {
+          primary: '#00A79D',   // Logo Teal / Persian Green ("AGRO" & Leaves)
+          'primary-dark': '#008C84',
+          deep: '#003732',      // Logo Deep Pine Spruce ("DAIRY" & "EXPORT LLP")
+          'deep-dark': '#002622',
+          secondary: '#008C84', // Mid teal tone
+          accent: '#E6F7F5',    // Light teal mint tint for pills & badges
+          'accent-hover': '#D4F1EE',
+          cream: '#F4F9F8',     // Soft modern off-white tint matching teal
+          ivory: '#FFFFFF',     // Clean white
+          text: '#0C2422',      // High-contrast deep pine dark text
+          muted: '#4D6765',     // Secondary/muted text with logo tint
+          gold: '#F5B800',      // Warm golden accent
+          border: '#D4ECE9',    // Subtle soft teal border
         },
+        // Legacy elysium tokens mapped to logo palette
+        elysium: {
+          dark: '#002622',
+          green: '#003732',       // Logo Deep Pine
+          lightgreen: '#008C84',  // Mid Teal
+          lime: '#00A79D',        // Logo Teal
+          yellow: '#F5B800',
+          yellowhover: '#E0A800',
+          orange: '#E07F0B',
+          cream: '#F4F9F8',
+          tint: '#E6F7F5',
+          tintborder: '#D4ECE9',
+        },
+        // Agro color system remapped directly to logo teal (#00A79D) & deep pine (#003732)
         agro: {
-          50: '#f3f9ef',
-          100: '#e4f2dc',
-          200: '#cfe3d2',
-          300: '#a3d991',
-          400: '#7dc242',
-          500: '#4c9a3a',
-          600: '#287a37',
-          700: '#13612e',
-          800: '#0f4c24',
-          900: '#0b3f1d',
-          950: '#062310',
+          50: '#EBF7F6',
+          100: '#CCECE9',
+          200: '#99D9D5',
+          300: '#66C5C0',
+          400: '#00A79D',         // Logo Primary Teal
+          500: '#008C84',         // Secondary Teal
+          600: '#006B64',
+          700: '#00544D',
+          800: '#003732',         // Logo Deep Pine
+          900: '#002622',         // Deep Pine Dark
+          950: '#001A17',
         },
         gold: {
           50: '#fffdf0',
@@ -48,7 +66,7 @@ export default {
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', '"Inter"', 'system-ui', 'sans-serif'],
         serif: ['"Merriweather"', 'Georgia', 'serif'],
-        display: ['"Merriweather"', 'Georgia', 'serif'],
+        display: ['"Playfair Display"', '"Merriweather"', 'Georgia', 'serif'],
         ui: ['"Outfit"', '"Plus Jakarta Sans"', 'sans-serif'],
       },
       keyframes: {
@@ -75,7 +93,15 @@ export default {
         marquee: {
           '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(-50%)' },
-        }
+        },
+        countUp: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        slideInRight: {
+          '0%': { opacity: '0', transform: 'translateX(30px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
       },
       animation: {
         'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
@@ -84,12 +110,24 @@ export default {
         'shimmer': 'shimmer 2.5s infinite linear',
         'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
         'marquee': 'marquee 25s linear infinite',
+        'count-up': 'countUp 0.8s ease-out forwards',
+        'slide-in-right': 'slideInRight 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards',
       },
       boxShadow: {
-        'glow-lime': '0 0 25px -5px rgba(125, 194, 66, 0.35)',
-        'glow-yellow': '0 0 25px -5px rgba(255, 201, 40, 0.45)',
-        'soft-xl': '0 20px 40px -15px rgba(11, 63, 29, 0.08)',
-        'card-hover': '0 22px 35px -10px rgba(15, 76, 36, 0.15)',
+        'glow-teal': '0 0 25px -5px rgba(0, 167, 157, 0.40)',
+        'glow-deep': '0 0 30px -8px rgba(0, 55, 50, 0.35)',
+        'glow-yellow': '0 0 25px -5px rgba(245, 184, 0, 0.45)',
+        'glow-lime': '0 0 25px -5px rgba(0, 167, 157, 0.35)',
+        'glow-green': '0 0 30px -8px rgba(0, 55, 50, 0.25)',
+        'soft-xl': '0 20px 40px -15px rgba(0, 55, 50, 0.08)',
+        'card-hover': '0 22px 35px -10px rgba(0, 55, 50, 0.15)',
+        'card-premium': '0 4px 24px 0 rgba(0, 55, 50, 0.08)',
+        'nav': '0 2px 24px 0 rgba(0, 55, 50, 0.06)',
+      },
+      backgroundImage: {
+        'hero-gradient': 'linear-gradient(135deg, #001A17 0%, #003732 50%, #00A79D 100%)',
+        'section-gradient': 'linear-gradient(180deg, #F4F9F8 0%, #FFFFFF 100%)',
+        'green-pattern': 'radial-gradient(at 0% 0%, rgba(0, 167, 157, 0.3) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(245, 184, 0, 0.15) 0px, transparent 50%)',
       }
     },
   },
