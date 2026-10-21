@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { MessageSquare, ArrowUp, FileText, CheckCircle2 } from 'lucide-react';
+import { MessageSquare, ArrowUp, FileText, CheckCircle2, Phone } from 'lucide-react';
 
 export default function FloatingActions() {
   const [showTop, setShowTop] = useState(false);

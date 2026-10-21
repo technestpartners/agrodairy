@@ -4,7 +4,7 @@ import { ArrowRight, MapPin, Scale, Package, ShieldCheck } from 'lucide-react';
 
 export default function CommodityCard({ product }) {
   const imageUrl = product.main_image 
-    ? (product.main_image.startsWith('http') ? product.main_image : `/images/${product.main_image}`)
+    ? (product.main_image.startsWith('http') || product.main_image.startsWith('/') ? product.main_image : `/${product.main_image}`)
     : '/images/products/bold-peanuts.jpg';
 
   return (
