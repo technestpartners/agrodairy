@@ -58,9 +58,13 @@ app.use('/api/tools', toolsRouter);
 app.use('/api/company', companyRouter);
 app.use('/api/admin', adminRouter);
 
-// Serve React frontend build if available
+const fs = require('fs');
+
+// Serve React frontend build if available locally
 const clientDistPath = path.join(__dirname, '../client/dist');
-app.use(express.static(clientDistPath));
+if (fs.existsSync(clientDistPath)) {
+  app.use(express.static(clientDistPath));
+}
 
 // Global Error Handler
 app.use((err, req, res, next) => {
@@ -68,13 +72,21 @@ app.use((err, req, res, next) => {
   res.status(500).json({ success: false, message: 'Internal server error', error: err.message });
 });
 
-// React SPA fallback
+// React SPA fallback (for local development when dist exists)
 app.get('*', (req, res) => {
   const indexPath = path.join(clientDistPath, 'index.html');
-  res.sendFile(indexPath);
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    res.status(404).json({ success: false, message: 'Not found' });
+  }
 });
 
-app.listen(PORT, () => {
-  console.log(`🌾 Agro Dairy Export API Server running on port ${PORT}`);
-  console.log(`📡 Health check available at http://localhost:${PORT}/api/health`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`🌾 Agro Dairy Export API Server running on port ${PORT}`);
+    console.log(`📡 Health check available at http://localhost:${PORT}/api/health`);
+  });
+}
+
+module.exports = app;
