@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { Search, Filter, Layers, ArrowUpDown, ChevronRight } from 'lucide-react';
-import { productsService } from '../services/api';
+import { 
+  Search, SlidersHorizontal, ArrowRight, ShieldCheck, 
+  Package, ChevronRight, Layers, Sparkles, Filter
+} from 'lucide-react';
 import CommodityCard from '../components/CommodityCard';
-import { RealProductSectionFlanks } from '../components/ProductBackgroundDecorations';
+import { productsService } from '../services/api';
+import { RealProductSectionFlanks, PageHeroDecorations } from '../components/ProductBackgroundDecorations';
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -11,9 +14,12 @@ export default function Products() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState(searchParams.get('search') || '');
+  const [sortBy, setSortBy] = useState('featured');
+
   const activeCategory = searchParams.get('category') || 'all';
 
   useEffect(() => {
+    // Fetch categories with counts
     productsService.getCategories()
       .then(res => {
         if (res.success) setCategories(res.data);
@@ -23,19 +29,16 @@ export default function Products() {
 
   useEffect(() => {
     setLoading(true);
-    const params = {
-      limit: 60,
-      search: searchParams.get('search') || undefined,
-      category: activeCategory !== 'all' ? activeCategory : undefined
-    };
+    const categoryQuery = activeCategory === 'all' ? undefined : activeCategory;
+    const searchQuery = searchParams.get('search') || undefined;
 
-    productsService.getAll(params)
+    productsService.getAll({ category: categoryQuery, search: searchQuery, limit: 100 })
       .then(res => {
         if (res.success) setProducts(res.data);
       })
       .catch(err => console.error(err))
       .finally(() => setLoading(false));
-  }, [searchParams, activeCategory]);
+  }, [searchParams]);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -58,103 +61,236 @@ export default function Products() {
     setSearchParams(newParams);
   };
 
+  const sortedProducts = [...products].sort((a, b) => {
+    if (sortBy === 'name-asc') return (a.name || '').localeCompare(b.name || '');
+    if (sortBy === 'name-desc') return (b.name || '').localeCompare(a.name || '');
+    return 0;
+  });
+
   return (
-    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 overflow-hidden">
-      {/* Real commodity photographic background elements */}
-      <RealProductSectionFlanks leftType="pearl-millet" rightType="shelled-peanuts" opacity="opacity-25 lg:opacity-35" />
+    <div className="relative bg-[#FAFCFB] min-h-screen">
+      <RealProductSectionFlanks leftType="pearl-millet" rightType="shelled-peanuts" opacity="opacity-20 lg:opacity-30" />
 
-      {/* Breadcrumb & Header */}
-      <div>
-        <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
-          <Link to="/" className="hover:text-agro-800">Home</Link>
-          <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-slate-800 font-semibold">Commodities Catalog</span>
-        </div>
-        <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-          Export Commodities Catalog
-        </h1>
-        <p className="text-slate-600 text-sm mt-1 max-w-2xl">
-          Browse our certified Indian agricultural and dairy export lines. All products conform to APEDA/FSSAI export specifications and are available for containerized shipment.
-        </p>
-      </div>
+      {/* ══════════════════════════════════════════════════════════════════════════
+          HERO BANNER: COMMODITIES CATALOG (Clean, Minimal Home Palette)
+          ══════════════════════════════════════════════════════════════════════════ */}
+      <section className="relative overflow-hidden bg-[#F4F9F8] text-[#0C2422] pt-8 pb-20 sm:pt-12 sm:pb-24 lg:pt-14 lg:pb-28 border-b border-[#D4ECE9]">
+        <PageHeroDecorations 
+          topRightType="pearl-millet" 
+          bottomLeftType="shelled-peanuts"
+          ticker="SORTEX 99.5%+ OPTICAL CLEANED • APEDA & FSSAI CERTIFIED • DIRECT GUJARAT MANDI ORIGIN • FCL EXPORT PACKAGING"
+          coordinates={{ lat: 'N 21.17° SURAT', lng: 'E 72.83°' }}
+        />
 
-      {/* Search & Filter Bar */}
-      <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm flex flex-col md:flex-row gap-4 justify-between items-center">
-        {/* Search Input */}
-        <form onSubmit={handleSearchSubmit} className="relative w-full md:w-96">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by commodity name, grade, or HS code..."
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-agro-600"
-          />
-        </form>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-[#4D6765] mb-5 font-mono">
+            <Link to="/" className="hover:text-brand-primary transition-colors flex items-center gap-1">
+              <span>Home</span>
+            </Link>
+            <ChevronRight className="w-3.5 h-3.5 text-brand-primary/60" />
+            <span className="text-brand-primary font-bold">Export Commodities Catalog</span>
+          </nav>
 
-        {/* Results summary */}
-        <div className="text-xs text-slate-500 font-medium">
-          Showing <span className="font-bold text-slate-800">{products.length}</span> commodities ready for export
-        </div>
-      </div>
+          <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8">
+            <div className="max-w-3xl space-y-4">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E6F7F5] border border-[#BBE5E1] text-brand-primary text-xs font-ui font-bold shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
+                <span className="tracking-wide">ORIGIN-DIRECT GUJARAT HARVESTS</span>
+                <span className="text-[#4D6765]/40">•</span>
+                <span className="text-[#4D6765] font-normal">Sortex 99.5%+ Machine Cleaned</span>
+              </div>
 
-      {/* Category Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar">
-        <button
-          onClick={() => handleCategorySelect('all')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition shrink-0 ${
-            activeCategory === 'all'
-              ? 'bg-agro-900 text-white shadow-md'
-              : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
-          }`}
-        >
-          All Categories
-        </button>
-        {categories.map(cat => (
-          <button
-            key={cat.id}
-            onClick={() => handleCategorySelect(cat.slug)}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition shrink-0 ${
-              activeCategory === cat.slug
-                ? 'bg-agro-900 text-white shadow-md'
-                : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
-            }`}
-          >
-            {cat.name} ({cat.products_count || 0})
-          </button>
-        ))}
-      </div>
+              <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-[3.25rem] leading-[1.12] tracking-tight text-[#0C2422]">
+                Export <span className="text-brand-primary">Commodities Catalog</span>
+              </h1>
 
-      {/* Commodity Grid */}
-      {loading ? (
-        <div className="py-20 text-center">
-          <div className="inline-block w-8 h-8 border-4 border-agro-800 border-t-transparent rounded-full animate-spin mb-4" />
-          <p className="text-sm text-slate-500">Loading export commodities...</p>
+              <p className="text-base sm:text-lg text-[#4D6765] leading-relaxed font-sans max-w-2xl">
+                Procured directly from certified Saurashtra farm mandis, processed through advanced optical color sorting, and packaged to meet strict APEDA, FSSAI, and European Union Aflatoxin specifications.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 shrink-0">
+              <Link
+                to="/rfq"
+                className="inline-flex items-center gap-2 bg-brand-primary hover:bg-[#008A82] text-white font-ui font-bold text-xs sm:text-sm px-6 py-3.5 rounded-full shadow-md hover:shadow-lg transition-all"
+              >
+                <span>Request Container Quote</span>
+                <ArrowRight className="w-4 h-4 text-white" />
+              </Link>
+              <Link
+                to="/tools/container-calculator"
+                className="inline-flex items-center gap-2 bg-white hover:bg-[#E6F7F5] text-[#0C2422] font-ui font-semibold text-xs sm:text-sm px-5 py-3.5 rounded-full border border-[#D4ECE9] transition-all shadow-xs"
+              >
+                <Package className="w-4 h-4 text-brand-primary" />
+                <span>Container Calculator</span>
+              </Link>
+            </div>
+          </div>
         </div>
-      ) : products.length === 0 ? (
-        <div className="bg-white rounded-2xl p-12 text-center border border-slate-200 max-w-md mx-auto">
-          <Layers className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-          <h3 className="text-lg font-bold text-slate-800">No commodities matched</h3>
-          <p className="text-xs text-slate-500 mt-1 mb-4">
-            Try resetting your search query or choosing another export category.
-          </p>
-          <button
-            onClick={() => {
-              setSearch('');
-              handleCategorySelect('all');
-            }}
-            className="bg-agro-800 text-white text-xs font-bold px-4 py-2 rounded-xl"
-          >
-            Reset Filters
-          </button>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════════════
+          SEARCH, CATEGORY PILLS & FILTERS CARD (Clean Home-Page Style)
+          ══════════════════════════════════════════════════════════════════════════ */}
+      <section className="relative z-20 -mt-10 sm:-mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-[#D4ECE9] space-y-5 text-[#0C2422]">
+          
+          {/* Top Bar: Search Input & Sort Selector */}
+          <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
+            {/* Search Input */}
+            <form onSubmit={handleSearchSubmit} className="relative w-full md:w-[440px]">
+              <Search className="w-4 h-4 text-slate-400 absolute left-4 top-3.5" />
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search by commodity, grade (38/42), or HS Code..."
+                className="w-full bg-[#F8FAF9] border border-[#D4ECE9] rounded-2xl pl-11 pr-24 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#00A79D] focus:bg-white transition text-[#0C2422]"
+              />
+              <button
+                type="submit"
+                className="absolute right-1.5 top-1.5 bottom-1.5 px-4 rounded-xl bg-brand-primary hover:bg-brand-primary-dark text-white text-xs font-bold font-ui transition"
+              >
+                Search
+              </button>
+            </form>
+
+            {/* Sort & Results Count */}
+            <div className="flex items-center justify-between w-full md:w-auto gap-4">
+              <div className="text-xs text-[#4D6765] font-mono">
+                Showing <strong className="text-[#0C2422] font-bold">{sortedProducts.length}</strong> export lines
+              </div>
+
+              <div className="flex items-center gap-2">
+                <SlidersHorizontal className="w-3.5 h-3.5 text-slate-400" />
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="bg-[#F8FAF9] border border-[#D4ECE9] rounded-xl px-3 py-2 text-xs font-ui font-semibold text-[#0C2422] focus:outline-none focus:ring-2 focus:ring-[#00A79D]"
+                >
+                  <option value="featured">Sort by: Featured</option>
+                  <option value="name-asc">Name (A to Z)</option>
+                  <option value="name-desc">Name (Z to A)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          {/* Category Filter Pills */}
+          <div className="pt-2 border-t border-slate-100">
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar">
+              <button
+                type="button"
+                onClick={() => handleCategorySelect('all')}
+                className={`px-4 py-2.5 rounded-2xl text-xs font-ui font-bold transition-all shrink-0 flex items-center gap-2 ${
+                  activeCategory === 'all'
+                    ? 'bg-brand-primary text-white shadow-sm'
+                    : 'bg-[#F4F9F8] hover:bg-[#E6F7F5] text-slate-700 border border-[#D4ECE9]'
+                }`}
+              >
+                <span>All Commodities</span>
+                <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${activeCategory === 'all' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-600'}`}>
+                  {products.length}
+                </span>
+              </button>
+
+              {categories.map(cat => (
+                <button
+                  type="button"
+                  key={cat.id}
+                  onClick={() => handleCategorySelect(cat.slug)}
+                  className={`px-4 py-2.5 rounded-2xl text-xs font-ui font-bold transition-all shrink-0 flex items-center gap-2 ${
+                    activeCategory === cat.slug
+                      ? 'bg-brand-primary text-white shadow-sm'
+                      : 'bg-[#F4F9F8] hover:bg-[#E6F7F5] text-slate-700 border border-[#D4ECE9]'
+                  }`}
+                >
+                  <span>{cat.name}</span>
+                  {cat.products_count !== undefined && (
+                    <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${activeCategory === cat.slug ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-600'}`}>
+                      {cat.products_count}
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {products.map(product => (
-            <CommodityCard key={product.id} product={product} />
-          ))}
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════════════
+          COMMODITY GRID SECTION (Clean Airy Layout)
+          ══════════════════════════════════════════════════════════════════════════ */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        {loading ? (
+          <div className="py-24 text-center">
+            <div className="inline-block w-10 h-10 border-4 border-brand-primary border-t-transparent rounded-full animate-spin mb-4" />
+            <p className="text-sm font-semibold text-[#4D6765]">Retrieving certified commodity catalog...</p>
+          </div>
+        ) : sortedProducts.length === 0 ? (
+          <div className="bg-white rounded-3xl p-12 text-center border border-[#D4ECE9] max-w-md mx-auto shadow-sm space-y-4">
+            <div className="w-14 h-14 bg-slate-100 text-slate-400 rounded-2xl flex items-center justify-center mx-auto">
+              <Layers className="w-7 h-7" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-[#0C2422]">No commodities found</h3>
+              <p className="text-xs text-[#4D6765] mt-1 max-w-xs mx-auto">
+                No active export lines matched your filter criteria. Try resetting the search or selecting another category.
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                setSearch('');
+                handleCategorySelect('all');
+              }}
+              className="bg-brand-primary hover:bg-brand-primary-dark text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-sm"
+            >
+              Reset Filters
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+            {sortedProducts.map(product => (
+              <CommodityCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════════════
+          BOTTOM TRADE ASSURANCE & MIXED CONTAINER BANNER (Signature Clean Dark Pine)
+          ══════════════════════════════════════════════════════════════════════════ */}
+      <section className="bg-gradient-to-br from-[#021814] via-[#052822] to-[#011310] text-white py-14 px-4 sm:px-6 lg:px-8 border-t border-[#00A79D]/30 shadow-2xl">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="max-w-2xl text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 text-xs font-mono text-[#5EEAD4] font-bold uppercase tracking-wider mb-2">
+              <ShieldCheck className="w-4 h-4 text-[#5EEAD4]" />
+              <span>Full Container Load (FCL) &amp; Mixed Consignments</span>
+            </div>
+            <h3 className="font-display font-black text-2xl sm:text-3xl text-white">
+              Need Multi-Commodity Mixed Containers or Custom Packaging?
+            </h3>
+            <p className="text-xs sm:text-sm text-emerald-100/75 mt-2 font-sans leading-relaxed">
+              We consolidate multiple commodities (e.g. Peanuts + Sesame + Chickpeas + Ghee) in single 20ft / 40ft containers under one unified Bill of Lading, saving freight and import duties.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
+            <Link
+              to="/rfq"
+              className="bg-brand-gold hover:bg-amber-400 text-[#002B26] font-ui font-black text-xs sm:text-sm px-6 py-3.5 rounded-full shadow-lg transition-transform hover:scale-105"
+            >
+              Request Formal RFQ
+            </Link>
+            <Link
+              to="/tools/container-calculator"
+              className="bg-white/10 hover:bg-white/15 text-white font-ui font-bold text-xs sm:text-sm px-6 py-3.5 rounded-full border border-white/20 transition-all"
+            >
+              Calculate Container Load
+            </Link>
+          </div>
         </div>
-      )}
+      </section>
     </div>
   );
 }

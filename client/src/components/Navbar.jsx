@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   Menu, X, Phone, Mail, ShieldCheck, ChevronDown, 
-  Search, ArrowRight, Layers, Calculator, FileText, CheckCircle2,
-  Package, MapPin, Globe2
+  ArrowRight, Anchor, MessageCircle, CheckCircle2,
+  Globe2, Sparkles, ChevronRight, Package, Layers, Sprout
 } from 'lucide-react';
 import { productsService } from '../services/api';
 
@@ -11,281 +11,568 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const [scrolled, setScrolled] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
+  const closeTimeoutRef = useRef(null);
   const location = useLocation();
 
   useEffect(() => {
     productsService.getCategories()
       .then(res => {
-        if (res.success) setCategories(res.data);
+        if (res.success && Array.isArray(res.data)) {
+          setCategories(res.data);
+        }
       })
       .catch(err => console.error(err));
 
+    let ticking = false;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const y = window.scrollY;
+          // Deadband hysteresis: shrink after scrolling 70px down, restore only above 25px
+          // This prevents rapid oscillation/flickering near the scroll threshold
+          setScrolled(prev => {
+            if (!prev && y > 70) return true;
+            if (prev && y < 25) return false;
+            return prev;
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    };
   }, []);
 
   useEffect(() => {
     setIsOpen(false);
+    setProductsOpen(false);
   }, [location]);
 
+  const handleMouseEnterProducts = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setProductsOpen(true);
+  };
+
+  const handleMouseLeaveProducts = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    closeTimeoutRef.current = setTimeout(() => {
+      setProductsOpen(false);
+    }, 180);
+  };
+
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${
-      scrolled 
-        ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-slate-200/80' 
-        : 'bg-white shadow-sm border-b border-slate-200'
-    }`}>
-      {/* Top Bar - Deep Logo Pine Banner with Live Indicator */}
-      <div className="bg-brand-deep text-white text-xs py-2 px-4 font-ui font-semibold border-b border-brand-primary/20">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-          <div className="flex items-center gap-3 flex-wrap justify-center sm:justify-start">
-            <span className="flex items-center gap-1.5 font-bold text-white/95">
+    <header className="sticky top-0 z-50 w-full bg-white shadow-[0_4px_20px_-4px_rgba(0,55,50,0.08)]">
+      
+      {/* =========================================================================
+          1. PROPER UTILITY TOP BAR (Deep Pine & Gold Credentials)
+          ========================================================================= */}
+      <div 
+        className={`w-full bg-[#002B26] text-white transition-[max-height,opacity,padding,border-color] duration-300 ease-in-out border-b ${
+          scrolled 
+            ? 'max-h-0 opacity-0 overflow-hidden py-0 border-transparent pointer-events-none' 
+            : 'max-h-14 opacity-100 py-2 px-4 border-[#00A79D]/20'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2 text-xs">
+          
+          {/* Left: Export Credentials & Port Gateways */}
+          <div className="flex items-center gap-3 flex-wrap justify-center md:justify-start">
+            <div className="flex items-center gap-1.5 font-bold text-white tracking-wide">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-primary"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00A79D] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00A79D]"></span>
               </span>
-              <ShieldCheck className="w-3.5 h-3.5 text-brand-primary" />
-              AGRO DAIRY EXPORT LLP • Surat, Gujarat, India
-            </span>
-            <span className="hidden md:inline-block text-white/30">|</span>
-            <span className="hidden md:inline-block text-white/70 text-[11px]">
-              Direct Shipments via Mundra, Kandla &amp; Hazira Ports
+              <ShieldCheck className="w-3.5 h-3.5 text-[#00A79D]" />
+              <span>AGRO DAIRY EXPORT LLP</span>
+            </div>
+
+            <span className="hidden sm:inline-block text-white/30">•</span>
+
+            <div className="hidden sm:flex items-center gap-1.5 text-white/80 font-mono text-[11px]">
+              <Anchor className="w-3 h-3 text-[#F5B800]" />
+              <span>Mundra, Kandla &amp; Hazira Seaport Direct Dispatches</span>
+            </div>
+
+            <span className="hidden lg:inline-block text-white/30">•</span>
+
+            <span className="hidden lg:inline-block text-[#F5B800] font-mono text-[11px] font-bold">
+              APEDA • FSSAI • DGFT IEC: 0817029381
             </span>
           </div>
 
-          <div className="flex items-center gap-3 sm:gap-4 text-white text-[11px] sm:text-xs">
+          {/* Right: Phone & Email Direct Hotline */}
+          <div className="flex items-center gap-4 text-white/90 text-xs">
             <a 
               href="tel:+919023363680" 
-              className="hover:text-brand-primary transition-colors flex items-center gap-1 font-bold"
+              className="hover:text-[#00A79D] transition-colors flex items-center gap-1.5 font-bold font-mono"
             >
-              <Phone className="w-3 h-3 text-brand-primary" />
-              <span>+91 90233 63680 <span className="hidden sm:inline font-normal opacity-75">(J.P. Vora)</span></span>
+              <Phone className="w-3 h-3 text-[#00A79D]" />
+              <span>+91 90233 63680 <span className="hidden sm:inline font-normal text-white/60 font-sans">(J.P. Vora)</span></span>
             </a>
-            <span className="text-white/30">|</span>
+
+            <span className="text-white/20">|</span>
+
             <a 
               href="mailto:agrodairyexportllp@gmail.com" 
-              className="hover:text-brand-primary transition-colors flex items-center gap-1 font-bold truncate max-w-[200px] sm:max-w-none"
+              className="hover:text-[#00A79D] transition-colors flex items-center gap-1.5 font-mono text-white/80 hover:text-white truncate max-w-[200px] sm:max-w-none"
             >
-              <Mail className="w-3 h-3 text-brand-primary" />
+              <Mail className="w-3 h-3 text-[#00A79D]" />
               <span>agrodairyexportllp@gmail.com</span>
             </a>
           </div>
+
         </div>
       </div>
 
-      {/* Main Navbar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Brand Logo */}
-          <Link to="/" className="flex items-center group py-1">
-            <img 
-              src="/images/logo.png" 
-              alt="Agro Dairy Export LLP" 
-              className="h-14 sm:h-16 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = '/images/logo-light.jpg';
-              }}
-            />
-          </Link>
-
-          {/* Desktop Navigation - Exact User Order: Home, About, Product, Gallery, Certificate, Contact Us */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2 font-ui font-semibold text-sm">
-            {/* 1. Home */}
-            <Link 
-              to="/" 
-              className={`px-3.5 py-2 rounded-lg transition ${
-                location.pathname === '/' ? 'text-brand-primary bg-brand-accent font-bold' : 'text-slate-700 hover:text-brand-primary hover:bg-brand-accent'
-              }`}
-            >
-              Home
+      {/* =========================================================================
+          2. MAIN SHAPED NAVIGATION BAR
+          ========================================================================= */}
+      <div className="w-full bg-white relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className={`flex items-center justify-between transition-[height] duration-300 ease-in-out ${
+            scrolled ? 'h-16' : 'h-20'
+          }`}>
+            
+            {/* Logo */}
+            <Link to="/" className="flex items-center group shrink-0 py-1">
+              <img 
+                src="/images/logo.png" 
+                alt="Agro Dairy Export LLP" 
+                className={`w-auto object-contain transform-gpu transition-[height,transform] duration-300 group-hover:scale-[1.03] ${
+                  scrolled ? 'h-11 sm:h-12' : 'h-14 sm:h-15'
+                }`}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '/images/logo-light.jpg';
+                }}
+              />
             </Link>
 
-            {/* 2. About */}
-            <Link 
-              to="/company/about" 
-              className={`px-3.5 py-2 rounded-lg transition ${
-                location.pathname.startsWith('/company/about') || location.pathname === '/about'
-                  ? 'text-brand-primary bg-brand-accent font-bold' 
-                  : 'text-slate-700 hover:text-brand-primary hover:bg-brand-accent'
-              }`}
-            >
-              About
-            </Link>
-
-            {/* 3. Product (with Category Dropdown) */}
-            <div className="relative group">
+            {/* Desktop Navigation Links */}
+            <nav className="hidden lg:flex items-center gap-1 xl:gap-2 font-sans font-semibold text-[13px] tracking-normal">
+              
+              {/* 1. Home */}
               <Link 
-                to="/products" 
-                className={`px-3.5 py-2 rounded-lg flex items-center gap-1 transition ${
-                  location.pathname.startsWith('/products') || location.pathname.startsWith('/categories')
-                    ? 'text-brand-primary bg-brand-accent font-bold' 
-                    : 'text-slate-700 hover:text-brand-primary hover:bg-brand-accent'
+                to="/" 
+                className={`px-3.5 py-2 rounded-xl transition-colors duration-150 ${
+                  location.pathname === '/' 
+                    ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
+                    : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
                 }`}
               >
-                Product
-                <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary group-hover:rotate-180 transition-transform duration-200" />
+                Home
               </Link>
-              
-              <div className="absolute left-0 top-full pt-2 w-80 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                <div className="bg-white rounded-2xl shadow-2xl border border-brand-border p-3 overflow-hidden">
-                  <div className="text-[11px] font-bold text-slate-400 px-3 py-1 uppercase tracking-wider">
-                    Core Export Lines
-                  </div>
-                  <div className="space-y-1">
-                    <Link
-                      to="/products?category=dairy-products"
-                      className="flex items-center justify-between px-3 py-2 rounded-xl text-sm font-medium text-slate-700 hover:bg-brand-accent hover:text-brand-deep transition"
-                    >
-                      <span className="font-bold text-brand-primary">Pure Cow &amp; Buffalo Ghee</span>
-                      <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-amber-100 text-amber-800">Dairy</span>
-                    </Link>
 
-                    <Link
-                      to="/products?category=grains-millets"
-                      className="flex items-center justify-between px-3 py-2 rounded-xl text-sm font-medium text-slate-700 hover:bg-brand-accent hover:text-brand-deep transition"
-                    >
-                      <span>Green Millet, Sorghum &amp; Maize</span>
-                      <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-brand-accent text-brand-primary font-bold">Grains</span>
-                    </Link>
+              {/* 2. About */}
+              <Link 
+                to="/company/about" 
+                className={`px-3.5 py-2 rounded-xl transition-colors duration-150 ${
+                  location.pathname.startsWith('/company/about') || location.pathname === '/about'
+                    ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
+                    : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
+                }`}
+              >
+                About
+              </Link>
 
-                    <Link
-                      to="/products?category=peanuts"
-                      className="flex items-center justify-between px-3 py-2 rounded-xl text-sm font-medium text-slate-700 hover:bg-brand-accent hover:text-brand-deep transition"
-                    >
-                      <span>Bold Peanut Kernels (38/42 to 70/80)</span>
-                      <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-amber-100 text-amber-800">Peanuts</span>
-                    </Link>
+              {/* 3. Products (with Dropdown) */}
+              <div 
+                className="relative"
+                onMouseEnter={handleMouseEnterProducts}
+                onMouseLeave={handleMouseLeaveProducts}
+                onFocus={handleMouseEnterProducts}
+                onBlur={handleMouseLeaveProducts}
+              >
+                <Link 
+                  to="/products" 
+                  onClick={() => setProductsOpen(false)}
+                  className={`px-3.5 py-2 rounded-xl flex items-center gap-1 transition-colors duration-150 ${
+                    location.pathname.startsWith('/products') || location.pathname.startsWith('/categories')
+                      ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
+                      : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
+                  }`}
+                >
+                  <span>Products</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${productsOpen ? 'text-[#00A79D] rotate-180' : 'text-slate-400'}`} />
+                </Link>
+                
+                {/* Proper Sculpted Dropdown Card with stable position & invisible bridge */}
+                <div 
+                  className={`absolute left-0 -translate-x-12 top-full pt-2 w-[500px] z-50 transition-all duration-200 ease-out origin-top ${
+                    productsOpen 
+                      ? 'opacity-100 scale-100 pointer-events-auto visible' 
+                      : 'opacity-0 scale-95 pointer-events-none invisible'
+                  }`}
+                >
+                  {/* Invisible Hit Bridge: eliminates dead zone between button and card */}
+                  <div className="absolute inset-x-0 -top-3 h-4 bg-transparent pointer-events-auto" />
 
-                    <Link
-                      to="/products?category=pulses-beans"
-                      className="flex items-center justify-between px-3 py-2 rounded-xl text-sm font-medium text-slate-700 hover:bg-brand-accent hover:text-brand-deep transition"
-                    >
-                      <span>Moong, Moong Mogar &amp; Chickpeas</span>
-                      <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-brand-accent text-brand-primary font-bold">Pulses</span>
-                    </Link>
+                  <div className="bg-white rounded-2xl shadow-2xl border border-[#D4ECE9] p-3.5 overflow-hidden ring-1 ring-black/5">
+                    
+                    {/* Header Bar */}
+                    <div className="px-3.5 py-2 mb-2 bg-[#F4F9F8] rounded-xl border border-[#D4ECE9] flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
+                        <span className="text-[11px] font-bold text-brand-primary uppercase tracking-wider font-mono">
+                          Export Commodities Directory
+                        </span>
+                      </div>
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#E6F7F5] border border-[#BBE5E1] text-[10px] font-mono font-bold text-brand-primary">
+                        Sortex 99.5%+
+                      </span>
+                    </div>
 
-                    <Link
-                      to="/products?category=sesame-seeds"
-                      className="flex items-center justify-between px-3 py-2 rounded-xl text-sm font-medium text-slate-700 hover:bg-brand-accent hover:text-brand-deep transition"
-                    >
-                      <span>Natural &amp; Hulled Sesame Seeds</span>
-                      <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-slate-100 text-slate-600">Oilseeds</span>
-                    </Link>
-                  </div>
+                    {/* Commodity Category Links */}
+                    <div className="space-y-1">
+                      {/* 1. Peanuts */}
+                      <Link
+                        to="/products?category=peanuts"
+                        onClick={() => setProductsOpen(false)}
+                        className="group/item flex items-center justify-between p-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-[#E6F7F5] hover:text-[#003732] transition-colors duration-150 border border-transparent hover:border-[#BBE5E1]"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 border border-amber-200/60 flex items-center justify-center shrink-0 group-hover/item:scale-105 transition-transform">
+                            <Package className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <div className="font-bold text-[13px] text-[#0C2422] group-hover/item:text-brand-primary transition-colors flex items-center gap-1.5">
+                              <span>Bold &amp; Java Peanuts</span>
+                              <span className="text-[11px] font-mono text-slate-400 font-normal">(38/42–70/80)</span>
+                            </div>
+                            <div className="text-[11px] text-[#4D6765] font-sans">
+                              Saurashtra origin, HPS groundnut kernels, Sortex cleaned
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200/60">
+                            Peanuts
+                          </span>
+                          <ChevronRight className="w-3.5 h-3.5 text-slate-300 group-hover/item:text-brand-primary group-hover/item:translate-x-0.5 transition-all" />
+                        </div>
+                      </Link>
 
-                  <div className="border-t border-brand-border mt-2 pt-2">
-                    <Link 
-                      to="/products" 
-                      className="flex items-center justify-between px-3 py-2 text-xs font-bold text-brand-primary hover:bg-brand-accent rounded-xl"
-                    >
-                      View All Products Catalog
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                      {/* 2. Sesame Seeds */}
+                      <Link
+                        to="/products?category=sesame-seeds"
+                        onClick={() => setProductsOpen(false)}
+                        className="group/item flex items-center justify-between p-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-[#E6F7F5] hover:text-[#003732] transition-colors duration-150 border border-transparent hover:border-[#BBE5E1]"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-xl bg-teal-50 text-brand-primary border border-teal-200/60 flex items-center justify-center shrink-0 group-hover/item:scale-105 transition-transform">
+                            <Sparkles className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <div className="font-bold text-[13px] text-[#0C2422] group-hover/item:text-brand-primary transition-colors">
+                              Natural White &amp; Hulled Sesame
+                            </div>
+                            <div className="text-[11px] text-[#4D6765] font-sans">
+                              Gujarat harvest, 99.9% Sortex purity, auto-color sorted
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-teal-50 text-teal-800 border border-teal-200/60">
+                            Oilseeds
+                          </span>
+                          <ChevronRight className="w-3.5 h-3.5 text-slate-300 group-hover/item:text-brand-primary group-hover/item:translate-x-0.5 transition-all" />
+                        </div>
+                      </Link>
+
+                      {/* 3. Dairy */}
+                      <Link
+                        to="/products?category=dairy-products"
+                        onClick={() => setProductsOpen(false)}
+                        className="group/item flex items-center justify-between p-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-[#E6F7F5] hover:text-[#003732] transition-colors duration-150 border border-transparent hover:border-[#BBE5E1]"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 border border-amber-200/60 flex items-center justify-center shrink-0 group-hover/item:scale-105 transition-transform">
+                            <ShieldCheck className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <div className="font-bold text-[13px] text-[#0C2422] group-hover/item:text-brand-primary transition-colors">
+                              Pure Indian Cow &amp; Buffalo Ghee
+                            </div>
+                            <div className="text-[11px] text-[#4D6765] font-sans">
+                              Desi Danedar A2 Cow &amp; Creamy Buffalo, AGMARK &amp; FSSAI
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200/60">
+                            Dairy
+                          </span>
+                          <ChevronRight className="w-3.5 h-3.5 text-slate-300 group-hover/item:text-brand-primary group-hover/item:translate-x-0.5 transition-all" />
+                        </div>
+                      </Link>
+
+                      {/* 4. Grains & Millets */}
+                      <Link
+                        to="/products?category=grains-millets"
+                        onClick={() => setProductsOpen(false)}
+                        className="group/item flex items-center justify-between p-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-[#E6F7F5] hover:text-[#003732] transition-colors duration-150 border border-transparent hover:border-[#BBE5E1]"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200/60 flex items-center justify-center shrink-0 group-hover/item:scale-105 transition-transform">
+                            <Sprout className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <div className="font-bold text-[13px] text-[#0C2422] group-hover/item:text-brand-primary transition-colors">
+                              Green Millet, Sorghum &amp; Maize
+                            </div>
+                            <div className="text-[11px] text-[#4D6765] font-sans">
+                              Bajra, Jowar &amp; White/Yellow Maize, machine-cleaned
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200/60">
+                            Grains
+                          </span>
+                          <ChevronRight className="w-3.5 h-3.5 text-slate-300 group-hover/item:text-brand-primary group-hover/item:translate-x-0.5 transition-all" />
+                        </div>
+                      </Link>
+
+                      {/* 5. Pulses & Beans */}
+                      <Link
+                        to="/products?category=pulses-beans"
+                        onClick={() => setProductsOpen(false)}
+                        className="group/item flex items-center justify-between p-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-[#E6F7F5] hover:text-[#003732] transition-colors duration-150 border border-transparent hover:border-[#BBE5E1]"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-xl bg-teal-50 text-brand-primary border border-teal-200/60 flex items-center justify-center shrink-0 group-hover/item:scale-105 transition-transform">
+                            <Layers className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <div className="font-bold text-[13px] text-[#0C2422] group-hover/item:text-brand-primary transition-colors">
+                              Green Moong, Mogar &amp; Chickpeas
+                            </div>
+                            <div className="text-[11px] text-[#4D6765] font-sans">
+                              Whole Moong, Moong Dal &amp; Desi/Kabuli Chickpeas
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-teal-50 text-teal-800 border border-teal-200/60">
+                            Pulses
+                          </span>
+                          <ChevronRight className="w-3.5 h-3.5 text-slate-300 group-hover/item:text-brand-primary group-hover/item:translate-x-0.5 transition-all" />
+                        </div>
+                      </Link>
+                    </div>
+
+                    {/* Bottom Bar: Action Links */}
+                    <div className="border-t border-[#D4ECE9] mt-2.5 pt-2.5 px-2 flex items-center justify-between gap-3 text-xs">
+                      <Link 
+                        to="/products" 
+                        onClick={() => setProductsOpen(false)}
+                        className="flex items-center gap-1.5 font-bold text-brand-primary hover:text-[#008A82] transition group/link"
+                      >
+                        <span>View All Commodities Catalog</span>
+                        <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                      </Link>
+                      <div className="flex items-center gap-2 text-[11px] font-mono text-[#4D6765]">
+                        <Link 
+                          to="/tools/container-calculator" 
+                          onClick={() => setProductsOpen(false)}
+                          className="hover:text-brand-primary transition hover:underline"
+                        >
+                          Container Calc
+                        </Link>
+                        <span>•</span>
+                        <Link 
+                          to="/tools/hs-code-finder" 
+                          onClick={() => setProductsOpen(false)}
+                          className="hover:text-brand-primary transition hover:underline"
+                        >
+                          HS Codes
+                        </Link>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>
+
+              {/* 4. Gallery */}
+              <Link 
+                to="/gallery" 
+                className={`px-3.5 py-2 rounded-xl transition-all duration-200 ${
+                  location.pathname === '/gallery' 
+                    ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
+                    : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
+                }`}
+              >
+                Gallery
+              </Link>
+
+              {/* 5. Certificate */}
+              <Link 
+                to="/quality/certifications" 
+                className={`px-3.5 py-2 rounded-xl transition-all duration-200 ${
+                  location.pathname.startsWith('/quality') || location.pathname.startsWith('/certifications') || location.pathname === '/certificates'
+                    ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
+                    : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
+                }`}
+              >
+                Certificates
+              </Link>
+
+              {/* 6. Contact Us */}
+              <Link 
+                to="/contact" 
+                className={`px-3.5 py-2 rounded-xl transition-all duration-200 ${
+                  location.pathname === '/contact' 
+                    ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
+                    : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
+                }`}
+              >
+                Contact Us
+              </Link>
+            </nav>
+
+            {/* Right Action Cluster */}
+            <div className="hidden lg:flex items-center gap-3">
+              {/* Direct WhatsApp Quick Contact */}
+              <a
+                href="https://wa.me/919023363680?text=Hello%20Agro%20Dairy%20Export%20LLP,%20I%20would%20like%20to%20inquire%20about%20agricultural%20commodity%20exports."
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Chat on WhatsApp"
+                className="w-10 h-10 rounded-full bg-[#25D366]/15 hover:bg-[#25D366] text-[#25D366] hover:text-white border border-[#25D366]/30 flex items-center justify-center transition-all duration-200 active:scale-95 shadow-sm"
+              >
+                <MessageCircle className="w-5 h-5" />
+              </a>
+
+              {/* Proper Sculpted CTA Button */}
+              <Link
+                to="/rfq"
+                id="nav-get-quote-btn"
+                className="px-6 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-[#00A79D] to-[#008C84] hover:from-[#008C84] hover:to-[#006B64] text-white font-sans font-extrabold text-xs tracking-wider uppercase shadow-md shadow-[#00A79D]/25 hover:shadow-lg transition-all duration-200 flex items-center gap-2 active:scale-95"
+              >
+                <span>Get a Quote</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+
             </div>
 
-            {/* 4. Gallery */}
-            <Link 
-              to="/gallery" 
-              className={`px-3.5 py-2 rounded-lg transition ${
-                location.pathname === '/gallery' ? 'text-brand-primary bg-brand-accent font-bold' : 'text-slate-700 hover:text-brand-primary hover:bg-brand-accent'
-              }`}
-            >
-              Gallery
-            </Link>
+            {/* Mobile Actions */}
+            <div className="lg:hidden flex items-center gap-2">
+              <Link
+                to="/rfq"
+                className="bg-[#00A79D] text-white text-xs font-bold px-3.5 py-1.5 rounded-full shadow-sm"
+              >
+                Quote
+              </Link>
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="p-2 rounded-xl text-slate-700 hover:bg-[#E6F7F5] transition active:scale-95"
+                aria-label="Toggle menu"
+              >
+                {isOpen ? <X className="w-6 h-6 text-[#003732]" /> : <Menu className="w-6 h-6 text-[#003732]" />}
+              </button>
+            </div>
 
-            {/* 5. Certificate */}
-            <Link 
-              to="/quality/certifications" 
-              className={`px-3.5 py-2 rounded-lg transition ${
-                location.pathname.startsWith('/quality') || location.pathname.startsWith('/certifications') || location.pathname === '/certificates'
-                  ? 'text-brand-primary bg-brand-accent font-bold' 
-                  : 'text-slate-700 hover:text-brand-primary hover:bg-brand-accent'
-              }`}
-            >
-              Certificate
-            </Link>
-
-            {/* 6. Contact Us */}
-            <Link 
-              to="/contact" 
-              className={`px-3.5 py-2 rounded-lg transition ${
-                location.pathname === '/contact' ? 'text-brand-primary bg-brand-accent font-bold' : 'text-slate-700 hover:text-brand-primary hover:bg-brand-accent'
-              }`}
-            >
-              Contact Us
-            </Link>
-          </nav>
-
-          <div className="hidden lg:flex items-center gap-3">
-            <Link
-              to="/rfq"
-              id="nav-get-quote-btn"
-              className="bg-brand-primary hover:bg-brand-primary-dark text-white font-ui font-bold px-7 py-3 rounded-full shadow-md shadow-brand-primary/20 hover:shadow-lg transition-all duration-200 text-sm flex items-center gap-2 active:scale-95"
-            >
-              <span>Get a Quote</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center gap-2">
-            <Link
-              to="/rfq"
-              className="bg-brand-primary text-white text-xs font-bold px-3.5 py-1.5 rounded-full shadow-sm"
-            >
-              Quote
-            </Link>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-xl text-slate-700 hover:bg-brand-accent transition active:scale-95"
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X className="w-6 h-6 text-brand-deep" /> : <Menu className="w-6 h-6 text-brand-deep" />}
-            </button>
           </div>
         </div>
+
+        {/* Sculpted Bottom Accent Line: Custom shaped gradient border */}
+        <div className="w-full h-[3px] bg-gradient-to-r from-transparent via-[#00A79D] to-transparent opacity-40" />
       </div>
 
-      {/* Mobile Drawer with smooth animation */}
+      {/* Mobile Drawer */}
       {isOpen && (
-        <div className="lg:hidden bg-white/98 backdrop-blur-xl border-b border-brand-border px-4 pt-3 pb-6 max-h-[85vh] overflow-y-auto custom-scrollbar animate-fade-in shadow-xl">
-          <nav className="flex flex-col gap-1.5 font-ui font-semibold text-sm">
-            <Link to="/" className="px-3 py-2.5 rounded-xl text-slate-800 hover:bg-brand-accent flex items-center justify-between">
+        <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 max-h-[85vh] overflow-y-auto shadow-xl animate-fade-in">
+          <nav className="flex flex-col gap-1.5 font-sans font-semibold text-sm">
+            <Link 
+              to="/" 
+              className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
+                location.pathname === '/' ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
+              }`}
+            >
               <span>Home</span>
               <span className="text-xs text-slate-400">→</span>
             </Link>
-            <Link to="/company/about" className="px-3 py-2.5 rounded-xl text-slate-800 hover:bg-brand-accent flex items-center justify-between">
+            <Link 
+              to="/company/about" 
+              className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
+                location.pathname.startsWith('/company/about') || location.pathname === '/about' ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
+              }`}
+            >
               <span>About</span>
               <span className="text-xs text-slate-400">→</span>
             </Link>
-            <Link to="/products" className="px-3 py-2.5 rounded-xl text-slate-800 hover:bg-brand-accent flex items-center justify-between">
-              <span>Product</span>
+            <Link 
+              to="/products" 
+              className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
+                location.pathname.startsWith('/products') ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
+              }`}
+            >
+              <span>Products</span>
               <span className="text-xs text-slate-400">→</span>
             </Link>
-            <Link to="/gallery" className="px-3 py-2.5 rounded-xl text-slate-800 hover:bg-brand-accent flex items-center justify-between">
+            <Link 
+              to="/gallery" 
+              className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
+                location.pathname === '/gallery' ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
+              }`}
+            >
               <span>Gallery</span>
               <span className="text-xs text-slate-400">→</span>
             </Link>
-            <Link to="/quality/certifications" className="px-3 py-2.5 rounded-xl text-slate-800 hover:bg-brand-accent flex items-center justify-between">
-              <span>Certificate</span>
+            <Link 
+              to="/quality/certifications" 
+              className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
+                location.pathname.startsWith('/quality') ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
+              }`}
+            >
+              <span>Certificates</span>
               <span className="text-xs text-slate-400">→</span>
             </Link>
-            <Link to="/contact" className="px-3 py-2.5 rounded-xl text-slate-800 hover:bg-brand-accent flex items-center justify-between">
+            <Link 
+              to="/contact" 
+              className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
+                location.pathname === '/contact' ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
+              }`}
+            >
               <span>Contact Us</span>
               <span className="text-xs text-slate-400">→</span>
             </Link>
-            <Link to="/rfq" className="mt-2 w-full bg-brand-primary hover:bg-brand-primary-dark text-white font-bold py-3.5 rounded-full text-center shadow-md">
-              Get a Quote →
-            </Link>
+
+            <div className="pt-3 mt-2 border-t border-slate-100 flex flex-col gap-2">
+              <Link 
+                to="/rfq" 
+                className="w-full bg-[#00A79D] hover:bg-[#008C84] text-white font-extrabold py-3.5 rounded-xl text-center text-xs tracking-wider uppercase shadow-md flex items-center justify-center gap-2"
+              >
+                <span>Request Proforma Quote</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+
+              <a 
+                href="https://wa.me/919023363680" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full bg-[#25D366]/15 text-[#25D366] border border-[#25D366]/30 font-bold py-3 rounded-xl text-center text-xs flex items-center justify-center gap-2"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>WhatsApp (+91 90233 63680)</span>
+              </a>
+            </div>
           </nav>
         </div>
       )}
+
     </header>
   );
 }

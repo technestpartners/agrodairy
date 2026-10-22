@@ -27,6 +27,18 @@ export default function Footer() {
     }
   };
 
+  const scrollToTop = () => {
+    try {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    } catch {
+      window.scrollTo(0, 0);
+    }
+  };
+
   return (
     <footer className="relative bg-[#F4F9F8] overflow-hidden pt-12 sm:pt-16">
       {/* ═══════════════════════════════════════
@@ -137,7 +149,7 @@ export default function Footer() {
           <div className="pb-12 mb-12 border-b border-white/10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             {/* Logo and Brand Statement */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5">
-              <Link to="/" className="bg-white p-2.5 rounded-2xl shadow-xl inline-flex items-center shrink-0 border border-white/20 group">
+              <Link to="/" onClick={scrollToTop} className="bg-white p-2.5 rounded-2xl shadow-xl inline-flex items-center shrink-0 border border-white/20 group">
                 <img
                   src="/images/logo.png"
                   alt="Agro Dairy Export LLP Logo"
@@ -192,31 +204,31 @@ export default function Footer() {
                 </h4>
                 <ul className="space-y-2.5 text-xs font-sans text-slate-300">
                   <li>
-                    <Link to="/products" className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
+                    <Link to="/products?category=peanuts" onClick={scrollToTop} className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
                       <span>Bold Peanuts (38/42 to 70/80)</span>
                       <ChevronRight className="w-3 h-3 text-white/30 group-hover:text-emerald-300 group-hover:translate-x-0.5 transition-all" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/products" className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
+                    <Link to="/products?category=dairy-products" onClick={scrollToTop} className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
                       <span>Pure Cow &amp; Buffalo Ghee</span>
                       <ChevronRight className="w-3 h-3 text-white/30 group-hover:text-emerald-300 group-hover:translate-x-0.5 transition-all" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/products" className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
+                    <Link to="/products?category=grains-millets" onClick={scrollToTop} className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
                       <span>Green Pearl Millet &amp; Sorghum</span>
                       <ChevronRight className="w-3 h-3 text-white/30 group-hover:text-emerald-300 group-hover:translate-x-0.5 transition-all" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/products" className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
+                    <Link to="/products?category=pulses-beans" onClick={scrollToTop} className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
                       <span>Desi &amp; Kabuli Chickpeas</span>
                       <ChevronRight className="w-3 h-3 text-white/30 group-hover:text-emerald-300 group-hover:translate-x-0.5 transition-all" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/products" className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
+                    <Link to="/products?category=grains-millets" onClick={scrollToTop} className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
                       <span>Yellow Maize &amp; Pulses</span>
                       <ChevronRight className="w-3 h-3 text-white/30 group-hover:text-emerald-300 group-hover:translate-x-0.5 transition-all" />
                     </Link>
@@ -224,7 +236,7 @@ export default function Footer() {
                 </ul>
               </div>
               <div className="pt-4 mt-3 border-t border-white/5">
-                <Link to="/products" className="text-brand-gold hover:text-amber-300 text-xs font-semibold transition-colors flex items-center gap-1 group">
+                <Link to="/products" onClick={scrollToTop} className="text-brand-gold hover:text-amber-300 text-xs font-semibold transition-colors flex items-center gap-1 group">
                   <span>Mixed Container Loads</span>
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                 </Link>
@@ -240,31 +252,31 @@ export default function Footer() {
                 </h4>
                 <ul className="space-y-2.5 text-xs font-sans text-slate-300">
                   <li>
-                    <Link to="/tools/container-calculator" className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
+                    <Link to="/tools/container-calculator" onClick={scrollToTop} className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
                       <span>Container Load Calculator</span>
                       <ChevronRight className="w-3 h-3 text-white/30 group-hover:text-emerald-300 group-hover:translate-x-0.5 transition-all" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/tools/landed-cost-calculator" className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
+                    <Link to="/tools/landed-cost-calculator" onClick={scrollToTop} className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
                       <span>Landed Cost Calculator</span>
                       <ChevronRight className="w-3 h-3 text-white/30 group-hover:text-emerald-300 group-hover:translate-x-0.5 transition-all" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/tools/crop-calendar" className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
+                    <Link to="/tools/crop-calendar" onClick={scrollToTop} className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
                       <span>Crop Harvest Calendar</span>
                       <ChevronRight className="w-3 h-3 text-white/30 group-hover:text-emerald-300 group-hover:translate-x-0.5 transition-all" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/tools/hs-code-finder" className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
+                    <Link to="/tools/hs-code-finder" onClick={scrollToTop} className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
                       <span>HS Code &amp; Tariff Directory</span>
                       <ChevronRight className="w-3 h-3 text-white/30 group-hover:text-emerald-300 group-hover:translate-x-0.5 transition-all" />
                     </Link>
                   </li>
                   <li>
-                    <Link to="/quality/certifications" className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
+                    <Link to="/quality/certifications" onClick={scrollToTop} className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
                       <span>Quality &amp; Lab Certifications</span>
                       <ChevronRight className="w-3 h-3 text-white/30 group-hover:text-emerald-300 group-hover:translate-x-0.5 transition-all" />
                     </Link>
@@ -272,14 +284,14 @@ export default function Footer() {
                 </ul>
               </div>
               <div className="pt-4 mt-3 border-t border-white/5">
-                <Link to="/rfq" className="text-emerald-400 hover:text-emerald-300 text-xs font-semibold transition-colors flex items-center gap-1 group">
+                <Link to="/rfq" onClick={scrollToTop} className="text-emerald-400 hover:text-emerald-300 text-xs font-semibold transition-colors flex items-center gap-1 group">
                   <span>Request Formal RFQ</span>
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
 
-            {/* Card 3: Global Discharge Ports */}
+            {/* Card 3: Global Discharge Ports & Regional Gateways */}
             <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-6 hover:border-brand-primary/40 hover:bg-white/[0.05] transition-all duration-300 flex flex-col justify-between">
               <div>
                 <h4 className="text-white font-display font-bold text-sm uppercase tracking-wider mb-4 pb-2 border-b border-brand-primary/30 flex items-center justify-between">
@@ -287,31 +299,42 @@ export default function Footer() {
                   <span className="text-[10px] font-mono text-brand-primary">PORTS</span>
                 </h4>
                 <ul className="space-y-2.5 text-xs font-sans text-slate-300">
-                  <li className="flex items-center justify-between">
-                    <span>Middle East &amp; GCC</span>
-                    <span className="text-[10px] font-mono text-emerald-400">Jebel Ali / Dammam</span>
+                  <li>
+                    <Link to="/rfq?destination=Middle+East" onClick={scrollToTop} className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
+                      <span>Middle East &amp; GCC</span>
+                      <span className="text-[10px] font-mono text-emerald-400 group-hover:text-emerald-300">Jebel Ali / Dammam</span>
+                    </Link>
                   </li>
-                  <li className="flex items-center justify-between">
-                    <span>Southeast Asia &amp; ASEAN</span>
-                    <span className="text-[10px] font-mono text-emerald-400">Haiphong / Manila</span>
+                  <li>
+                    <Link to="/rfq?destination=Southeast+Asia" onClick={scrollToTop} className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
+                      <span>Southeast Asia &amp; ASEAN</span>
+                      <span className="text-[10px] font-mono text-emerald-400 group-hover:text-emerald-300">Haiphong / Manila</span>
+                    </Link>
                   </li>
-                  <li className="flex items-center justify-between">
-                    <span>Europe &amp; UK</span>
-                    <span className="text-[10px] font-mono text-emerald-400">Rotterdam / Mersin</span>
+                  <li>
+                    <Link to="/rfq?destination=Europe" onClick={scrollToTop} className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
+                      <span>Europe &amp; UK</span>
+                      <span className="text-[10px] font-mono text-emerald-400 group-hover:text-emerald-300">Rotterdam / Mersin</span>
+                    </Link>
                   </li>
-                  <li className="flex items-center justify-between">
-                    <span>South Asia &amp; Africa</span>
-                    <span className="text-[10px] font-mono text-emerald-400">Chittagong / Mombasa</span>
+                  <li>
+                    <Link to="/rfq?destination=Africa" onClick={scrollToTop} className="hover:text-emerald-300 transition-colors flex items-center justify-between group">
+                      <span>South Asia &amp; Africa</span>
+                      <span className="text-[10px] font-mono text-emerald-400 group-hover:text-emerald-300">Chittagong / Mombasa</span>
+                    </Link>
                   </li>
                 </ul>
               </div>
               <div className="pt-4 mt-3 border-t border-white/5">
-                <div className="text-[10px] font-mono text-brand-gold uppercase tracking-wider font-bold mb-0.5">
-                  Direct Origin Sea Ports:
-                </div>
-                <div className="text-[11px] text-white/80">
-                  Mundra • Kandla • Hazira
-                </div>
+                <Link to="/tools/crop-calendar" onClick={scrollToTop} className="group block">
+                  <div className="text-[10px] font-mono text-brand-gold uppercase tracking-wider font-bold mb-0.5 group-hover:text-amber-300 transition-colors">
+                    Direct Origin Sea Ports:
+                  </div>
+                  <div className="text-[11px] text-white/80 group-hover:text-white transition-colors flex items-center justify-between">
+                    <span>Mundra • Kandla • Hazira</span>
+                    <ChevronRight className="w-3 h-3 text-white/30 group-hover:text-brand-gold group-hover:translate-x-0.5 transition-all" />
+                  </div>
+                </Link>
               </div>
             </div>
 
@@ -325,9 +348,9 @@ export default function Footer() {
                 <div className="space-y-2.5 text-xs font-sans">
                   <div className="flex items-start gap-2">
                     <MapPin className="w-4 h-4 text-brand-primary shrink-0 mt-0.5" />
-                    <span className="text-slate-300 leading-snug">
+                    <Link to="/contact" onClick={scrollToTop} className="text-slate-300 hover:text-white leading-snug transition-colors">
                       Office no. -701, THE FUTURE CORNER, Sarthana, Surat-395013, Gujarat, India
-                    </span>
+                    </Link>
                   </div>
                   <div className="flex items-center gap-2">
                     <Phone className="w-4 h-4 text-brand-primary shrink-0" />
@@ -344,9 +367,15 @@ export default function Footer() {
                 </div>
               </div>
               <div className="pt-3 mt-3 border-t border-white/5 text-[10px] font-mono text-slate-400 space-y-0.5">
-                <div>IEC: <strong className="text-slate-200">0817029381</strong> (DGFT)</div>
-                <div>GSTIN: <strong className="text-slate-200">24AAHFA3928L1Z9</strong></div>
-                <div>FSSAI: <strong className="text-slate-200">10722026000148</strong></div>
+                <Link to="/quality/certifications" onClick={scrollToTop} className="block hover:text-white transition-colors">
+                  IEC: <strong className="text-slate-200">0817029381</strong> (DGFT)
+                </Link>
+                <Link to="/quality/certifications" onClick={scrollToTop} className="block hover:text-white transition-colors">
+                  GSTIN: <strong className="text-slate-200">24AAHFA3928L1Z9</strong>
+                </Link>
+                <Link to="/quality/certifications" onClick={scrollToTop} className="block hover:text-white transition-colors">
+                  FSSAI: <strong className="text-slate-200">10722026000148</strong>
+                </Link>
               </div>
             </div>
           </div>
@@ -360,16 +389,16 @@ export default function Footer() {
             </div>
 
             <div className="flex items-center gap-5 font-mono text-[11px]">
-              <div className="flex items-center gap-1.5 text-emerald-400">
+              <Link to="/tools/crop-calendar" onClick={scrollToTop} className="flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 transition-colors">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Port Dispatch: Active</span>
-              </div>
+              </Link>
               <span className="text-white/20">•</span>
-              <Link to="/company/about" className="hover:text-white transition-colors">About</Link>
-              <Link to="/products" className="hover:text-white transition-colors">Products</Link>
-              <Link to="/quality/certifications" className="hover:text-white transition-colors">Certifications</Link>
-              <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
-              <Link to="/admin/login" className="hover:text-brand-primary transition-colors">Staff</Link>
+              <Link to="/company/about" onClick={scrollToTop} className="hover:text-white transition-colors">About</Link>
+              <Link to="/products" onClick={scrollToTop} className="hover:text-white transition-colors">Products</Link>
+              <Link to="/quality/certifications" onClick={scrollToTop} className="hover:text-white transition-colors">Certifications</Link>
+              <Link to="/contact" onClick={scrollToTop} className="hover:text-white transition-colors">Contact</Link>
+              <Link to="/admin/login" onClick={scrollToTop} className="hover:text-brand-primary transition-colors">Staff</Link>
             </div>
           </div>
         </div>

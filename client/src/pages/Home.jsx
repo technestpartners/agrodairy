@@ -64,7 +64,7 @@ const PRODUCTS_STATIC = [
   { id: 'peanuts', name: 'Bold Peanut Kernels', category_name: 'Peanuts', slug: 'bold-peanuts', short_description: 'Sortex-clean Bold Peanuts, counts 38/42 to 70/80. Purity 99%+, moisture 7–8%. Available in 25 kg PP/Jute/Vacuum bags.', origin: 'Saurashtra, Gujarat', moq: 19, moq_unit: 'MT', grade_variety: 'Sortex 99%', is_featured: 1, main_image: '/images/products/bold-peanuts.jpg' },
   { id: 'moong', name: 'Green Moong Beans', category_name: 'Pulses', slug: 'green-moong', short_description: 'Premium Green Moong Beans, 180–270 count range. 98–99.9% purity, 12% moisture max. Ideal for retail and food processing.', origin: 'Rajkot, Gujarat', moq: 25, moq_unit: 'MT', grade_variety: 'Export Grade', is_featured: 0, main_image: '/images/products/green-moong-beans.jpg' },
   { id: 'ghee', name: 'Pure Dairy Ghee', category_name: 'Dairy Ghee', slug: 'pure-dairy-ghee', short_description: 'Pure Cow & Buffalo Granular Ghee. 99.7–99.8% milk fat, zero starch. 15 kg food-grade tins, jars or drums.', origin: 'Anand, Gujarat', moq: 1, moq_unit: 'MT', grade_variety: 'FSSAI Certified', is_featured: 1, main_image: '/images/bg/real-ghee.jpg' },
-  { id: 'chickpeas', name: 'Desi Chickpeas', category_name: 'Pulses', slug: 'desi-chickpeas', short_description: 'Brown Desi Chickpeas, 5–7 mm / 6–8 mm. Purity 98–99%, moisture 12% max. 25 kg/50 kg PP or Jute bags.', origin: 'Gujarat, India', moq: 25, moq_unit: 'MT', grade_variety: 'Sortex Clean', is_featured: 0, main_image: '/images/bg/chickpeas.jpg' },
+  { id: 'chickpeas', name: 'Desi Chickpeas', category_name: 'Pulses', slug: 'desi-chickpeas', short_description: 'Brown Desi Chickpeas, 5–7 mm / 6–8 mm. Purity 98–99%, moisture 12% max. 25 kg/50 kg PP or Jute bags.', origin: 'Gujarat, India', moq: 25, moq_unit: 'MT', grade_variety: 'Sortex Clean', is_featured: 0, main_image: '/images/products/desi-chickpeas.jpg' },
   { id: 'millet', name: 'Green Pearl Millet', category_name: 'Grains', slug: 'pearl-millet', short_description: 'Pearl Millet (Bajra) / Foxtail Millet. Machine & Sortex 99% purity, 11% moisture max. 24–25 MT in 20ft FCL.', origin: 'Saurashtra, Gujarat', moq: 24, moq_unit: 'MT', grade_variety: '99% Sortex', is_featured: 0, main_image: '/images/bg/pearl-millet.jpg' },
   { id: 'kabuli', name: 'Kabuli Chickpeas', category_name: 'Pulses', slug: 'kabuli-chickpeas', short_description: 'Cream Kabuli Chickpeas, count 38/40 to 75/80. 99% Sortex clean, moisture 12% max. Premium export grade.', origin: 'Rajasthan / MP', moq: 25, moq_unit: 'MT', grade_variety: '99% Sortex', is_featured: 0, main_image: '/images/products/kabuli-chickpeas.jpg' },
   { id: 'sorghum', name: 'Sorghum (White Jowar)', category_name: 'Grains', slug: 'sorghum-jowar', short_description: 'White Sorghum. Machine 98–99%, Sortex 99% purity. Moisture 11% max. 25 kg/50 kg PP or Jute bags.', origin: 'Saurashtra, Gujarat', moq: 24, moq_unit: 'MT', grade_variety: '99% Sortex', is_featured: 0, main_image: '/images/bg/real-grains.jpg' },
@@ -629,14 +629,25 @@ export default function Home() {
 
             {/* Right Column: Hero Visual with Pure India script & floating badges (5 cols) */}
             <div className="lg:col-span-5 relative">
-              {/* Handwritten script note: "Pure India to the World" with curved arrow */}
-              <div className="absolute -top-6 left-6 z-20 flex flex-col items-center select-none pointer-events-none">
-                <span className="font-serif italic font-bold text-brand-deep text-lg md:text-xl drop-shadow-sm rotate-[-4deg]">
-                  Pure India to the World
+              {/* Handwritten script note: "Pure India to the World" with smooth hand-drawn curved arrow */}
+              <div className="absolute -top-8 left-6 sm:left-10 z-20 flex flex-col items-center select-none pointer-events-none">
+                <span className="font-serif italic font-bold text-[#003732] text-base sm:text-lg tracking-wide drop-shadow-sm rotate-[-3deg] inline-flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F5B800] animate-pulse" />
+                  <span>Pure India to the World</span>
                 </span>
-                <svg className="w-14 h-8 text-brand-primary/80 -mt-1 ml-6" viewBox="0 0 60 30" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                  <path d="M 10 5 Q 35 25 50 15" />
-                  <path d="M 45 10 L 52 16 L 45 22" />
+                <svg 
+                  className="w-12 h-8 text-[#00A79D] -mt-0.5 ml-6 drop-shadow-sm" 
+                  viewBox="0 0 50 36" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2.2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                >
+                  {/* Smooth curved swoop pointing down-right */}
+                  <path d="M 8 4 C 18 10, 28 20, 36 30" />
+                  {/* Crisp arrow tip pointing down-right */}
+                  <path d="M 27 28 L 36 30 L 34 20" />
                 </svg>
               </div>
 

@@ -55,6 +55,9 @@ export function getProductFallback(product) {
   if (slug.includes('java')) {
     return '/images/products/java-peanuts.jpg';
   }
+  if (slug.includes('buffalo')) {
+    return '/images/products/buffalo-ghee.jpg';
+  }
   if (slug.includes('ghee') || category.includes('ghee') || category.includes('dairy')) {
     return '/images/bg/real-ghee.jpg';
   }
@@ -64,10 +67,16 @@ export function getProductFallback(product) {
   if (slug.includes('maize') || slug.includes('corn')) {
     return '/images/bg/yellow-corn.jpg';
   }
+  if (slug.includes('mogar') || slug.includes('split-mung') || slug.includes('dhuli') || slug.includes('huskless')) {
+    return '/images/products/moong-mogar.jpg';
+  }
   if (slug.includes('moong') || slug.includes('mung')) {
     return '/images/products/green-moong-beans.jpg';
   }
-  if (slug.includes('chickpea') || slug.includes('chana') || category.includes('chickpea')) {
+  if (slug.includes('desi') || slug.includes('bengal-gram') || slug.includes('kala-chana')) {
+    return '/images/products/desi-chickpeas.jpg';
+  }
+  if (slug.includes('chickpea') || slug.includes('chana') || category.includes('chickpea') || slug.includes('kabuli') || slug.includes('garbanzo')) {
     return '/images/products/kabuli-chickpeas.jpg';
   }
   if (slug.includes('sorghum') || slug.includes('jowar') || slug.includes('wheat') || category.includes('grain')) {

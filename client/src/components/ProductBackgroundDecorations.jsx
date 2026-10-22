@@ -241,31 +241,17 @@ export function RfqBgDecorations() {
 }
 
 /* ==========================================================================
-   6. CERTIFICATIONS BACKGROUND (Prestigious Security Guilloche & Seals)
+   6. CERTIFICATIONS BACKGROUND (Clean, Architectural & Subtle)
    ========================================================================== */
 export function CertificationsBgDecorations() {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none" aria-hidden="true">
-      {/* Official Government Guilloche Security Ring (Left) */}
-      <div className="absolute top-1/2 -translate-y-1/2 -left-12 w-80 h-80 opacity-12 hidden lg:block">
-        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-brand-primary">
-          <circle cx="100" cy="100" r="95" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" />
-          <circle cx="100" cy="100" r="80" stroke="currentColor" strokeWidth="2" />
-          <circle cx="100" cy="100" r="65" stroke="currentColor" strokeWidth="1" strokeDasharray="6 3" />
-          <path d="M100 20 L104 35 L120 35 L107 45 L112 60 L100 50 L88 60 L93 45 L80 35 L96 35 Z" fill="currentColor" opacity="0.3" />
-          <text x="100" y="115" textAnchor="middle" fontSize="8" fill="currentColor" fontFamily="monospace" fontWeight="bold">APEDA • IEC • FSSAI</text>
-          <text x="100" y="130" textAnchor="middle" fontSize="7" fill="currentColor" fontFamily="monospace">GOVT. OF INDIA VERIFIED</text>
-        </svg>
-      </div>
+      {/* Precision Geometric Micro-Grid */}
+      <div className="absolute inset-0 bg-[radial-gradient(#00A79D_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.05]" />
 
-      {/* Official Right Security Ring Seal */}
-      <div className="absolute top-1/2 -translate-y-1/2 -right-12 w-80 h-80 opacity-10 hidden lg:block">
-        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-brand-gold">
-          <circle cx="100" cy="100" r="90" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
-          <circle cx="100" cy="100" r="75" stroke="currentColor" strokeWidth="1" />
-          <text x="100" y="105" textAnchor="middle" fontSize="9" fill="currentColor" fontFamily="monospace" fontWeight="bold">100% COMPLIANT</text>
-        </svg>
-      </div>
+      {/* Soft Ambient Radial Glows */}
+      <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#00A79D]/5 rounded-full blur-3xl" />
+      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#F5B800]/5 rounded-full blur-3xl" />
     </div>
   );
 }
@@ -341,3 +327,251 @@ export const RealProductSectionFlanks = ({ leftType, rightType, position = 'both
   return <AboutBgDecorations />;
 };
 export const SectionProductWatermark = RealProductSectionFlanks;
+
+/* ==========================================================================
+   8. DEDICATED ABOUT PAGE SECTION-SPECIFIC BACKGROUND DECORATIONS (Architectural & Refined)
+   ========================================================================== */
+
+export function AboutHeroDecorations() {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none" aria-hidden="true">
+      {/* Precision Geometric Micro-Grid (Home Standard) */}
+      <div className="absolute inset-0 bg-[radial-gradient(#00A79D_1.2px,transparent_1.2px)] [background-size:32px_32px] opacity-[0.14]" />
+
+      {/* Atmospheric Ambient Glow Orbs */}
+      <div className="absolute -top-32 -right-32 w-[520px] h-[520px] bg-gradient-to-br from-[#00A79D]/14 via-[#5EEAD4]/08 to-transparent rounded-full blur-3xl" />
+      <div className="absolute -bottom-32 -left-32 w-[460px] h-[460px] bg-gradient-to-tr from-[#F5B800]/14 via-amber-200/08 to-transparent rounded-full blur-3xl" />
+
+      {/* Subtle Maritime Coordinates & Trajectory Ticker */}
+      <div className="absolute top-5 left-8 text-[11px] font-mono tracking-widest text-[#00A79D]/25 hidden lg:flex items-center gap-2">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#00A79D] animate-ping" />
+        <span>SURAT HQ ➔ MUNDRA &amp; HAZIRA SEAPORTS ➔ 30+ GLOBAL DESTINATION HUBS</span>
+      </div>
+
+      {/* Top-Right: Maritime Compass & Navigation Circles */}
+      <div className="absolute -top-6 right-8 lg:right-20 w-72 sm:w-84 h-72 sm:h-84 opacity-15 hidden lg:block pointer-events-none">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-brand-primary">
+          <circle cx="100" cy="100" r="90" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" />
+          <circle cx="100" cy="100" r="70" stroke="currentColor" strokeWidth="1.2" />
+          <circle cx="100" cy="100" r="45" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" />
+          <line x1="100" y1="5" x2="100" y2="195" stroke="currentColor" strokeWidth="1" strokeOpacity="0.4" />
+          <line x1="5" y1="100" x2="195" y2="100" stroke="currentColor" strokeWidth="1" strokeOpacity="0.4" />
+          <text x="100" y="24" textAnchor="middle" fontSize="7.5" fill="currentColor" fontFamily="monospace" fontWeight="bold">N 21.17° SURAT</text>
+          <text x="176" y="103" textAnchor="middle" fontSize="7.5" fill="currentColor" fontFamily="monospace" fontWeight="bold">E 72.83°</text>
+        </svg>
+      </div>
+
+      {/* Top-Right: Golden Wheat / Grains Botanical Vignette */}
+      <div className="absolute top-0 right-0 lg:right-6 w-64 sm:w-80 lg:w-92 h-64 sm:h-80 lg:h-92 pointer-events-none">
+        <div className="absolute inset-8 bg-amber-100/35 rounded-full blur-3xl" />
+        <div className="absolute inset-12 rounded-full border border-amber-300/25" />
+        <div 
+          className="relative w-full h-full mix-blend-multiply opacity-24 sm:opacity-28 lg:opacity-32 transform rotate-6"
+          style={{ 
+            maskImage: 'radial-gradient(circle at 55% 45%, black 28%, rgba(0,0,0,0.5) 55%, transparent 76%)',
+            WebkitMaskImage: 'radial-gradient(circle at 55% 45%, black 28%, rgba(0,0,0,0.5) 55%, transparent 76%)'
+          }}
+        >
+          <img src="/images/bg/real-grains.jpg" alt="Indian Wheat Grains" className="w-full h-full object-contain filter contrast-110" />
+        </div>
+      </div>
+
+      {/* Bottom-Left: Shelled Saurashtra Peanuts Organic Watermark */}
+      <div className="absolute -bottom-8 -left-8 sm:left-2 lg:left-6 w-56 sm:w-68 lg:w-80 h-56 sm:h-68 lg:h-80 pointer-events-none">
+        <div className="absolute inset-8 bg-amber-100/25 rounded-full blur-3xl" />
+        <div 
+          className="relative w-full h-full mix-blend-multiply opacity-20 sm:opacity-24 lg:opacity-28 transform -rotate-6"
+          style={{ 
+            maskImage: 'radial-gradient(circle at 45% 55%, black 28%, rgba(0,0,0,0.5) 55%, transparent 76%)',
+            WebkitMaskImage: 'radial-gradient(circle at 45% 55%, black 28%, rgba(0,0,0,0.5) 55%, transparent 76%)'
+          }}
+        >
+          <img src="/images/bg/shelled-peanuts.jpg" alt="Shelled Peanuts" className="w-full h-full object-contain filter contrast-110" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function AboutStoryDecorations() {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none" aria-hidden="true">
+      <div className="absolute inset-0 bg-[radial-gradient(#00A79D_1px,transparent_1px)] [background-size:36px_36px] opacity-[0.08]" />
+      <div className="absolute top-1/4 -right-24 w-96 h-96 bg-[#00A79D]/8 rounded-full blur-3xl" />
+      <div className="absolute bottom-10 -left-20 w-80 h-80 bg-amber-200/15 rounded-full blur-3xl" />
+
+      {/* Right Flank: Green Moong Botanical Watermark */}
+      <div className="absolute top-12 -right-6 sm:right-4 lg:right-10 w-56 sm:w-68 lg:w-80 h-56 sm:h-68 lg:h-80 pointer-events-none">
+        <div className="absolute inset-8 bg-emerald-100/30 rounded-full blur-3xl" />
+        <div 
+          className="relative w-full h-full mix-blend-multiply opacity-20 sm:opacity-24 lg:opacity-28"
+          style={{ 
+            maskImage: 'radial-gradient(circle at center, black 30%, rgba(0,0,0,0.5) 55%, transparent 75%)',
+            WebkitMaskImage: 'radial-gradient(circle at center, black 30%, rgba(0,0,0,0.5) 55%, transparent 75%)'
+          }}
+        >
+          <img src="/images/bg/green-moong.jpg" alt="Green Moong" className="w-full h-full object-contain filter contrast-110" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function AboutTeamDecorations() {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none" aria-hidden="true">
+      <div className="absolute inset-0 bg-[radial-gradient(#00A79D_1px,transparent_1px)] [background-size:36px_36px] opacity-[0.08]" />
+      <div className="absolute -top-24 -left-24 w-80 h-80 bg-[#00A79D]/10 rounded-full blur-3xl" />
+      <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-[#F5B800]/10 rounded-full blur-3xl" />
+
+      {/* Bottom-Right: Pure Dairy Ghee Luminous Aura Watermark */}
+      <div className="absolute -bottom-10 right-2 sm:right-6 lg:right-12 w-60 sm:w-72 lg:w-84 h-60 sm:h-72 lg:h-84 pointer-events-none">
+        <div className="absolute inset-8 bg-gradient-to-tr from-[#F5B800]/20 to-amber-200/30 rounded-full blur-3xl" />
+        <div 
+          className="relative w-full h-full mix-blend-multiply opacity-22 sm:opacity-26 lg:opacity-30"
+          style={{ 
+            maskImage: 'radial-gradient(circle at center, black 30%, rgba(0,0,0,0.5) 55%, transparent 75%)',
+            WebkitMaskImage: 'radial-gradient(circle at center, black 30%, rgba(0,0,0,0.5) 55%, transparent 75%)'
+          }}
+        >
+          <img src="/images/bg/real-ghee.jpg" alt="Pure Cow Ghee" className="w-full h-full object-contain filter contrast-110" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function AboutExpertiseDecorations() {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none" aria-hidden="true">
+      <div className="absolute inset-0 bg-[radial-gradient(#003732_1px,transparent_1px)] [background-size:36px_36px] opacity-[0.06]" />
+      
+      {/* Top Left: Desi Chickpeas Watermark */}
+      <div className="absolute top-10 left-4 sm:left-8 lg:left-12 w-56 sm:w-68 h-56 sm:h-68 pointer-events-none">
+        <div className="absolute inset-6 bg-amber-100/25 rounded-full blur-2xl" />
+        <div 
+          className="relative w-full h-full mix-blend-multiply opacity-18 sm:opacity-22 lg:opacity-25"
+          style={{ 
+            maskImage: 'radial-gradient(circle at center, black 30%, rgba(0,0,0,0.5) 55%, transparent 75%)',
+            WebkitMaskImage: 'radial-gradient(circle at center, black 30%, rgba(0,0,0,0.5) 55%, transparent 75%)'
+          }}
+        >
+          <img src="/images/bg/chickpeas.jpg" alt="Desi Chickpeas" className="w-full h-full object-contain filter contrast-110" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function AboutReachDecorations() {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none" aria-hidden="true">
+      <div className="absolute inset-0 bg-[radial-gradient(#00A79D_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.10]" />
+
+      {/* Top-Right: Maritime Compass & Navigation Lines */}
+      <div className="absolute -top-10 -right-10 w-80 h-80 opacity-15 hidden lg:block">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-[#00A79D]">
+          <circle cx="100" cy="100" r="90" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" />
+          <circle cx="100" cy="100" r="70" stroke="currentColor" strokeWidth="1.5" />
+          <circle cx="100" cy="100" r="45" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" />
+          <line x1="100" y1="5" x2="100" y2="195" stroke="currentColor" strokeWidth="1" strokeOpacity="0.4" />
+          <line x1="5" y1="100" x2="195" y2="100" stroke="currentColor" strokeWidth="1" strokeOpacity="0.4" />
+          <text x="100" y="24" textAnchor="middle" fontSize="7" fill="currentColor" fontFamily="monospace" fontWeight="bold">N 22.75° GUJARAT</text>
+        </svg>
+      </div>
+
+      {/* Left Flank: Pearl Millet Watermark */}
+      <div className="absolute bottom-10 left-6 sm:left-12 w-60 sm:w-72 h-60 sm:h-72 pointer-events-none">
+        <div className="absolute inset-8 bg-emerald-100/25 rounded-full blur-3xl" />
+        <div 
+          className="relative w-full h-full mix-blend-multiply opacity-20 sm:opacity-24"
+          style={{ 
+            maskImage: 'radial-gradient(circle at center, black 30%, rgba(0,0,0,0.5) 55%, transparent 75%)',
+            WebkitMaskImage: 'radial-gradient(circle at center, black 30%, rgba(0,0,0,0.5) 55%, transparent 75%)'
+          }}
+        >
+          <img src="/images/bg/pearl-millet.jpg" alt="Pearl Millet" className="w-full h-full object-contain filter contrast-110" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ==========================================================================
+   9. UNIVERSAL PAGE HERO BACKGROUND DECORATIONS (Home Page Standard)
+   ========================================================================== */
+export function PageHeroDecorations({ 
+  topRightType = 'real-grains', 
+  bottomLeftType = 'shelled-peanuts',
+  ticker = 'SURAT HQ ➔ MUNDRA & HAZIRA SEAPORTS ➔ 30+ GLOBAL DESTINATION HUBS',
+  coordinates = { lat: 'N 21.17° SURAT', lng: 'E 72.83°' }
+}) {
+  const topImg = getCommodityImage(topRightType);
+  const bottomImg = getCommodityImage(bottomLeftType);
+
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none" aria-hidden="true">
+      {/* Precision Geometric Micro-Grid (Home Standard) */}
+      <div className="absolute inset-0 bg-[radial-gradient(#00A79D_1.2px,transparent_1.2px)] [background-size:32px_32px] opacity-[0.14]" />
+
+      {/* Atmospheric Ambient Glow Orbs */}
+      <div className="absolute -top-32 -right-32 w-[520px] h-[520px] bg-gradient-to-br from-[#00A79D]/14 via-[#5EEAD4]/08 to-transparent rounded-full blur-3xl" />
+      <div className="absolute -bottom-32 -left-32 w-[460px] h-[460px] bg-gradient-to-tr from-[#F5B800]/14 via-amber-200/08 to-transparent rounded-full blur-3xl" />
+
+      {/* Subtle Maritime Coordinates & Trajectory Ticker */}
+      {ticker && (
+        <div className="absolute top-5 left-8 text-[11px] font-mono tracking-widest text-[#00A79D]/25 hidden lg:flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#00A79D] animate-ping" />
+          <span>{ticker}</span>
+        </div>
+      )}
+
+      {/* Top-Right: Maritime Compass & Navigation Circles */}
+      <div className="absolute -top-6 right-8 lg:right-20 w-72 sm:w-84 h-72 sm:h-84 opacity-15 hidden lg:block pointer-events-none">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-brand-primary">
+          <circle cx="100" cy="100" r="90" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" />
+          <circle cx="100" cy="100" r="70" stroke="currentColor" strokeWidth="1.2" />
+          <circle cx="100" cy="100" r="45" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" />
+          <line x1="100" y1="5" x2="100" y2="195" stroke="currentColor" strokeWidth="1" strokeOpacity="0.4" />
+          <line x1="5" y1="100" x2="195" y2="100" stroke="currentColor" strokeWidth="1" strokeOpacity="0.4" />
+          <text x="100" y="24" textAnchor="middle" fontSize="7.5" fill="currentColor" fontFamily="monospace" fontWeight="bold">{coordinates.lat}</text>
+          <text x="176" y="103" textAnchor="middle" fontSize="7.5" fill="currentColor" fontFamily="monospace" fontWeight="bold">{coordinates.lng}</text>
+        </svg>
+      </div>
+
+      {/* Top-Right: Botanical Commodity Vignette */}
+      {topImg && (
+        <div className="absolute top-0 right-0 lg:right-6 w-64 sm:w-80 lg:w-92 h-64 sm:h-80 lg:h-92 pointer-events-none">
+          <div className="absolute inset-8 bg-amber-100/35 rounded-full blur-3xl" />
+          <div className="absolute inset-12 rounded-full border border-amber-300/25" />
+          <div 
+            className="relative w-full h-full mix-blend-multiply opacity-24 sm:opacity-28 lg:opacity-32 transform rotate-6"
+            style={{ 
+              maskImage: 'radial-gradient(circle at 55% 45%, black 28%, rgba(0,0,0,0.5) 55%, transparent 76%)',
+              WebkitMaskImage: 'radial-gradient(circle at 55% 45%, black 28%, rgba(0,0,0,0.5) 55%, transparent 76%)'
+            }}
+          >
+            <img src={topImg} alt="Commodity Vignette" className="w-full h-full object-contain filter contrast-110" />
+          </div>
+        </div>
+      )}
+
+      {/* Bottom-Left: Organic Commodity Watermark */}
+      {bottomImg && (
+        <div className="absolute -bottom-8 -left-8 sm:left-2 lg:left-6 w-56 sm:w-68 lg:w-80 h-56 sm:h-68 lg:h-80 pointer-events-none">
+          <div className="absolute inset-8 bg-amber-100/25 rounded-full blur-3xl" />
+          <div 
+            className="relative w-full h-full mix-blend-multiply opacity-20 sm:opacity-24 lg:opacity-28 transform -rotate-6"
+            style={{ 
+              maskImage: 'radial-gradient(circle at 45% 55%, black 28%, rgba(0,0,0,0.5) 55%, transparent 76%)',
+              WebkitMaskImage: 'radial-gradient(circle at 45% 55%, black 28%, rgba(0,0,0,0.5) 55%, transparent 76%)'
+            }}
+          >
+            <img src={bottomImg} alt="Commodity Watermark" className="w-full h-full object-contain filter contrast-110" />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
