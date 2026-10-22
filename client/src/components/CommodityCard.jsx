@@ -3,16 +3,58 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, MapPin } from 'lucide-react';
 import { WheatStalkSvg, PeanutPodSvg, DairyGheeDropletSvg, PulseChickpeaPodSvg } from './ProductBackgroundDecorations';
 
-export function getProductImage(product) {
-  if (product?.main_image && product.main_image.trim() && !product.main_image.includes('hero-commodities')) {
-    return product.main_image.startsWith('http') || product.main_image.startsWith('/')
-      ? product.main_image
-      : `/images/${product.main_image}`;
-  }
-
+export function getProductFallback(product) {
   const slug = (product?.slug || product?.name || '').toLowerCase();
   const category = (product?.category_name || product?.category_slug || '').toLowerCase();
 
+  if (slug.includes('white-sesame') || slug.includes('natural-white')) {
+    return '/images/products/natural-white-sesame-seeds.jpg';
+  }
+  if (slug.includes('hulled-sesame')) {
+    return '/images/products/hulled-sesame-seeds.jpg';
+  }
+  if (slug.includes('black-sesame')) {
+    return '/images/products/black-sesame-seeds.jpg';
+  }
+  if (slug.includes('sesame') || category.includes('sesame')) {
+    return '/images/products/natural-white-sesame-seeds.jpg';
+  }
+  if (slug.includes('cumin') || slug.includes('jeera')) {
+    return '/images/products/cumin-seeds.jpg';
+  }
+  if (slug.includes('coriander') || slug.includes('dhania')) {
+    return '/images/products/coriander-seeds.jpg';
+  }
+  if (slug.includes('fennel') || slug.includes('variyali') || slug.includes('saunf')) {
+    return '/images/products/fennel-seeds.jpg';
+  }
+  if (slug.includes('turmeric') || slug.includes('haldi')) {
+    return '/images/products/turmeric-fingers.jpg';
+  }
+  if (category.includes('spice') || slug.includes('spice')) {
+    return '/images/products/cumin-seeds.jpg';
+  }
+  if (slug.includes('onion')) {
+    return '/images/products/dehydrated-white-onion-flakes.jpg';
+  }
+  if (slug.includes('garlic')) {
+    return '/images/products/dehydrated-garlic-flakes-powder.jpg';
+  }
+  if (category.includes('dehydrated') || category.includes('vegetable')) {
+    return '/images/products/dehydrated-white-onion-flakes.jpg';
+  }
+  if (slug.includes('soybean') || slug.includes('feed') || category.includes('feed')) {
+    return '/images/products/soybean-meal-hi-pro.jpg';
+  }
+  if (slug.includes('butter')) {
+    return '/images/products/natural-peanut-butter.jpg';
+  }
+  if (slug.includes('blanched')) {
+    return '/images/products/blanched-peanuts.jpg';
+  }
+  if (slug.includes('java')) {
+    return '/images/products/java-peanuts.jpg';
+  }
   if (slug.includes('ghee') || category.includes('ghee') || category.includes('dairy')) {
     return '/images/bg/real-ghee.jpg';
   }
@@ -23,24 +65,28 @@ export function getProductImage(product) {
     return '/images/bg/yellow-corn.jpg';
   }
   if (slug.includes('moong') || slug.includes('mung')) {
-    return '/images/bg/green-moong.jpg';
+    return '/images/products/green-moong-beans.jpg';
   }
   if (slug.includes('chickpea') || slug.includes('chana') || category.includes('chickpea')) {
-    return '/images/bg/chickpeas.jpg';
+    return '/images/products/kabuli-chickpeas.jpg';
   }
   if (slug.includes('sorghum') || slug.includes('jowar') || slug.includes('wheat') || category.includes('grain')) {
     return '/images/bg/real-grains.jpg';
   }
-  if (slug.includes('peanut') || slug.includes('groundnut') || category.includes('peanut')) {
-    return '/images/bg/shelled-peanuts.jpg';
+  if (category.includes('pulses') || category.includes('lentil')) {
+    return '/images/products/green-moong-beans.jpg';
   }
-  if (slug.includes('sesame')) {
-    return '/images/categories/sesame.jpg';
+  return '/images/products/bold-peanuts.jpg';
+}
+
+export function getProductImage(product) {
+  if (product?.main_image && product.main_image.trim() && !product.main_image.includes('hero-commodities')) {
+    return product.main_image.startsWith('http') || product.main_image.startsWith('/')
+      ? product.main_image
+      : `/images/${product.main_image}`;
   }
-  if (category.includes('pulses')) {
-    return '/images/bg/green-moong.jpg';
-  }
-  return '/images/bg/shelled-peanuts.jpg';
+
+  return getProductFallback(product);
 }
 
 export default function CommodityCard({ product }) {
@@ -56,7 +102,7 @@ export default function CommodityCard({ product }) {
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           onError={(e) => {
             e.target.onerror = null;
-            e.target.src = '/images/bg/shelled-peanuts.jpg';
+            e.target.src = getProductFallback(product);
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/60 via-transparent to-transparent" />

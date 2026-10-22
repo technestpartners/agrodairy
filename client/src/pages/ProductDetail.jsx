@@ -5,7 +5,7 @@ import {
   ArrowRight, CheckCircle2, AlertCircle, Share2, Printer
 } from 'lucide-react';
 import { productsService } from '../services/api';
-import CommodityCard from '../components/CommodityCard';
+import CommodityCard, { getProductFallback } from '../components/CommodityCard';
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -51,7 +51,7 @@ export default function ProductDetail() {
 
   const mainImageUrl = activeImage
     ? (activeImage.startsWith('http') || activeImage.startsWith('/') ? activeImage : `/${activeImage}`)
-    : '/images/products/bold-peanuts.jpg';
+    : getProductFallback(product);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
@@ -83,7 +83,7 @@ export default function ProductDetail() {
               className="w-full h-full object-cover"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = '/images/about-commodities.jpg';
+                e.target.src = getProductFallback(product);
               }}
             />
             {product.is_featured === 1 && (
