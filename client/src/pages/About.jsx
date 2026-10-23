@@ -9,6 +9,7 @@ import {
   CheckCircle, ArrowUpRight, ShieldAlert, Cpu, Share2, Leaf
 } from 'lucide-react';
 import { companyService } from '../services/api';
+import { useSettings } from '../context/SettingsContext';
 import { 
   AboutHeroDecorations, 
   AboutStoryDecorations, 
@@ -291,6 +292,7 @@ const VERIFIED_CREDENTIALS = [
 ];
 
 export default function About() {
+  const { settings } = useSettings();
   const [team, setTeam] = useState(VERIFIED_TEAM);
   const [activeTab, setActiveTab] = useState('sourcing');
   const [activeTransitPort, setActiveTransitPort] = useState(0);
@@ -363,7 +365,7 @@ export default function About() {
               {/* Mission Narrative */}
               <p className="text-base sm:text-lg text-[#4D6765] leading-relaxed font-normal max-w-2xl font-sans">
                 Headquartered in Surat with direct procurement desks across Gujarat and Saurashtra farming belts, 
-                <strong className="text-[#0C2422] font-semibold"> Agro Dairy Export LLP</strong> delivers international commodity buyers calibrated Bold Peanuts, high-purity Sesame Seeds, Whole Spices, Pulses, Grains, and pure Indian Dairy Ghee backed by rigorous optical Sortex grading and accredited laboratory analysis.
+                <strong className="text-[#0C2422] font-semibold"> {settings?.company_name || 'Agro Dairy Export LLP'}</strong> delivers international commodity buyers calibrated Bold Peanuts, high-purity Sesame Seeds, Whole Spices, Pulses, Grains, and pure Indian Dairy Ghee backed by rigorous optical Sortex grading and accredited laboratory analysis.
               </p>
 
               {/* Action Buttons & Fast RFQ Desk */}
@@ -385,7 +387,7 @@ export default function About() {
                 </Link>
 
                 <a
-                  href="https://wa.me/919023363680?text=Hello%20Agro%20Dairy%20Export%20LLP,%20we%20are%20interested%20in%20importing%20agricultural%20commodities."
+                  href={`https://wa.me/${(settings?.contact_whatsapp || '919023363680').replace(/[^0-9]/g, '')}?text=Hello%20${encodeURIComponent(settings?.company_name || 'Agro Dairy Export LLP')},%20we%20are%20interested%20in%20importing%20agricultural%20commodities.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-5 py-3.5 rounded-full bg-white hover:bg-emerald-50 text-emerald-800 border border-emerald-300 font-ui font-bold text-sm transition-all flex items-center gap-2 shadow-sm"
@@ -403,7 +405,7 @@ export default function About() {
                   </div>
                   <div>
                     <div className="font-ui font-bold text-xs text-[#0C2422] leading-tight">DGFT License</div>
-                    <div className="text-[11px] font-mono text-[#4D6765]">IEC: 0817029381</div>
+                    <div className="text-[11px] font-mono text-[#4D6765]">IEC: {settings?.company_iec || '0817029381'}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2.5">

@@ -281,7 +281,60 @@
   background-clip: text;
 }
 
-/* ===== RESPONSIVE OVERFLOW FIX ===== */
+/* ===== RESPONSIVE OVERFLOW FIX & BUTTERY SMOOTH RENDER ===== */
 body {
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
+
+/* ===== ULTRA SMOOTH RENDERING & HARDWARE ACCELERATION ===== */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth Interactive Elements */
+a, button, input, select, textarea {
+  transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transition-duration: 200ms;
+}
+
+/* GPU Hardware Layer Promotion for Lag-Free 60fps Animations */
+.smooth-gpu, .commodity-card, .group {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Smooth live update fade-in animation */
+@keyframes smoothLiveFade {
+  from {
+    opacity: 0.85;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-live-update {
+  animation: smoothLiveFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Slide up entrance for live toast */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUpFade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+

@@ -26,6 +26,8 @@ import BlogDetail from './pages/BlogDetail';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 
+import { SettingsProvider } from './context/SettingsContext';
+
 function Layout({ children }) {
   return (
     <div className="flex flex-col min-h-screen">
@@ -41,7 +43,7 @@ function Layout({ children }) {
 
 export default function App() {
   return (
-    <>
+    <SettingsProvider>
       <ScrollToTop />
       <Routes>
       {/* Admin CRM routes */}
@@ -83,6 +85,6 @@ export default function App() {
       {/* Catch-all 404 */}
       <Route path="*" element={<Layout><Home /></Layout>} />
     </Routes>
-    </>
+    </SettingsProvider>
   );
 }

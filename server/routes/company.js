@@ -125,4 +125,23 @@ router.get('/settings', async (req, res) => {
   }
 });
 
+// GET /api/company/gallery
+router.get('/gallery', async (req, res) => {
+  try {
+    const { category } = req.query;
+    let query = 'SELECT * FROM gallery_items WHERE is_active = 1';
+    const params = [];
+    if (category && category !== 'All') {
+      query += ' AND category = ?';
+      params.push(category);
+    }
+    query += ' ORDER BY sort_order ASC, id ASC';
+    const [rows] = await pool.query(query, params);
+    res.json({ success: true, data: rows });
+  } catch (error) {
+    console.error('Error fetching gallery items:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 module.exports = router;

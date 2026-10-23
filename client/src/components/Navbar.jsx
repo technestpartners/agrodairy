@@ -3,11 +3,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { 
   Menu, X, Phone, Mail, ShieldCheck, ChevronDown, 
   ArrowRight, Anchor, MessageCircle, CheckCircle2,
-  Globe2, Sparkles, ChevronRight, Package, Layers, Sprout
+  Globe2, Sparkles, ChevronRight, Package, Layers, Sprout,
+  Linkedin, Instagram
 } from 'lucide-react';
 import { productsService } from '../services/api';
+import { useSettings } from '../context/SettingsContext';
 
 export default function Navbar() {
+  const { settings } = useSettings();
   const [isOpen, setIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const [scrolled, setScrolled] = useState(false);
@@ -71,6 +74,9 @@ export default function Navbar() {
     }, 180);
   };
 
+  const cleanPhone = (settings.header_hotline_phone || '+91 90233 63680').replace(/[^0-9+]/g, '');
+  const cleanWhatsapp = (settings.header_whatsapp || '+919023363680').replace(/[^0-9]/g, '');
+
   return (
     <header className="sticky top-0 z-50 w-full bg-white shadow-[0_4px_20px_-4px_rgba(0,55,50,0.08)]">
       
@@ -94,42 +100,76 @@ export default function Navbar() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00A79D]"></span>
               </span>
               <ShieldCheck className="w-3.5 h-3.5 text-[#00A79D]" />
-              <span>AGRO DAIRY EXPORT LLP</span>
+              <span>{settings.company_name || 'AGRO DAIRY EXPORT LLP'}</span>
             </div>
 
             <span className="hidden sm:inline-block text-white/30">•</span>
 
             <div className="hidden sm:flex items-center gap-1.5 text-white/80 font-mono text-[11px]">
               <Anchor className="w-3 h-3 text-[#F5B800]" />
-              <span>Mundra, Kandla &amp; Hazira Seaport Direct Dispatches</span>
+              <span>{settings.header_ticker || 'Mundra, Kandla & Hazira Seaport Direct Dispatches'}</span>
             </div>
 
             <span className="hidden lg:inline-block text-white/30">•</span>
 
             <span className="hidden lg:inline-block text-[#F5B800] font-mono text-[11px] font-bold">
-              APEDA • FSSAI • DGFT IEC: 0817029381
+              {settings.header_credentials_badge || 'APEDA • FSSAI • DGFT IEC: 0817029381'}
             </span>
           </div>
 
-          {/* Right: Phone & Email Direct Hotline */}
-          <div className="flex items-center gap-4 text-white/90 text-xs">
+          {/* Right: Phone, Email Direct Hotline & Social Channels */}
+          <div className="flex items-center gap-3 sm:gap-4 text-white/90 text-xs flex-wrap justify-center md:justify-end">
             <a 
-              href="tel:+919023363680" 
+              href={`tel:${cleanPhone}`} 
               className="hover:text-[#00A79D] transition-colors flex items-center gap-1.5 font-bold font-mono"
             >
               <Phone className="w-3 h-3 text-[#00A79D]" />
-              <span>+91 90233 63680 <span className="hidden sm:inline font-normal text-white/60 font-sans">(J.P. Vora)</span></span>
+              <span>{settings.header_hotline_phone || '+91 90233 63680'} <span className="hidden sm:inline font-normal text-white/60 font-sans">({settings.header_contact_person || 'J.P. Vora'})</span></span>
             </a>
 
             <span className="text-white/20">|</span>
 
             <a 
-              href="mailto:agrodairyexportllp@gmail.com" 
-              className="hover:text-[#00A79D] transition-colors flex items-center gap-1.5 font-mono text-white/80 hover:text-white truncate max-w-[200px] sm:max-w-none"
+              href={`mailto:${settings.header_primary_email || 'agrodairyexportllp@gmail.com'}`} 
+              className="hover:text-[#00A79D] transition-colors flex items-center gap-1.5 font-mono text-white/80 hover:text-white truncate max-w-[180px] sm:max-w-none"
             >
               <Mail className="w-3 h-3 text-[#00A79D]" />
-              <span>agrodairyexportllp@gmail.com</span>
+              <span className="hidden lg:inline">{settings.header_primary_email || 'agrodairyexportllp@gmail.com'}</span>
+              <span className="lg:hidden">Email Desk</span>
             </a>
+
+            {/* Social Media Links: LinkedIn & Instagram */}
+            {(settings.header_show_social !== '0' && settings.header_show_social !== false) && (
+              <>
+                <span className="text-white/20">|</span>
+                <div className="flex items-center gap-2">
+                  {settings.header_linkedin && (
+                    <a
+                      href={settings.header_linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="Follow Agro Dairy on LinkedIn"
+                      aria-label="LinkedIn Profile"
+                      className="w-5.5 h-5.5 rounded bg-white/10 hover:bg-[#0077B5] text-white/80 hover:text-white flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-xs"
+                    >
+                      <Linkedin className="w-3 h-3" />
+                    </a>
+                  )}
+                  {settings.header_instagram && (
+                    <a
+                      href={settings.header_instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="Follow Agro Dairy on Instagram"
+                      aria-label="Instagram Profile"
+                      className="w-5.5 h-5.5 rounded bg-white/10 hover:bg-gradient-to-tr hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF] text-white/80 hover:text-white flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-xs"
+                    >
+                      <Instagram className="w-3 h-3" />
+                    </a>
+                  )}
+                </div>
+              </>
+            )}
           </div>
 
         </div>
@@ -147,7 +187,7 @@ export default function Navbar() {
             {/* Logo */}
             <Link to="/" className="flex items-center group shrink-0 py-1">
               <img 
-                src="/images/logo.png" 
+                src={settings.site_logo || "/images/logo.png"} 
                 alt="Agro Dairy Export LLP" 
                 className={`w-auto object-contain transform-gpu transition-[height,transform] duration-300 group-hover:scale-[1.03] ${
                   scrolled ? 'h-11 sm:h-12' : 'h-14 sm:h-15'
@@ -163,49 +203,54 @@ export default function Navbar() {
             <nav className="hidden lg:flex items-center gap-1 xl:gap-2 font-sans font-semibold text-[13px] tracking-normal">
               
               {/* 1. Home */}
-              <Link 
-                to="/" 
-                className={`px-3.5 py-2 rounded-xl transition-colors duration-150 ${
-                  location.pathname === '/' 
-                    ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
-                    : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
-                }`}
-              >
-                Home
-              </Link>
-
-              {/* 2. About */}
-              <Link 
-                to="/company/about" 
-                className={`px-3.5 py-2 rounded-xl transition-colors duration-150 ${
-                  location.pathname.startsWith('/company/about') || location.pathname === '/about'
-                    ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
-                    : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
-                }`}
-              >
-                About
-              </Link>
-
-              {/* 3. Products (with Dropdown) */}
-              <div 
-                className="relative"
-                onMouseEnter={handleMouseEnterProducts}
-                onMouseLeave={handleMouseLeaveProducts}
-                onFocus={handleMouseEnterProducts}
-                onBlur={handleMouseLeaveProducts}
-              >
+              {(settings.nav_show_home !== '0' && settings.nav_show_home !== 0 && settings.nav_show_home !== false) && (
                 <Link 
-                  to="/products" 
-                  onClick={() => setProductsOpen(false)}
-                  className={`px-3.5 py-2 rounded-xl flex items-center gap-1 transition-colors duration-150 ${
-                    location.pathname.startsWith('/products') || location.pathname.startsWith('/categories')
+                  to="/" 
+                  className={`px-3.5 py-2 rounded-xl transition-colors duration-150 ${
+                    location.pathname === '/' 
                       ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
                       : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
                   }`}
                 >
-                  <span>Products</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${productsOpen ? 'text-[#00A79D] rotate-180' : 'text-slate-400'}`} />
+                  {settings.nav_label_home || 'Home'}
                 </Link>
+              )}
+
+              {/* 2. About */}
+              {(settings.nav_show_about !== '0' && settings.nav_show_about !== 0 && settings.nav_show_about !== false) && (
+                <Link 
+                  to="/company/about" 
+                  className={`px-3.5 py-2 rounded-xl transition-colors duration-150 ${
+                    location.pathname.startsWith('/company/about') || location.pathname === '/about'
+                      ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
+                      : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
+                  }`}
+                >
+                  {settings.nav_label_about || 'About'}
+                </Link>
+              )}
+
+              {/* 3. Products (with Dropdown) */}
+              {(settings.nav_show_products !== '0' && settings.nav_show_products !== 0 && settings.nav_show_products !== false) && (
+                <div 
+                  className="relative"
+                  onMouseEnter={handleMouseEnterProducts}
+                  onMouseLeave={handleMouseLeaveProducts}
+                  onFocus={handleMouseEnterProducts}
+                  onBlur={handleMouseLeaveProducts}
+                >
+                  <Link 
+                    to="/products" 
+                    onClick={() => setProductsOpen(false)}
+                    className={`px-3.5 py-2 rounded-xl flex items-center gap-1 transition-colors duration-150 ${
+                      location.pathname.startsWith('/products') || location.pathname.startsWith('/categories')
+                        ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
+                        : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
+                    }`}
+                  >
+                    <span>{settings.nav_label_products || 'Products'}</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${productsOpen ? 'text-[#00A79D] rotate-180' : 'text-slate-400'}`} />
+                  </Link>
                 
                 {/* Proper Sculpted Dropdown Card with stable position & invisible bridge */}
                 <div 
@@ -404,66 +449,107 @@ export default function Navbar() {
                   </div>
                 </div>
               </div>
+              )}
 
               {/* 4. Gallery */}
-              <Link 
-                to="/gallery" 
-                className={`px-3.5 py-2 rounded-xl transition-all duration-200 ${
-                  location.pathname === '/gallery' 
-                    ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
-                    : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
-                }`}
-              >
-                Gallery
-              </Link>
+              {(settings.nav_show_gallery !== '0' && settings.nav_show_gallery !== 0 && settings.nav_show_gallery !== false) && (
+                <Link 
+                  to="/gallery" 
+                  className={`px-3.5 py-2 rounded-xl transition-all duration-200 ${
+                    location.pathname === '/gallery' 
+                      ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
+                      : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
+                  }`}
+                >
+                  {settings.nav_label_gallery || 'Gallery'}
+                </Link>
+              )}
 
               {/* 5. Certificate */}
-              <Link 
-                to="/quality/certifications" 
-                className={`px-3.5 py-2 rounded-xl transition-all duration-200 ${
-                  location.pathname.startsWith('/quality') || location.pathname.startsWith('/certifications') || location.pathname === '/certificates'
-                    ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
-                    : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
-                }`}
-              >
-                Certificates
-              </Link>
+              {(settings.nav_show_certifications !== '0' && settings.nav_show_certifications !== 0 && settings.nav_show_certifications !== false) && (
+                <Link 
+                  to="/quality/certifications" 
+                  className={`px-3.5 py-2 rounded-xl transition-all duration-200 ${
+                    location.pathname.startsWith('/quality') || location.pathname.startsWith('/certifications') || location.pathname === '/certificates'
+                      ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
+                      : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
+                  }`}
+                >
+                  {settings.nav_label_certifications || 'Certificates'}
+                </Link>
+              )}
 
               {/* 6. Contact Us */}
-              <Link 
-                to="/contact" 
-                className={`px-3.5 py-2 rounded-xl transition-all duration-200 ${
-                  location.pathname === '/contact' 
-                    ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
-                    : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
-                }`}
-              >
-                Contact Us
-              </Link>
+              {(settings.nav_show_contact !== '0' && settings.nav_show_contact !== 0 && settings.nav_show_contact !== false) && (
+                <Link 
+                  to="/contact" 
+                  className={`px-3.5 py-2 rounded-xl transition-all duration-200 ${
+                    location.pathname === '/contact' 
+                      ? 'text-[#003732] bg-[#E6F7F5] font-extrabold border border-[#00A79D]/30' 
+                      : 'text-slate-700 hover:text-[#00A79D] hover:bg-[#E6F7F5]/50'
+                  }`}
+                >
+                  {settings.nav_label_contact || 'Contact Us'}
+                </Link>
+              )}
             </nav>
 
             {/* Right Action Cluster */}
-            <div className="hidden lg:flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-2.5">
+              {/* Direct LinkedIn & Instagram Channels */}
+              {(settings.header_show_social !== '0' && settings.header_show_social !== false) && (
+                <div className="flex items-center gap-1.5 mr-1">
+                  {settings.header_linkedin && (
+                    <a
+                      href={settings.header_linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="Follow Agro Dairy on LinkedIn"
+                      aria-label="LinkedIn Profile"
+                      className="w-9 h-9 rounded-full bg-slate-100 hover:bg-[#0077B5] text-slate-600 hover:text-white flex items-center justify-center transition-all duration-200 active:scale-95 border border-slate-200/80 shadow-xs group/li"
+                    >
+                      <Linkedin className="w-4 h-4 text-[#0077B5] group-hover/li:text-white transition-colors" />
+                    </a>
+                  )}
+                  {settings.header_instagram && (
+                    <a
+                      href={settings.header_instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="Follow Agro Dairy on Instagram"
+                      aria-label="Instagram Profile"
+                      className="w-9 h-9 rounded-full bg-slate-100 hover:bg-gradient-to-tr hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF] text-slate-600 hover:text-white flex items-center justify-center transition-all duration-200 active:scale-95 border border-slate-200/80 shadow-xs group/ig"
+                    >
+                      <Instagram className="w-4 h-4 text-[#E1306C] group-hover/ig:text-white transition-colors" />
+                    </a>
+                  )}
+                </div>
+              )}
+
               {/* Direct WhatsApp Quick Contact */}
-              <a
-                href="https://wa.me/919023363680?text=Hello%20Agro%20Dairy%20Export%20LLP,%20I%20would%20like%20to%20inquire%20about%20agricultural%20commodity%20exports."
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Chat on WhatsApp"
-                className="w-10 h-10 rounded-full bg-[#25D366]/15 hover:bg-[#25D366] text-[#25D366] hover:text-white border border-[#25D366]/30 flex items-center justify-center transition-all duration-200 active:scale-95 shadow-sm"
-              >
-                <MessageCircle className="w-5 h-5" />
-              </a>
+              {(settings.nav_show_whatsapp_btn !== '0' && settings.nav_show_whatsapp_btn !== 0 && settings.nav_show_whatsapp_btn !== false) && (
+                <a
+                  href={`https://wa.me/${cleanWhatsapp}?text=Hello%20${encodeURIComponent(settings.company_name || 'Agro Dairy Export LLP')},%20I%20would%20like%20to%20inquire%20about%20agricultural%20commodity%20exports.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Chat on WhatsApp"
+                  className="w-10 h-10 rounded-full bg-[#25D366]/15 hover:bg-[#25D366] text-[#25D366] hover:text-white border border-[#25D366]/30 flex items-center justify-center transition-all duration-200 active:scale-95 shadow-sm"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                </a>
+              )}
 
               {/* Proper Sculpted CTA Button */}
-              <Link
-                to="/rfq"
-                id="nav-get-quote-btn"
-                className="px-6 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-[#00A79D] to-[#008C84] hover:from-[#008C84] hover:to-[#006B64] text-white font-sans font-extrabold text-xs tracking-wider uppercase shadow-md shadow-[#00A79D]/25 hover:shadow-lg transition-all duration-200 flex items-center gap-2 active:scale-95"
-              >
-                <span>Get a Quote</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              {(settings.nav_show_quote_btn !== '0' && settings.nav_show_quote_btn !== 0 && settings.nav_show_quote_btn !== false && settings.header_show_cta !== '0' && settings.header_show_cta !== false) && (
+                <Link
+                  to={settings.header_cta_link || '/rfq'}
+                  id="nav-get-quote-btn"
+                  className="px-6 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-[#00A79D] to-[#008C84] hover:from-[#008C84] hover:to-[#006B64] text-white font-sans font-extrabold text-xs tracking-wider uppercase shadow-md shadow-[#00A79D]/25 hover:shadow-lg transition-all duration-200 flex items-center gap-2 active:scale-95"
+                >
+                  <span>{settings.header_cta_text || 'Get a Quote'}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              )}
 
             </div>
 
@@ -495,79 +581,134 @@ export default function Navbar() {
       {isOpen && (
         <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 max-h-[85vh] overflow-y-auto shadow-xl animate-fade-in">
           <nav className="flex flex-col gap-1.5 font-sans font-semibold text-sm">
-            <Link 
-              to="/" 
-              className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
-                location.pathname === '/' ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
-              }`}
-            >
-              <span>Home</span>
-              <span className="text-xs text-slate-400">→</span>
-            </Link>
-            <Link 
-              to="/company/about" 
-              className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
-                location.pathname.startsWith('/company/about') || location.pathname === '/about' ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
-              }`}
-            >
-              <span>About</span>
-              <span className="text-xs text-slate-400">→</span>
-            </Link>
-            <Link 
-              to="/products" 
-              className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
-                location.pathname.startsWith('/products') ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
-              }`}
-            >
-              <span>Products</span>
-              <span className="text-xs text-slate-400">→</span>
-            </Link>
-            <Link 
-              to="/gallery" 
-              className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
-                location.pathname === '/gallery' ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
-              }`}
-            >
-              <span>Gallery</span>
-              <span className="text-xs text-slate-400">→</span>
-            </Link>
-            <Link 
-              to="/quality/certifications" 
-              className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
-                location.pathname.startsWith('/quality') ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
-              }`}
-            >
-              <span>Certificates</span>
-              <span className="text-xs text-slate-400">→</span>
-            </Link>
-            <Link 
-              to="/contact" 
-              className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
-                location.pathname === '/contact' ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
-              }`}
-            >
-              <span>Contact Us</span>
-              <span className="text-xs text-slate-400">→</span>
-            </Link>
+            {/* 1. Home */}
+            {(settings.nav_show_home !== '0' && settings.nav_show_home !== 0 && settings.nav_show_home !== false) && (
+              <Link 
+                to="/" 
+                className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
+                  location.pathname === '/' ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <span>{settings.nav_label_home || 'Home'}</span>
+                <span className="text-xs text-slate-400">→</span>
+              </Link>
+            )}
+
+            {/* 2. About */}
+            {(settings.nav_show_about !== '0' && settings.nav_show_about !== 0 && settings.nav_show_about !== false) && (
+              <Link 
+                to="/company/about" 
+                className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
+                  location.pathname.startsWith('/company/about') || location.pathname === '/about' ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <span>{settings.nav_label_about || 'About'}</span>
+                <span className="text-xs text-slate-400">→</span>
+              </Link>
+            )}
+
+            {/* 3. Products */}
+            {(settings.nav_show_products !== '0' && settings.nav_show_products !== 0 && settings.nav_show_products !== false) && (
+              <Link 
+                to="/products" 
+                className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
+                  location.pathname.startsWith('/products') ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <span>{settings.nav_label_products || 'Products'}</span>
+                <span className="text-xs text-slate-400">→</span>
+              </Link>
+            )}
+
+            {/* 4. Gallery */}
+            {(settings.nav_show_gallery !== '0' && settings.nav_show_gallery !== 0 && settings.nav_show_gallery !== false) && (
+              <Link 
+                to="/gallery" 
+                className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
+                  location.pathname === '/gallery' ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <span>{settings.nav_label_gallery || 'Gallery'}</span>
+                <span className="text-xs text-slate-400">→</span>
+              </Link>
+            )}
+
+            {/* 5. Certificates */}
+            {(settings.nav_show_certifications !== '0' && settings.nav_show_certifications !== 0 && settings.nav_show_certifications !== false) && (
+              <Link 
+                to="/quality/certifications" 
+                className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
+                  location.pathname.startsWith('/quality') ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <span>{settings.nav_label_certifications || 'Certificates'}</span>
+                <span className="text-xs text-slate-400">→</span>
+              </Link>
+            )}
+
+            {/* 6. Contact Us */}
+            {(settings.nav_show_contact !== '0' && settings.nav_show_contact !== 0 && settings.nav_show_contact !== false) && (
+              <Link 
+                to="/contact" 
+                className={`px-3 py-2.5 rounded-xl flex items-center justify-between ${
+                  location.pathname === '/contact' ? 'bg-[#E6F7F5] text-[#003732] font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <span>{settings.nav_label_contact || 'Contact Us'}</span>
+                <span className="text-xs text-slate-400">→</span>
+              </Link>
+            )}
 
             <div className="pt-3 mt-2 border-t border-slate-100 flex flex-col gap-2">
-              <Link 
-                to="/rfq" 
-                className="w-full bg-[#00A79D] hover:bg-[#008C84] text-white font-extrabold py-3.5 rounded-xl text-center text-xs tracking-wider uppercase shadow-md flex items-center justify-center gap-2"
-              >
-                <span>Request Proforma Quote</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              {(settings.nav_show_quote_btn !== '0' && settings.nav_show_quote_btn !== 0 && settings.nav_show_quote_btn !== false && settings.header_show_cta !== '0' && settings.header_show_cta !== false) && (
+                <Link 
+                  to={settings.header_cta_link || '/rfq'} 
+                  className="w-full bg-[#00A79D] hover:bg-[#008C84] text-white font-extrabold py-3.5 rounded-xl text-center text-xs tracking-wider uppercase shadow-md flex items-center justify-center gap-2"
+                >
+                  <span>{settings.header_cta_text || 'Request Proforma Quote'}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              )}
 
-              <a 
-                href="https://wa.me/919023363680" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-full bg-[#25D366]/15 text-[#25D366] border border-[#25D366]/30 font-bold py-3 rounded-xl text-center text-xs flex items-center justify-center gap-2"
-              >
-                <MessageCircle className="w-4 h-4" />
-                <span>WhatsApp (+91 90233 63680)</span>
-              </a>
+              {(settings.nav_show_whatsapp_btn !== '0' && settings.nav_show_whatsapp_btn !== 0 && settings.nav_show_whatsapp_btn !== false) && (
+                <a 
+                  href={`https://wa.me/${cleanWhatsapp}?text=Hello%20${encodeURIComponent(settings.company_name || 'Agro Dairy Export LLP')},%20I%20would%20like%20to%20inquire%20about%20agricultural%20commodity%20exports.`}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full bg-[#25D366]/15 text-[#25D366] border border-[#25D366]/30 font-bold py-3 rounded-xl text-center text-xs flex items-center justify-center gap-2"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>WhatsApp ({settings.header_hotline_phone || '+91 90233 63680'})</span>
+                </a>
+              )}
+
+              {/* Social Media Channels (LinkedIn & Instagram) */}
+              {(settings.header_show_social !== '0' && settings.header_show_social !== false) && (
+                <div className="pt-2 border-t border-slate-100 flex items-center justify-center gap-2.5">
+                  {settings.header_linkedin && (
+                    <a
+                      href={settings.header_linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-slate-50 hover:bg-[#0077B5] text-slate-700 hover:text-white border border-slate-200/80 text-xs font-bold transition group"
+                    >
+                      <Linkedin className="w-3.5 h-3.5 text-[#0077B5] group-hover:text-white transition-colors" />
+                      <span>LinkedIn</span>
+                    </a>
+                  )}
+                  {settings.header_instagram && (
+                    <a
+                      href={settings.header_instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-slate-50 hover:bg-rose-500 text-slate-700 hover:text-white border border-slate-200/80 text-xs font-bold transition group"
+                    >
+                      <Instagram className="w-3.5 h-3.5 text-[#E1306C] group-hover:text-white transition-colors" />
+                      <span>Instagram</span>
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
           </nav>
         </div>

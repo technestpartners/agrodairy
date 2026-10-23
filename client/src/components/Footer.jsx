@@ -6,8 +6,10 @@ import {
   Clock, Award, ExternalLink
 } from 'lucide-react';
 import { companyService } from '../services/api';
+import { useSettings } from '../context/SettingsContext';
 
 export default function Footer() {
+  const { settings } = useSettings();
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -151,7 +153,7 @@ export default function Footer() {
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5">
               <Link to="/" onClick={scrollToTop} className="bg-white p-2.5 rounded-2xl shadow-xl inline-flex items-center shrink-0 border border-white/20 group">
                 <img
-                  src="/images/logo.png"
+                  src={settings.site_logo_footer || settings.site_logo || "/images/logo.png"}
                   alt="Agro Dairy Export LLP Logo"
                   className="h-11 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                 />
@@ -349,32 +351,32 @@ export default function Footer() {
                   <div className="flex items-start gap-2">
                     <MapPin className="w-4 h-4 text-brand-primary shrink-0 mt-0.5" />
                     <Link to="/contact" onClick={scrollToTop} className="text-slate-300 hover:text-white leading-snug transition-colors">
-                      Office no. -701, THE FUTURE CORNER, Sarthana, Surat-395013, Gujarat, India
+                      {settings.company_address || 'Office no. -701, THE FUTURE CORNER, Sarthana, Surat-395013, Gujarat, India'}
                     </Link>
                   </div>
                   <div className="flex items-center gap-2">
                     <Phone className="w-4 h-4 text-brand-primary shrink-0" />
-                    <a href="tel:+919023363680" className="hover:text-emerald-300 text-white font-bold transition-colors">
-                      +91 90233 63680 (J.P. Vora)
+                    <a href={`tel:${settings.contact_phone || '+919023363680'}`} className="hover:text-emerald-300 text-white font-bold transition-colors">
+                      {settings.contact_phone || '+91 90233 63680'} {settings.contact_person ? `(${settings.contact_person})` : '(J.P. Vora)'}
                     </a>
                   </div>
                   <div className="flex items-center gap-2">
                     <Mail className="w-4 h-4 text-brand-primary shrink-0" />
-                    <a href="mailto:agrodairyexportllp@gmail.com" className="hover:text-emerald-300 text-slate-300 transition-colors break-all">
-                      agrodairyexportllp@gmail.com
+                    <a href={`mailto:${settings.contact_email || 'export@agrodairy.com'}`} className="hover:text-emerald-300 text-slate-300 transition-colors break-all">
+                      {settings.contact_email || 'export@agrodairy.com'}
                     </a>
                   </div>
                 </div>
               </div>
               <div className="pt-3 mt-3 border-t border-white/5 text-[10px] font-mono text-slate-400 space-y-0.5">
                 <Link to="/quality/certifications" onClick={scrollToTop} className="block hover:text-white transition-colors">
-                  IEC: <strong className="text-slate-200">0817029381</strong> (DGFT)
+                  IEC: <strong className="text-slate-200">{settings.company_iec || '0817029381'}</strong> (DGFT)
                 </Link>
                 <Link to="/quality/certifications" onClick={scrollToTop} className="block hover:text-white transition-colors">
-                  GSTIN: <strong className="text-slate-200">24AAHFA3928L1Z9</strong>
+                  GSTIN: <strong className="text-slate-200">{settings.company_gstin || '24AAHFA3928L1Z9'}</strong>
                 </Link>
                 <Link to="/quality/certifications" onClick={scrollToTop} className="block hover:text-white transition-colors">
-                  FSSAI: <strong className="text-slate-200">10722026000148</strong>
+                  FSSAI: <strong className="text-slate-200">{settings.company_fssai || '10722026000148'}</strong>
                 </Link>
               </div>
             </div>

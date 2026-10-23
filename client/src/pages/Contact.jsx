@@ -7,9 +7,11 @@ import {
   HelpCircle, ChevronDown, ExternalLink, Sparkles
 } from 'lucide-react';
 import { companyService } from '../services/api';
+import { useSettings } from '../context/SettingsContext';
 import { RealProductSectionFlanks, PageHeroDecorations } from '../components/ProductBackgroundDecorations';
 
 export default function Contact() {
+  const { settings } = useSettings();
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -163,13 +165,13 @@ export default function Contact() {
             {/* Direct Action Hub */}
             <div className="flex flex-wrap items-center gap-3 shrink-0">
               <a
-                href="https://wa.me/919023363680?text=Hello%20J.P.%20Vora,%20I%20am%20inquiring%20about%20Agro%20Dairy%20export%20commodities%20pricing."
+                href={`https://wa.me/${(settings?.contact_whatsapp || '919023363680').replace(/[^0-9]/g, '')}?text=Hello%20${encodeURIComponent(settings?.contact_person || 'J.P. Vora')},%20I%20am%20inquiring%20about%20Agro%20Dairy%20export%20commodities%20pricing.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-5 py-3.5 rounded-full bg-white hover:bg-emerald-50 text-emerald-800 border border-emerald-300 font-ui font-bold text-xs sm:text-sm transition-all flex items-center gap-2.5 shadow-sm group"
               >
                 <MessageSquare className="w-4 h-4 text-[#25D366] fill-current group-hover:scale-110 transition-transform" />
-                <span>WhatsApp Export Desk (+91 90233 63680)</span>
+                <span>WhatsApp Export Desk ({settings?.contact_phone || '+91 90233 63680'})</span>
               </a>
 
               <Link
@@ -206,13 +208,13 @@ export default function Contact() {
               </p>
             </div>
             <div className="pt-4 mt-4 border-t border-[#D4ECE9] space-y-1.5 text-xs font-mono">
-              <a href="tel:+919023363680" className="flex items-center gap-2 text-[#0C2422] hover:text-brand-primary transition-colors font-bold">
+              <a href={`tel:${(settings?.contact_phone || '+91 90233 63680').replace(/\s+/g, '')}`} className="flex items-center gap-2 text-[#0C2422] hover:text-brand-primary transition-colors font-bold">
                 <Phone className="w-3.5 h-3.5 text-brand-primary" />
-                <span>+91 90233 63680</span>
+                <span>{settings?.contact_phone || '+91 90233 63680'}</span>
               </a>
-              <a href="mailto:agrodairyexportllp@gmail.com" className="flex items-center gap-2 text-[#4D6765] hover:text-brand-primary transition-colors truncate">
+              <a href={`mailto:${settings?.contact_email || 'agrodairyexportllp@gmail.com'}`} className="flex items-center gap-2 text-[#4D6765] hover:text-brand-primary transition-colors truncate">
                 <Mail className="w-3.5 h-3.5 text-brand-primary" />
-                <span className="truncate">agrodairyexportllp@gmail.com</span>
+                <span className="truncate">{settings?.contact_email || 'agrodairyexportllp@gmail.com'}</span>
               </a>
             </div>
           </div>
@@ -557,7 +559,7 @@ export default function Contact() {
                   <div>
                     <span className="font-bold text-white block text-sm mb-0.5">Physical Registered Office</span>
                     <span className="text-slate-300 leading-relaxed block font-sans">
-                      Office no. -701, THE FUTURE CORNER, Sarthana, Surat-395013, Gujarat, India
+                      {settings?.company_address || 'Office no. -701, THE FUTURE CORNER, Sarthana, Surat-395013, Gujarat, India'}
                     </span>
                   </div>
                 </div>
@@ -567,8 +569,8 @@ export default function Contact() {
                   <Phone className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold text-white block text-sm mb-0.5">Export Director Hotline</span>
-                    <a href="tel:+919023363680" className="text-white hover:text-[#5EEAD4] transition-colors font-mono font-bold text-sm">
-                      +91 90233 63680 (J.P. Vora)
+                    <a href={`tel:${(settings?.contact_phone || '+91 90233 63680').replace(/\s+/g, '')}`} className="text-white hover:text-[#5EEAD4] transition-colors font-mono font-bold text-sm">
+                      {settings?.contact_phone || '+91 90233 63680'} ({settings?.contact_person || 'J.P. Vora'})
                     </a>
                     <span className="block text-[11px] text-emerald-300/80 font-mono mt-0.5">
                       Direct Calls &amp; WhatsApp Trade Desk
@@ -581,8 +583,8 @@ export default function Contact() {
                   <Mail className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold text-white block text-sm mb-0.5">Official Commercial Email</span>
-                    <a href="mailto:agrodairyexportllp@gmail.com" className="text-slate-300 hover:text-white transition-colors font-mono text-xs break-all">
-                      agrodairyexportllp@gmail.com
+                    <a href={`mailto:${settings?.contact_email || 'agrodairyexportllp@gmail.com'}`} className="text-slate-300 hover:text-white transition-colors font-mono text-xs break-all">
+                      {settings?.contact_email || 'agrodairyexportllp@gmail.com'}
                     </a>
                   </div>
                 </div>
@@ -592,9 +594,9 @@ export default function Contact() {
                   <Clock className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold text-white block text-sm mb-0.5">Trade Trading Hours</span>
-                    <span className="text-slate-300 font-sans">Monday - Saturday: 09:00 - 19:30 IST</span>
+                    <span className="text-slate-300 font-sans">{settings?.footer_hours || 'Monday - Saturday: 09:00 - 19:30 IST'}</span>
                     <span className="block text-[11px] text-slate-400 mt-0.5 font-sans">
-                      Sunday: Emergency vessel stuffing operations only
+                      Port Operations: 24/7 continuous vessel loading
                     </span>
                   </div>
                 </div>
@@ -603,7 +605,7 @@ export default function Contact() {
               {/* Direct WhatsApp Callout */}
               <div className="pt-2">
                 <a
-                  href="https://wa.me/919023363680?text=Hello%20J.P.%20Vora,%20I%20would%20like%20to%20connect%20regarding%20Agro%20Dairy%20Export%20commodities."
+                  href={`https://wa.me/${(settings?.contact_whatsapp || '919023363680').replace(/[^0-9]/g, '')}?text=Hello%20${encodeURIComponent(settings?.contact_person || 'J.P. Vora')},%20I%20would%20like%20to%20connect%20regarding%20Agro%20Dairy%20Export%20commodities.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full bg-[#25D366] hover:bg-[#1fb857] text-white font-ui font-bold text-xs py-3.5 rounded-2xl transition flex items-center justify-center gap-2 shadow-lg shadow-[#25D366]/20"

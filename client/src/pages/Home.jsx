@@ -7,7 +7,8 @@ import {
   Star, Leaf, Scale, ChevronDown, ChevronUp, TrendingUp, Users, HeartHandshake,
   Ship, Factory, Wheat, Droplets, FlaskConical, BadgeCheck, MessageCircle
 } from 'lucide-react';
-import { productsService, inquiriesService } from '../services/api';
+import { productsService, inquiriesService, companyService } from '../services/api';
+import { useSettings } from '../context/SettingsContext';
 import CommodityCard from '../components/CommodityCard';
 import { 
   HeroBgDecorations,
@@ -520,11 +521,14 @@ function QuoteForm({ defaultProduct = '' }) {
    MAIN HOME COMPONENT
    =========================== */
 export default function Home() {
-  const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
+  const { settings, commodities: liveProducts, categories: liveCategories, faqs: liveFaqs, loading } = useSettings();
   const [activeCategory, setActiveCategory] = useState('all');
   const [openFaq, setOpenFaq] = useState(0);
-  const [loading, setLoading] = useState(true);
+
+  // Live datasets with static fallback guarantees
+  const categories = liveCategories?.length ? liveCategories : CATEGORIES_STATIC;
+  const products = liveProducts?.length ? liveProducts : PRODUCTS_STATIC;
+  const faqs = liveFaqs?.length ? liveFaqs : FAQS;
 
   // Intersection refs
   const [statsRef, statsVisible] = useIntersection(0.2);
@@ -532,21 +536,6 @@ export default function Home() {
   const [whyRef, whyVisible] = useIntersection(0.1);
   const [processRef, processVisible] = useIntersection(0.1);
   const [certsRef, certsVisible] = useIntersection(0.1);
-
-  useEffect(() => {
-    Promise.all([
-      productsService.getCategories(),
-      productsService.getAll({ limit: 50 })
-    ]).then(([catRes, prodRes]) => {
-      if (catRes.success && catRes.data?.length) setCategories(catRes.data);
-      else setCategories(CATEGORIES_STATIC);
-      if (prodRes.success && prodRes.data?.length) setProducts(prodRes.data);
-      else setProducts(PRODUCTS_STATIC);
-    }).catch(() => {
-      setCategories(CATEGORIES_STATIC);
-      setProducts(PRODUCTS_STATIC);
-    }).finally(() => setLoading(false));
-  }, []);
 
   const filteredProducts = activeCategory === 'all'
     ? products.slice(0, 8)
@@ -570,43 +559,61 @@ export default function Home() {
             {/* Left Column: Heading, Subtext, CTAs (7 cols) */}
             <div className="lg:col-span-7 space-y-6">
               {/* Badge */}
-              <div className="animate-fade-in inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E6F7F5] border border-[#BBE5E1] text-brand-primary text-xs font-ui font-semibold shadow-sm">
-                <Leaf className="w-3.5 h-3.5 text-brand-primary shrink-0" />
-                <span>Trusted Agro &amp; Dairy Export Partner from India</span>
-              </div>
+              {(settings.hero_show_badge !== '0' && settings.hero_show_badge !== 0 && settings.hero_show_badge !== false) && (
+                <div className="animate-fade-in inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E6F7F5] border border-[#BBE5E1] text-brand-primary text-xs font-ui font-semibold shadow-sm">
+                  <Leaf className="w-3.5 h-3.5 text-brand-primary shrink-0" />
+                  <span>{settings.hero_badge || 'Trusted Agro & Dairy Export Partner from India'}</span>
+                </div>
+              )}
 
               {/* Main Headline */}
               <h1 className="animate-fade-in-up font-display font-extrabold text-4xl sm:text-5xl lg:text-[3.25rem] leading-[1.14] tracking-tight text-[#0C2422]">
-                Origin-Direct Peanuts,<br />
-                Grains, Pulses &amp; Pure<br />
-                <span className="text-brand-primary">Dairy Ghee</span>
+                {settings.hero_title ? (
+                  <>
+                    {settings.hero_title} <span className="text-brand-primary">{settings.hero_highlight || 'Dairy Ghee'}</span>
+                  </>
+                ) : (
+                  <>
+                    Origin-Direct Peanuts,<br />
+                    Grains, Pulses &amp; Pure<br />
+                    <span className="text-brand-primary">Dairy Ghee</span>
+                  </>
+                )}
               </h1>
 
               {/* Subtitle */}
               <p className="animate-fade-in-up delay-100 text-base sm:text-lg text-[#4D6765] leading-relaxed max-w-xl font-sans">
-                We source, process and export premium quality agricultural commodities from India to global markets with consistent quality, competitive pricing and reliable supply.
+                {settings.hero_subtitle || 'We source, process and export premium quality agricultural commodities from India to global markets with consistent quality, competitive pricing and reliable supply.'}
               </p>
 
               {/* CTAs */}
-              <div className="animate-fade-in-up delay-200 flex flex-wrap items-center gap-4 pt-2">
-                <Link
-                  to="/products"
-                  id="hero-view-products-btn"
-                  className="px-7 py-3.5 rounded-full bg-brand-primary hover:bg-brand-primary-dark text-white font-ui font-bold text-sm shadow-md shadow-brand-primary/25 hover:shadow-lg transition-all flex items-center gap-2 group"
-                >
-                  <span>View Products</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <a
-                  href="#rfq-section"
-                  id="hero-get-quote-btn"
-                  className="px-7 py-3.5 rounded-full bg-white hover:bg-brand-accent text-brand-deep font-ui font-bold text-sm border-2 border-brand-deep transition-all shadow-sm"
-                >
-                  Get a Quote
-                </a>
-              </div>
+              {((settings.hero_show_primary_btn !== '0' && settings.hero_show_primary_btn !== 0 && settings.hero_show_primary_btn !== false) ||
+                (settings.hero_show_secondary_btn !== '0' && settings.hero_show_secondary_btn !== 0 && settings.hero_show_secondary_btn !== false)) && (
+                <div className="animate-fade-in-up delay-200 flex flex-wrap items-center gap-4 pt-2">
+                  {(settings.hero_show_primary_btn !== '0' && settings.hero_show_primary_btn !== 0 && settings.hero_show_primary_btn !== false) && (
+                    <Link
+                      to={settings.hero_cta_primary_link || '/products'}
+                      id="hero-view-products-btn"
+                      className="px-7 py-3.5 rounded-full bg-brand-primary hover:bg-brand-primary-dark text-white font-ui font-bold text-sm shadow-md shadow-brand-primary/25 hover:shadow-lg transition-all flex items-center gap-2 group"
+                    >
+                      <span>{settings.hero_cta_primary_text || 'View Products'}</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  )}
+                  {(settings.hero_show_secondary_btn !== '0' && settings.hero_show_secondary_btn !== 0 && settings.hero_show_secondary_btn !== false) && (
+                    <a
+                      href={settings.hero_cta_secondary_link || '#rfq-section'}
+                      id="hero-get-quote-btn"
+                      className="px-7 py-3.5 rounded-full bg-white hover:bg-brand-accent text-brand-deep font-ui font-bold text-sm border-2 border-brand-deep transition-all shadow-sm"
+                    >
+                      {settings.hero_cta_secondary_text || 'Get a Quote'}
+                    </a>
+                  )}
+                </div>
+              )}
 
               {/* Horizontal Trust Bar below CTAs */}
+              {(settings.hero_show_trust_bar !== '0' && settings.hero_show_trust_bar !== 0 && settings.hero_show_trust_bar !== false) && (
               <div className="animate-fade-in-up delay-300 grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 sm:pt-8 mt-6 sm:mt-8 border-t border-[#D4ECE9]">
                 {[
                   { Icon: Building2, title: 'Farm to Global Markets', sub: 'Direct Sourcing' },
@@ -625,6 +632,7 @@ export default function Home() {
                   </div>
                 ))}
               </div>
+              )}
             </div>
 
             {/* Right Column: Hero Visual with Pure India script & floating badges (5 cols) */}
@@ -670,7 +678,7 @@ export default function Home() {
               {/* Central Visual Image with Real Product Floating Chips */}
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white">
                 <img
-                  src="/images/hero-commodities.jpg"
+                  src={settings.hero_image || "/images/hero-commodities.jpg"}
                   alt="Export quality peanuts, pulses, grains, and golden pure dairy ghee"
                   className="w-full h-[380px] sm:h-[420px] object-cover"
                 />
@@ -679,7 +687,7 @@ export default function Home() {
                 <div className="hidden sm:flex absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-2.5 shadow-xl border border-[#D4ECE9] items-center gap-2.5 animate-bounce-gentle">
                   <div className="w-11 h-11 rounded-xl overflow-hidden bg-amber-50 shrink-0 border border-amber-200">
                     <img 
-                      src="/images/bg/real-ghee.jpg" 
+                      src={settings.hero_chip_1_image || "/images/bg/real-ghee.jpg"} 
                       alt="Pure Indian Cow Ghee" 
                       className="w-full h-full object-cover" 
                       onError={(e) => {
@@ -698,7 +706,7 @@ export default function Home() {
                 <div className="absolute bottom-4 left-4 sm:left-4 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-2.5 shadow-xl border border-[#D4ECE9] flex items-center gap-2.5">
                   <div className="w-11 h-11 rounded-xl overflow-hidden bg-brand-cream shrink-0 border border-brand-border">
                     <img 
-                      src="/images/products/bold-peanuts.jpg" 
+                      src={settings.hero_chip_2_image || "/images/products/bold-peanuts.jpg"} 
                       alt="Sortex Bold Peanuts 38/42" 
                       className="w-full h-full object-cover" 
                       onError={(e) => {
@@ -731,7 +739,7 @@ export default function Home() {
             <div className={`lg:col-span-5 relative transition-all duration-700 ${aboutVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
               <div className="rounded-3xl overflow-hidden shadow-xl border border-brand-border bg-white group">
                 <img
-                  src="/images/cargo-ship.jpg"
+                  src={settings.about_banner_image || "/images/cargo-ship.jpg"}
                   alt="Container cargo vessel exporting commodities globally"
                   className="w-full h-[420px] lg:h-[480px] object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
@@ -765,15 +773,15 @@ export default function Home() {
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#BBE5E1] text-brand-primary text-xs font-mono font-bold shadow-sm mb-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-primary" />
-                  <span>ORIGIN EXPORT PARTNER • GUJARAT, INDIA</span>
+                  <span>{settings.about_badge || 'ORIGIN EXPORT PARTNER • GUJARAT, INDIA'}</span>
                 </div>
                 <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[2.65rem] text-[#0C2422] leading-tight tracking-tight">
-                  Your Trusted Partner for Agricultural &amp; Dairy Exports
+                  {settings.about_headline || 'Your Trusted Partner for Agricultural & Dairy Exports'}
                 </h2>
               </div>
 
               <p className="text-[#4D6765] text-sm sm:text-base leading-relaxed font-sans">
-                Agro Dairy Export LLP is an origin-direct exporter of Sortex-cleaned Peanuts, Grains, Pulses, and Pure Dairy Ghee from Gujarat, India. By uniting farmer aggregations across fertile crop belts with direct ocean gateway access at Mundra and Hazira ports, we provide global importers with guaranteed specifications, verified phytosanitary clearance, and uninterrupted supply.
+                {settings.about_paragraph1 || 'Agro Dairy Export LLP is an origin-direct exporter of Sortex-cleaned Peanuts, Grains, Pulses, and Pure Dairy Ghee from Gujarat, India. By uniting farmer aggregations across fertile crop belts with direct ocean gateway access at Mundra and Hazira ports, we provide global importers with guaranteed specifications, verified phytosanitary clearance, and uninterrupted supply.'}
               </p>
 
               {/* 4 Feature Cards Matrix */}
@@ -939,6 +947,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════
           SECTION 4: OUR EXPORT RECORD IN NUMBERS (Unique Global Trade Showcase)
           ═══════════════════════════════════════ */}
+      {(settings.hero_show_stats !== '0' && settings.hero_show_stats !== 0 && settings.hero_show_stats !== false) && (
       <section 
         ref={statsRef} 
         className="relative py-16 sm:py-20 lg:py-24 text-white overflow-hidden border-y border-[#00A79D]/30 bg-gradient-to-br from-[#021814] via-[#052b23] to-[#011410]"
@@ -978,7 +987,33 @@ export default function Home() {
 
           {/* 5 Stats Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
-            {STATS.map((stat, i) => (
+            {[
+              {
+                ...STATS[0],
+                value: settings.hero_stat_1_val ? parseInt(settings.hero_stat_1_val, 10) || STATS[0].value : STATS[0].value,
+                label: settings.hero_stat_1_lbl || STATS[0].label,
+              },
+              {
+                ...STATS[1],
+                value: settings.hero_stat_2_val ? parseInt(settings.hero_stat_2_val, 10) || STATS[1].value : STATS[1].value,
+                label: settings.hero_stat_2_lbl || STATS[1].label,
+              },
+              {
+                ...STATS[2],
+                value: 150,
+                label: 'Institutional Buyers',
+              },
+              {
+                ...STATS[3],
+                value: settings.hero_stat_3_val ? parseInt(settings.hero_stat_3_val, 10) || STATS[3].value : STATS[3].value,
+                label: settings.hero_stat_3_lbl || STATS[3].label,
+              },
+              {
+                ...STATS[4],
+                value: settings.hero_stat_4_val ? parseInt(settings.hero_stat_4_val, 10) || STATS[4].value : STATS[4].value,
+                label: settings.hero_stat_4_lbl || STATS[4].label,
+              },
+            ].map((stat, i) => (
               <StatCard key={i} stat={stat} index={i} running={statsVisible} />
             ))}
           </div>
@@ -1002,6 +1037,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      )}
 
       {/* ═══════════════════════════════════════
           SECTION 5: GLOBAL QUALITY. INDIAN ROOTS. (WHY CHOOSE US)
@@ -1342,25 +1378,25 @@ export default function Home() {
               {
                 title: 'IEC License',
                 authority: 'DGFT, Ministry of Commerce',
-                code: '0817029381',
+                code: settings.company_iec || '0817029381',
                 badge: 'Verified Exporter',
               },
               {
                 title: 'APEDA Registration',
                 authority: 'Agri & Processed Food Authority',
-                code: 'APEDA/RCMC/2026',
+                code: settings.company_apeda || 'APEDA/RCMC/2026/0892',
                 badge: 'Active RCMC',
               },
               {
                 title: 'GSTIN Registered',
                 authority: 'CBIC, Govt. of India',
-                code: '24AAHFA3928L1Z9',
+                code: settings.company_gstin || '24AAHFA3928L1Z9',
                 badge: 'State Certified',
               },
               {
                 title: 'FSSAI Central License',
                 authority: 'Food Safety Authority of India',
-                code: '10722026000148',
+                code: settings.company_fssai || '10722026000148',
                 badge: 'Food Safety Grade',
               },
             ].map((cert, i) => (
@@ -1459,7 +1495,7 @@ export default function Home() {
               </div>
 
               <div className="space-y-3" role="list">
-                {FAQS.map((faq, i) => (
+                {faqs.map((faq, i) => (
                   <FaqItem
                     key={i}
                     faq={faq}

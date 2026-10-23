@@ -10,11 +10,11 @@ export default defineConfig({
         target: 'http://localhost:5000',
         changeOrigin: true
       },
-      '/images': {
+      '/storage': {
         target: 'http://localhost:5000',
         changeOrigin: true
       },
-      '/storage': {
+      '/uploads': {
         target: 'http://localhost:5000',
         changeOrigin: true
       }

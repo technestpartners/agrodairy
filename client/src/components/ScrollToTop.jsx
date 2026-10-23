@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
  * Automatically scrolls window to top on every route and search parameter change.
  */
 export default function ScrollToTop() {
-  const { pathname, search } = useLocation();
+  const { pathname, search, hash } = useLocation();
 
   useEffect(() => {
     if ('scrollRestoration' in window.history) {
@@ -15,6 +15,14 @@ export default function ScrollToTop() {
   }, []);
 
   useEffect(() => {
+    if (hash) {
+      const target = document.getElementById(hash.replace('#', ''));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+    }
+
     // Scroll to the very top immediately on navigation
     try {
       window.scrollTo({
@@ -25,7 +33,7 @@ export default function ScrollToTop() {
     } catch {
       window.scrollTo(0, 0);
     }
-  }, [pathname, search]);
+  }, [pathname, search, hash]);
 
   return null;
 }
