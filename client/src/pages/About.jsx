@@ -36,47 +36,6 @@ export default function About() {
         </p>
       </div>
 
-      {/* Origin & Infrastructure Story */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div className="space-y-5">
-          <span className="text-xs font-bold uppercase tracking-widest text-agro-700">
-            Heritage & Modern Processing
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
-            From the Saurashtra Basin to 40+ Ports Worldwide
-          </h2>
-          <p className="text-sm text-slate-600 leading-relaxed">
-            The Saurashtra region of Gujarat accounts for a massive share of India's peanut, sesame, and cumin production due to its ideal red-loamy soil and sunny climate. 
-            We operate integrated cleaning, de-stoning, grading, and Buhler optical Sortex color-sorting plants within hours of major farm mandis.
-          </p>
-          <p className="text-sm text-slate-600 leading-relaxed">
-            Every lot entering our export stream undergoes rigid quality audits: moisture checks, aflatoxin testing (&lt;4 ppb for European Union conformance), seed count analysis, and metal detection.
-          </p>
-
-          <div className="grid grid-cols-2 gap-4 pt-2">
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-              <span className="text-2xl font-black text-agro-900 block">15,000+</span>
-              <span className="text-xs text-slate-600 font-medium">Partner Farmers Network</span>
-            </div>
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-              <span className="text-2xl font-black text-agro-900 block">50 MT/Day</span>
-              <span className="text-xs text-slate-600 font-medium">Buhler Sortex Optical Line</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="rounded-3xl overflow-hidden shadow-xl border border-slate-200">
-          <img
-            src="/images/about-commodities.jpg"
-            alt="Agro Dairy Harvesting & Processing"
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = '/images/facility-bg.jpg';
-            }}
-          />
-        </div>
-      </div>
 
       {/* Leadership & Trade Team */}
       {team.length > 0 && (
