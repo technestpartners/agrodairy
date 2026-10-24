@@ -19,63 +19,31 @@ import {
   RealProductSectionFlanks
 } from '../components/ProductBackgroundDecorations';
 
-// Verified Executive Leadership
+// Verified Executive Leadership (Managing Partners)
 const VERIFIED_TEAM = [
   {
-    id: 5,
+    id: 1,
     name: 'J.P. Vora',
-    position: 'Managing Partner & Director of Global Trade',
-    bio: 'Oversees global export trade desks, buyer contract negotiations across GCC, EU, and Southeast Asia, farmer mandi procurement networks in Saurashtra, and multimodal export execution.',
+    position: 'Managing Partner',
+    bio: '25+ years of agricultural commodities procurement, export development, and global trade across Asia, Middle East, and Europe. Leads buyer negotiations, maritime Incoterms execution, and Saurashtra farmer origination.',
     initials: 'JV',
     email: 'agrodairyexportllp@gmail.com',
     phone: '+91 90233 63680',
-    roleCategory: 'Global Trade & Desk',
-    experience: '18+ Years Experience',
+    roleCategory: 'Managing Partner',
+    experience: '25+ Years Experience',
     specialty: 'International Trade Contracts & Maritime Incoterms'
   },
   {
-    id: 1,
-    name: 'Dharmesh Patel',
-    position: 'Co-Founder & Managing Director',
-    bio: 'Directs strategic agricultural expansion, commodity procurement alliances with Gujarat APMC mandis, and enterprise export financing.',
-    initials: 'DP',
-    email: 'dharmesh@agrodairy.com',
-    roleCategory: 'Strategy & Origination',
-    experience: '25+ Years Experience',
-    specialty: 'Mandi Procurement & Farmer Cooperatives'
-  },
-  {
     id: 2,
-    name: 'Bhavesh Thummar',
-    position: 'Director — Supply Chain & Processing Operations',
-    bio: 'Manages advanced optical Sortex grading facilities in Gondal, contract farming programs, precision packing lines, and port staging logistics.',
-    initials: 'BT',
-    email: 'bhavesh@agrodairy.com',
-    roleCategory: 'Processing & Sortex Plant',
+    name: 'Kalpesh Thummar',
+    position: 'Managing Partner',
+    bio: 'Oversees strategic agricultural sourcing, international supply chain operations, processing facility quality control, optical Sortex grading, and port dispatch management.',
+    initials: 'KT',
+    email: 'kalpesh@agrodairy.com',
+    phone: '+91 90233 63680',
+    roleCategory: 'Managing Partner',
     experience: '20+ Years Experience',
-    specialty: 'Buhler Sortex Calibration & Container Loading'
-  },
-  {
-    id: 3,
-    name: 'Rajesh Patel',
-    position: 'Head of International Trade & RFQ Relations',
-    bio: 'Specializes in ocean freight container booking, buyer specification audits, phytosanitary fumigation tracking, and proforma documentation.',
-    initials: 'RP',
-    email: 'sales@agrodairy.com',
-    roleCategory: 'Commercial & Freight',
-    experience: '14+ Years Experience',
-    specialty: 'Ocean Freight & Tamper-Evident Stenciling'
-  },
-  {
-    id: 4,
-    name: 'Dr. Hiren Mehta',
-    position: 'Chief Quality Officer & Food Technologist',
-    bio: 'Ph.D. in Food Safety. Directs accredited HPLC chromatography testing, EU aflatoxin compliance (<4 ppb), pesticide residue screens, and ISO 22000 protocols.',
-    initials: 'HM',
-    email: 'quality@agrodairy.com',
-    roleCategory: 'Quality & Lab Compliance',
-    experience: '19+ Years Experience',
-    specialty: 'Aflatoxin Analysis & Pre-Shipment COA'
+    specialty: 'Supply Chain, Sortex Processing & Mandi Origination'
   }
 ];
 
@@ -301,18 +269,35 @@ export default function About() {
     companyService.getTeam()
       .then(res => {
         if (res.success && Array.isArray(res.data) && res.data.length > 0) {
-          const merged = res.data.map((item, idx) => {
-            const fallback = VERIFIED_TEAM.find(t => t.id === item.id) || VERIFIED_TEAM[idx] || {};
-            return {
-              ...item,
-              initials: fallback.initials || item.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase(),
-              roleCategory: fallback.roleCategory || 'Executive Leadership',
-              experience: fallback.experience || '15+ Years Industry Experience',
-              specialty: fallback.specialty || 'Global Commodity Trade & Procurement',
-              phone: fallback.phone || '+91 90233 63680'
-            };
-          });
-          setTeam(merged);
+          const filtered = [];
+          const seen = new Set();
+          for (const item of res.data) {
+            const lower = (item.name || '').toLowerCase();
+            const isVora = lower.includes('vora');
+            const isKalpesh = lower.includes('kalpesh');
+            if (isVora || isKalpesh) {
+              const key = isVora ? 'vora' : 'kalpesh';
+              if (!seen.has(key)) {
+                seen.add(key);
+                const fallback = VERIFIED_TEAM.find(t => t.name.toLowerCase().includes(key)) || {};
+                filtered.push({
+                  ...fallback,
+                  ...item,
+                  position: 'Managing Partner',
+                  initials: fallback.initials || (isVora ? 'JV' : 'KT'),
+                  roleCategory: 'Managing Partner',
+                  experience: fallback.experience || (isVora ? '25+ Years Experience' : '20+ Years Experience'),
+                  specialty: fallback.specialty || 'International Trade & Sourcing',
+                  phone: fallback.phone || '+91 90233 63680'
+                });
+              }
+            }
+          }
+          if (filtered.length > 0) {
+            setTeam(filtered);
+          } else {
+            setTeam(VERIFIED_TEAM);
+          }
         }
       })
       .catch(e => console.warn('Using verified team fallback:', e));
@@ -756,11 +741,11 @@ export default function About() {
           </div>
 
           {/* Clean, Uniform Executive Leadership Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {team.map((member) => (
               <div
                 key={member.id}
-                className="bg-[#FAFCFB] rounded-3xl p-6 border border-[#D4ECE9] hover:border-brand-primary/50 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
+                className="bg-[#FAFCFB] rounded-3xl p-7 border border-[#D4ECE9] hover:border-brand-primary/50 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
                   {/* Avatar & Role Badge */}
@@ -768,8 +753,8 @@ export default function About() {
                     <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#021814] to-[#00A79D] text-white flex items-center justify-center font-black text-xl shadow-sm group-hover:scale-105 transition-transform duration-200">
                       <span>{member.initials || member.name.charAt(0)}</span>
                     </div>
-                    <span className="text-[10px] font-bold font-mono uppercase px-2.5 py-1 rounded-full bg-[#E6F7F5] text-[#008C84] border border-[#BBE5E1]">
-                      Executive
+                    <span className="text-[10px] font-bold font-mono uppercase px-3 py-1 rounded-full bg-[#E6F7F5] text-[#008C84] border border-[#BBE5E1]">
+                      Managing Partner
                     </span>
                   </div>
 

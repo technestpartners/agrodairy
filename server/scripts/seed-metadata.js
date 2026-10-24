@@ -162,21 +162,19 @@ async function seedMetadata() {
   }
   console.log('✓ Testimonials seeded');
 
-  // 8. Team Members
+  // 8. Team Members (Only Managing Partners J.P. Vora & Kalpesh Thummar)
+  await conn.query('DELETE FROM team_members');
   const team = [
-    { name: 'J.P. Vora', position: 'Managing Partner', bio: '25+ years of agricultural commodities procurement, export development, and global trade across Asia, Middle East, and Europe.', email: 'agrodairyexportllp@gmail.com', sort_order: 1 },
-    { name: 'Bhavesh Thummar', position: 'Director — Supply Chain & Processing Operations', bio: 'Oversees state-of-the-art sorting and processing facilities in Gujarat, contract farming programs, and port logistics coordination.', email: 'bhavesh@agrodairy.com', sort_order: 2 },
-    { name: 'Rajesh Patel', position: 'Head of International Trade & RFQ Relations', bio: 'Specializes in ocean freight logistics, Incoterm negotiations, and client relationship management across GCC and European markets.', email: 'sales@agrodairy.com', sort_order: 3 },
-    { name: 'Dr. Hiren Mehta', position: 'Chief Quality Officer & Food Technologist', bio: 'PhD in Food Safety leading laboratory chromatography, Aflatoxin elimination, HACCP auditing, and phytosanitary compliance.', email: 'quality@agrodairy.com', sort_order: 4 }
+    { name: 'J.P. Vora', position: 'Managing Partner', bio: '25+ years of agricultural commodities procurement, export development, and global trade across Asia, Middle East, and Europe. Leads buyer negotiations, maritime Incoterms execution, and Saurashtra farmer origination.', email: 'agrodairyexportllp@gmail.com', sort_order: 1 },
+    { name: 'Kalpesh Thummar', position: 'Managing Partner', bio: 'Oversees strategic agricultural sourcing, international supply chain operations, processing facility quality control, optical Sortex grading, and port dispatch management.', email: 'kalpesh@agrodairy.com', sort_order: 2 }
   ];
   for (const tm of team) {
     await conn.query(`
       INSERT INTO team_members (name, position, bio, email, is_active, sort_order, created_at, updated_at)
       VALUES (?, ?, ?, ?, 1, ?, NOW(), NOW())
-      ON DUPLICATE KEY UPDATE name=VALUES(name), position=VALUES(position), bio=VALUES(bio), updated_at=NOW();
     `, [tm.name, tm.position, tm.bio, tm.email, tm.sort_order]);
   }
-  console.log('✓ Team members seeded');
+  console.log('✓ Team members seeded (J.P. Vora & Kalpesh Thummar)');
 
   // 9. Infrastructure
   try {

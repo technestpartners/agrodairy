@@ -15,12 +15,37 @@ router.get('/infrastructure', async (req, res) => {
 
 // GET /api/company/team
 router.get('/team', async (req, res) => {
+  const fallback = [
+    { id: 1, name: 'J.P. Vora', position: 'Managing Partner', bio: '25+ years of agricultural commodities procurement, export development, and global trade across Asia, Middle East, and Europe.', email: 'agrodairyexportllp@gmail.com', sort_order: 1 },
+    { id: 2, name: 'Kalpesh Thummar', position: 'Managing Partner', bio: 'Oversees strategic agricultural sourcing, international supply chain operations, processing facility quality control, optical Sortex grading, and port dispatch management.', email: 'kalpesh@agrodairy.com', sort_order: 2 }
+  ];
+
   try {
     const [rows] = await pool.query('SELECT * FROM team_members WHERE is_active = 1 ORDER BY sort_order ASC');
-    res.json({ success: true, data: rows });
+    if (!rows || rows.length === 0) {
+      return res.json({ success: true, data: fallback });
+    }
+    const filtered = [];
+    const seen = new Set();
+    for (const r of rows) {
+      const lower = (r.name || '').toLowerCase();
+      const isVora = lower.includes('vora');
+      const isKalpesh = lower.includes('kalpesh');
+      if (isVora || isKalpesh) {
+        const key = isVora ? 'vora' : 'kalpesh';
+        if (!seen.has(key)) {
+          seen.add(key);
+          filtered.push({
+            ...r,
+            position: 'Managing Partner'
+          });
+        }
+      }
+    }
+    res.json({ success: true, data: filtered.length > 0 ? filtered : fallback });
   } catch (error) {
     console.error('Error fetching team members:', error);
-    res.status(500).json({ success: false, message: 'Server error' });
+    res.json({ success: true, data: fallback });
   }
 });
 
