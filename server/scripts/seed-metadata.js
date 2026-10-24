@@ -222,7 +222,7 @@ async function seedMetadata() {
     { hs_code: '1207.40.90', product_name: 'Natural Sesame Seeds', category: 'Sesame Seeds', gst_export_incentive: 'RoDTEP 1.0%', standard_description: 'Sesamum seeds, whether or not broken: Other than planting / of seed quality' },
     { hs_code: '1207.40.10', product_name: 'Hulled Sesame Seeds', category: 'Sesame Seeds', gst_export_incentive: 'RoDTEP 1.2%', standard_description: 'Sesamum seeds, whether or not broken: Hulled / Decorticated' },
     { hs_code: '0909.31.29', product_name: 'Cumin Seeds (Whole)', category: 'Spices', gst_export_incentive: 'RoDTEP 2.0%', standard_description: 'Seeds of anise, badian, fennel, coriander, cumin or caraway: Cumin seeds' },
-    { hs_code: '0713.20.10', product_name: 'Kabuli Chickpeas (Garbanzo Beans)', category: 'Chickpeas', gst_export_incentive: 'RoDTEP 1.0%', standard_description: 'Dried leguminous vegetables, shelled: Chickpeas (garbanzos): Kabuli chana' },
+    { hs_code: '0713.20.10', product_name: 'Kabuli Chickpeas', category: 'Chickpeas', gst_export_incentive: 'RoDTEP 1.0%', standard_description: 'Dried leguminous vegetables, shelled: Chickpeas (garbanzos): Kabuli chana' },
     { hs_code: '0405.90.20', product_name: 'Pure Cow Ghee', category: 'Dairy Products', gst_export_incentive: 'RoDTEP 2.0%', standard_description: 'Butter and other fats and oils derived from milk; dairy spreads: Ghee' }
   ];
   for (const h of hsCodes) {

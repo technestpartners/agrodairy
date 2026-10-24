@@ -31,12 +31,15 @@ export function getCommodityImage(type) {
     case 'green_moong':
     case 'moong':
       return '/images/bg/green-moong.jpg';
+    case 'kabuli':
+    case 'kabuli-chickpeas':
+      return '/images/products/kabuli-chickpeas.jpg';
     case 'chickpea':
     case 'chickpeas':
-    case 'kabuli':
     case 'desi-chana':
+    case 'desi-chickpeas':
     case 'chana':
-      return '/images/bg/chickpeas.jpg';
+      return '/images/products/desi-chickpeas.jpg';
     case 'ghee':
     case 'dairy':
     case 'cow-ghee':
@@ -168,7 +171,7 @@ export function CatalogBgDecorations() {
             WebkitMaskImage: 'radial-gradient(circle at center, black 30%, rgba(0,0,0,0.5) 55%, transparent 75%)'
           }}
         >
-          <img src="/images/bg/chickpeas.jpg" alt="Kabuli Chickpeas" className="w-full h-full object-contain filter contrast-110" />
+          <img src="/images/products/kabuli-chickpeas.jpg" alt="Kabuli Chickpeas" className="w-full h-full object-contain filter contrast-110" />
         </div>
       </div>
     </div>
@@ -233,7 +236,7 @@ export function RfqBgDecorations() {
             WebkitMaskImage: 'radial-gradient(circle at center, black 30%, rgba(0,0,0,0.5) 55%, transparent 75%)'
           }}
         >
-          <img src="/images/bg/chickpeas.jpg" alt="Desi Chickpeas" className="w-full h-full object-contain filter contrast-110" />
+          <img src="/images/products/desi-chickpeas.jpg" alt="Desi Chickpeas" className="w-full h-full object-contain filter contrast-110" />
         </div>
       </div>
     </div>
@@ -456,7 +459,7 @@ export function AboutExpertiseDecorations() {
             WebkitMaskImage: 'radial-gradient(circle at center, black 30%, rgba(0,0,0,0.5) 55%, transparent 75%)'
           }}
         >
-          <img src="/images/bg/chickpeas.jpg" alt="Desi Chickpeas" className="w-full h-full object-contain filter contrast-110" />
+          <img src="/images/products/desi-chickpeas.jpg" alt="Desi Chickpeas" className="w-full h-full object-contain filter contrast-110" />
         </div>
       </div>
     </div>

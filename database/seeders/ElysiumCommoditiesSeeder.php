@@ -748,7 +748,7 @@ class ElysiumCommoditiesSeeder extends Seeder
             // CHICKPEAS (GARBANZO BEANS)
             [
                 'category' => 'chickpeas',
-                'name' => 'Kabuli Chickpeas (Large Caliber)',
+                'name' => 'Kabuli Chickpeas',
                 'slug' => 'kabuli-chickpeas',
                 'sku' => 'ADE-CK-KAB',
                 'short_description' => 'Jumbo caliber (40/42, 42/44, 44/46 count) Kabuli Chickpeas with bright cream skins.',
@@ -774,7 +774,7 @@ class ElysiumCommoditiesSeeder extends Seeder
             ],
             [
                 'category' => 'chickpeas',
-                'name' => 'Desi Chickpeas (Brown Bengal Gram)',
+                'name' => 'Desi Chickpeas',
                 'slug' => 'desi-chickpeas',
                 'sku' => 'ADE-CK-DES',
                 'short_description' => 'Dark brown, angular Desi chickpeas packed with protein and dietary fiber.',

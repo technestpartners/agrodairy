@@ -73,10 +73,11 @@ export function getProductFallback(product) {
   if (slug.includes('moong') || slug.includes('mung')) {
     return '/images/products/green-moong-beans.jpg';
   }
-  if (slug.includes('desi') || slug.includes('bengal-gram') || slug.includes('kala-chana')) {
+  const name = (product?.name || '').toLowerCase();
+  if (slug.includes('desi') || name.includes('desi') || slug.includes('bengal') || slug.includes('kala-chana')) {
     return '/images/products/desi-chickpeas.jpg';
   }
-  if (slug.includes('chickpea') || slug.includes('chana') || category.includes('chickpea') || slug.includes('kabuli') || slug.includes('garbanzo')) {
+  if (slug.includes('kabuli') || name.includes('kabuli') || slug.includes('chickpea') || slug.includes('chana') || category.includes('chickpea') || slug.includes('garbanzo')) {
     return '/images/products/kabuli-chickpeas.jpg';
   }
   if (slug.includes('sorghum') || slug.includes('jowar') || slug.includes('wheat') || category.includes('grain')) {

@@ -258,8 +258,8 @@ async function syncData() {
     },
     {
       category_slug: 'pulses-beans',
-      name: 'Desi Chickpeas (Bengal Gram)',
-      slug: 'desi-chickpeas-bengal-gram',
+      name: 'Desi Chickpeas',
+      slug: 'desi-chickpeas',
       origin: 'Gujarat & Western India',
       grade_variety: 'Size Caliber: 5-7mm / 6-8mm',
       hs_code: '0713.20.20',
@@ -285,8 +285,8 @@ async function syncData() {
     },
     {
       category_slug: 'pulses-beans',
-      name: 'Kabuli Chickpea (Garbanzo Beans)',
-      slug: 'kabuli-chickpea-garbanzo',
+      name: 'Kabuli Chickpeas',
+      slug: 'kabuli-chickpeas',
       origin: 'Gujarat & Central India',
       grade_variety: 'Counts: 38/40 to 75/80 (8mm to 12mm+)',
       hs_code: '0713.20.10',
