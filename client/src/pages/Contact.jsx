@@ -43,7 +43,6 @@ export default function Contact() {
     'Pure Desi Cow Ghee & Buffalo Ghee',
     'Green Pearl Millet (Bajra) & Sorghum',
     'Desi & Large Caliber Kabuli Chickpeas',
-    'Natural White & Auto-Hulled Sesame Seeds',
     'Yellow Maize (Animal Feed & Food Grade)',
     'Cumin Seeds (Jeera) & Whole Spices',
     'Multiple Commodities / Mixed Consignment'

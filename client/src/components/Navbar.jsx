@@ -308,33 +308,6 @@ export default function Navbar() {
                         </div>
                       </Link>
 
-                      {/* 2. Sesame Seeds */}
-                      <Link
-                        to="/products?category=sesame-seeds"
-                        onClick={() => setProductsOpen(false)}
-                        className="group/item flex items-center justify-between p-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-[#E6F7F5] hover:text-[#003732] transition-colors duration-150 border border-transparent hover:border-[#BBE5E1]"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-xl bg-teal-50 text-brand-primary border border-teal-200/60 flex items-center justify-center shrink-0 group-hover/item:scale-105 transition-transform">
-                            <Sparkles className="w-4 h-4" />
-                          </div>
-                          <div>
-                            <div className="font-bold text-[13px] text-[#0C2422] group-hover/item:text-brand-primary transition-colors">
-                              Natural White &amp; Hulled Sesame
-                            </div>
-                            <div className="text-[11px] text-[#4D6765] font-sans">
-                              Gujarat harvest, 99.9% Sortex purity, auto-color sorted
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2 shrink-0">
-                          <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-teal-50 text-teal-800 border border-teal-200/60">
-                            Oilseeds
-                          </span>
-                          <ChevronRight className="w-3.5 h-3.5 text-slate-300 group-hover/item:text-brand-primary group-hover/item:translate-x-0.5 transition-all" />
-                        </div>
-                      </Link>
-
                       {/* 3. Dairy */}
                       <Link
                         to="/products?category=dairy-products"

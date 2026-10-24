@@ -286,7 +286,7 @@ export const GALLERY_ITEMS = [
     category: 'Packaging & Warehouse',
     image: '/images/gallery/gallery-35.jpg',
     location: 'Central Storage Facility',
-    desc: 'Pest-controlled, moisture-monitored warehouse holding ready export stocks of sesame, peanuts, and pulses.'
+    desc: 'Pest-controlled, moisture-monitored warehouse holding ready export stocks of bold peanuts, grains, and pulses.'
   },
   {
     id: 36,
@@ -390,7 +390,7 @@ export const GALLERY_ITEMS = [
     category: 'Commodities',
     image: '/images/gallery/gallery-48.jpg',
     location: 'Processing Hub, Saurashtra',
-    desc: 'Raw and processed sesame seeds and peanuts held under controlled humidity prior to bagging.'
+    desc: 'Raw and processed bold peanuts and grains held under controlled humidity prior to bagging.'
   },
   {
     id: 49,
