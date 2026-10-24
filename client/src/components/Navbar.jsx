@@ -87,7 +87,7 @@ export default function Navbar() {
         className={`w-full bg-[#002B26] text-white transition-[max-height,opacity,padding,border-color] duration-300 ease-in-out border-b ${
           scrolled 
             ? 'max-h-0 opacity-0 overflow-hidden py-0 border-transparent pointer-events-none' 
-            : 'max-h-14 opacity-100 py-2 px-4 border-[#00A79D]/20'
+            : 'max-h-36 md:max-h-14 opacity-100 py-2 px-3 sm:px-4 border-[#00A79D]/20'
         }`}
       >
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2 text-xs">

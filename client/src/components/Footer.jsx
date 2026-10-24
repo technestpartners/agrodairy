@@ -47,7 +47,7 @@ export default function Footer() {
           SECTION A: UNIQUELY SHAPED FLOATING TRADE CAPSULE
           ═══════════════════════════════════════ */}
       <div className="section-container relative z-20 -mb-24 sm:-mb-28 lg:-mb-32 px-4 sm:px-6">
-        <div className="relative rounded-[2.5rem] sm:rounded-[3.5rem] overflow-hidden bg-gradient-to-br from-[#062B24] via-[#0B3A32] to-[#041D18] p-8 sm:p-12 lg:p-16 text-white shadow-[0_24px_64px_rgba(0,35,30,0.35)] border border-[#00A79D]/35">
+        <div className="relative rounded-3xl sm:rounded-[3.5rem] overflow-hidden bg-gradient-to-br from-[#062B24] via-[#0B3A32] to-[#041D18] p-5 sm:p-10 lg:p-16 text-white shadow-[0_24px_64px_rgba(0,35,30,0.35)] border border-[#00A79D]/35">
           {/* Subtle geometric dot grid pattern */}
           <div 
             className="absolute inset-0 bg-[radial-gradient(#00A79D_1px,transparent_1px)] [background-size:24px_24px] opacity-15 pointer-events-none" 

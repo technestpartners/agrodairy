@@ -282,9 +282,36 @@
 }
 
 /* ===== RESPONSIVE OVERFLOW FIX & BUTTERY SMOOTH RENDER ===== */
-body {
+html, body {
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
   -webkit-overflow-scrolling: touch;
+}
+
+#root {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure images, svgs and embeds never cause horizontal scroll */
+img, video, iframe, embed, object {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Better typography wrapping on small mobile screens */
+p, h1, h2, h3, h4, h5, h6, li {
+  overflow-wrap: break-word;
+}
+
+/* Smooth mobile tap highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* ===== ULTRA SMOOTH RENDERING & HARDWARE ACCELERATION ===== */
