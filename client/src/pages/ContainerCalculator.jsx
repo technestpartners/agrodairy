@@ -155,7 +155,7 @@ export default function ContainerCalculator() {
                   className="w-full bg-[#F8FAF9] border border-[#D4ECE9] rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#00A79D] focus:bg-white transition text-[#0C2422]"
                 >
                   <option value="peanuts">Peanuts &amp; Groundnut Kernels</option>
-                  <option value="sesame">Sesame Seeds (Hulled &amp; Natural)</option>
+                  <option value="dairy">Pure Indian Cow &amp; Buffalo Ghee</option>
                   <option value="spices">Whole Spices (Cumin, Coriander, Fennel)</option>
                   <option value="pulses">Chickpeas &amp; Pulses</option>
                   <option value="grains">Grains &amp; Basmati Rice</option>
@@ -322,7 +322,7 @@ export default function ContainerCalculator() {
               Need Mixed Containers or Palletized Stuffing?
             </h3>
             <p className="text-xs sm:text-sm text-emerald-100/75 mt-2 font-sans leading-relaxed">
-              Agro Dairy accommodates mixed container loads (e.g. 10 MT Peanuts + 9 MT Sesame) with heat-treated ISPM-15 wooden pallets and shrink wrapping.
+              Agro Dairy accommodates mixed container loads (e.g. 10 MT Peanuts + 9 MT Chickpeas) with heat-treated ISPM-15 wooden pallets and shrink wrapping.
             </p>
           </div>
 

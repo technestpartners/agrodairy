@@ -271,7 +271,7 @@ export default function Products() {
               Need Multi-Commodity Mixed Containers or Custom Packaging?
             </h3>
             <p className="text-xs sm:text-sm text-emerald-100/75 mt-2 font-sans leading-relaxed">
-              We consolidate multiple commodities (e.g. Peanuts + Sesame + Chickpeas + Ghee) in single 20ft / 40ft containers under one unified Bill of Lading, saving freight and import duties.
+              We consolidate multiple commodities (e.g. Peanuts + Grains + Chickpeas + Ghee) in single 20ft / 40ft containers under one unified Bill of Lading, saving freight and import duties.
             </p>
           </div>
 

@@ -803,7 +803,7 @@ export default function AdminDashboard() {
     { id: 'about', title: 'About & Story', category: 'CMS Content', icon: Building2, desc: 'Company mission, origin aggregation narrative, sourcing belts', action: () => { setActiveTab('about'); setCommandPaletteOpen(false); } },
     { id: 'company', title: 'Company & Certs', category: 'CMS Content', icon: ShieldCheck, desc: 'APEDA, FSSAI, IEC, ISO registrations & statutory compliance', action: () => { setActiveTab('company'); setCommandPaletteOpen(false); } },
     { id: 'footer', title: 'Footer & Legal Terms', category: 'CMS Content', icon: Compass, desc: 'Footer text, dispatch disclaimers, global export terms', action: () => { setActiveTab('footer'); setCommandPaletteOpen(false); } },
-    { id: 'commodities', title: 'Commodities Catalog', category: 'Commodities & Trade', icon: ShoppingBag, desc: 'Manage peanuts, sesame, pulses, grains and pure ghee', action: () => { setActiveTab('commodities'); setCommandPaletteOpen(false); } },
+    { id: 'commodities', title: 'Commodities Catalog', category: 'Commodities & Trade', icon: ShoppingBag, desc: 'Manage peanuts, pulses, grains and pure ghee', action: () => { setActiveTab('commodities'); setCommandPaletteOpen(false); } },
     { id: 'add-commodity', title: 'Add New Commodity', category: 'Quick Action', icon: Plus, desc: 'Create a new agricultural or dairy export listing', action: () => { setActiveTab('commodities'); handleOpenCommodityModal(); setCommandPaletteOpen(false); } },
     { id: 'traceability', title: 'Traceability Lots & Batches', category: 'Commodities & Trade', icon: Scale, desc: 'Inspect lot numbers, container stuffing and COA test reports', action: () => { setActiveTab('traceability'); setCommandPaletteOpen(false); } },
     { id: 'ports', title: 'Gateway Ports & Routes', category: 'Commodities & Trade', icon: Anchor, desc: 'Mundra, Kandla and Hazira seaport berths and liner corridors', action: () => { setActiveTab('ports'); setCommandPaletteOpen(false); } },
@@ -4007,7 +4007,7 @@ export default function AdminDashboard() {
                   <option value="Grains">Grains</option>
                   <option value="Pulses">Pulses</option>
                   <option value="Dairy Ghee">Dairy Ghee</option>
-                  <option value="Oilseeds">Oilseeds &amp; Sesame</option>
+                  <option value="Spices">Whole Spices</option>
                 </select>
               </div>
 

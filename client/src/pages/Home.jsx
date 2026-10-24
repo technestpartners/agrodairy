@@ -33,7 +33,7 @@ const FAQS = [
   },
   {
     q: "What agricultural and dairy products does Agro Dairy export?",
-    a: "We export pure Indian Cow Ghee and Buffalo Ghee, Bold Peanut Kernels (38/42 to 70/80 counts), Grains & Millets (Green Pearl/Foxtail Millet, Sorghum/Jowar, Yellow & White Maize), Pulses (Green Moong Beans, Moong Mogar split mung, Desi Chickpeas, Kabuli Chickpeas), and Sesame Seeds."
+    a: "We export pure Indian Cow Ghee and Buffalo Ghee, Bold Peanut Kernels (38/42 to 70/80 counts), Grains & Millets (Green Pearl/Foxtail Millet, Sorghum/Jowar, Yellow & White Maize), and Pulses (Green Moong Beans, Moong Mogar split mung, Desi Chickpeas, Kabuli Chickpeas)."
   },
   {
     q: "Can one supplier ship grains, pulses, peanuts, and dairy ghee in a single container?",

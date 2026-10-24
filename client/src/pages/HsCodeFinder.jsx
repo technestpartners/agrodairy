@@ -153,7 +153,7 @@ export default function HsCodeFinder() {
                   ) : codes.length === 0 ? (
                     <tr>
                       <td colSpan="5" className="py-12 text-center text-[#4D6765] font-mono">
-                        No tariff entries found for "{search}". Try searching for Peanuts, Sesame, Chickpeas, or Ghee.
+                        No tariff entries found for "{search}". Try searching for Peanuts, Pulses, Chickpeas, or Ghee.
                       </td>
                     </tr>
                   ) : (

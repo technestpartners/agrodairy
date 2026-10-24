@@ -63,7 +63,7 @@ export default function Contact() {
     },
     {
       q: 'What is your standard Minimum Order Quantity (MOQ)? Can we consolidate mixed containers?',
-      a: 'Our standard MOQ is one 20ft Full Container Load (approx. 18 to 20 Metric Tons depending on product density). We also offer customized multi-commodity container consolidation—enabling buyers to combine Peanuts, Sesame, Chickpeas, and Ghee in a single 20ft or 40ft container under one unified Bill of Lading.'
+      a: 'Our standard MOQ is one 20ft Full Container Load (approx. 18 to 20 Metric Tons depending on product density). We also offer customized multi-commodity container consolidation—enabling buyers to combine Peanuts, Green Millet, Chickpeas, and Ghee in a single 20ft or 40ft container under one unified Bill of Lading.'
     },
     {
       q: 'Which Incoterms do you quote, and what are your primary gateway export ports?',

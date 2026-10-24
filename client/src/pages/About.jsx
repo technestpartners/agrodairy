@@ -60,10 +60,10 @@ const SOURCING_BELTS = [
   {
     region: 'Unjha Spice & Seed Belt',
     hubs: 'Unjha, Mehsana, Banaskantha, Patan',
-    crops: 'Natural White Sesame, Hulled Sesame (99.95%), Cumin (Jeera), Fennel (Variyali)',
+    crops: 'Cumin (Jeera), Fennel (Variyali), Coriander Seeds, Mustard Seeds',
     purity: '99.5%–99.95% Purity',
     aflatoxin: 'Pesticide Tested',
-    description: 'The global trading epicenter for high-essential-oil cumin seeds and snow-white mechanically hulled sesame seeds ready for bakery and tahini applications.'
+    description: 'The global trading epicenter for high-essential-oil cumin seeds and premium whole spices ready for grinding, seasoning, and export packaging.'
   },
   {
     region: 'Bhal & Central Gujarat Agro Basin',
@@ -107,7 +107,7 @@ const PORT_ROUTES = [
     transit: '10 – 14 Days',
     frequency: '3 Sailings / Week',
     vesselLine: 'Evergreen, ONE, Wan Hai',
-    status: 'Major Peanut & Sesame Flow'
+    status: 'Major Peanut & Pulses Flow'
   },
   {
     port: 'Chittagong, Bangladesh',
@@ -350,7 +350,7 @@ export default function About() {
               {/* Mission Narrative */}
               <p className="text-base sm:text-lg text-[#4D6765] leading-relaxed font-normal max-w-2xl font-sans">
                 Headquartered in Surat with direct procurement desks across Gujarat and Saurashtra farming belts, 
-                <strong className="text-[#0C2422] font-semibold"> {settings?.company_name || 'Agro Dairy Export LLP'}</strong> delivers international commodity buyers calibrated Bold Peanuts, high-purity Sesame Seeds, Whole Spices, Pulses, Grains, and pure Indian Dairy Ghee backed by rigorous optical Sortex grading and accredited laboratory analysis.
+                <strong className="text-[#0C2422] font-semibold"> {settings?.company_name || 'Agro Dairy Export LLP'}</strong> delivers international commodity buyers calibrated Bold Peanuts, Whole Spices, Pulses, Grains, and pure Indian Dairy Ghee backed by rigorous optical Sortex grading and accredited laboratory analysis.
               </p>
 
               {/* Action Buttons & Fast RFQ Desk */}
@@ -626,9 +626,9 @@ export default function About() {
               <div className="text-3xl sm:text-4xl font-black text-[#0C2422] font-mono tracking-tight">
                 15,000<span className="text-[#F5B800]">+</span> MT
               </div>
-              <div className="text-sm font-bold text-slate-900 mt-1">Bold Peanuts &amp; Sesame</div>
+              <div className="text-sm font-bold text-slate-900 mt-1">Bold Peanuts &amp; Groundnuts</div>
               <p className="text-xs text-[#4D6765] mt-2 leading-relaxed font-sans">
-                Calibrated groundnut kernels and natural white/hulled sesame seeds annually graded and exported.
+                Calibrated bold and java groundnut kernels annually Sortex-graded and exported.
               </p>
               <div className="mt-4 pt-3 border-t border-[#D4ECE9] text-[11px] font-mono text-brand-primary font-bold">
                 EU &amp; GCC Spec Compliant

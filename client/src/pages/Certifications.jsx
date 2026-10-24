@@ -284,7 +284,7 @@ export default function Certifications() {
               Strict European-Grade Aflatoxin &amp; <span className="text-brand-primary">Microbiological Limits</span>
             </h2>
             <p className="text-base text-[#4D6765] mt-3 leading-relaxed font-sans">
-              All peanut, sesame, and grain shipments undergo High-Performance Liquid Chromatography (HPLC) testing prior to port dispatch. We guarantee complete compliance with European Commission Regulation (EC) 1881/2006.
+              All peanut, pulse, and grain shipments undergo High-Performance Liquid Chromatography (HPLC) testing prior to port dispatch. We guarantee complete compliance with European Commission Regulation (EC) 1881/2006.
             </p>
           </div>
 

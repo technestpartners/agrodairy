@@ -554,7 +554,7 @@ export default function Rfq() {
 
                 <div className="p-3 rounded-2xl bg-white/5 border border-white/10">
                   <span className="text-[#5EEAD4] font-bold block mb-0.5">40ft High Cube Container (FCL)</span>
-                  <span className="text-slate-300">Sesame / Pulses: ~26 to 27 Metric Tons</span>
+                  <span className="text-slate-300">Pulses / Chickpeas: ~26 to 27 Metric Tons</span>
                   <span className="block text-[11px] text-slate-400 mt-0.5">520 to 540 Bags (50 Kg PP)</span>
                 </div>
 

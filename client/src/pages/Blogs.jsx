@@ -74,7 +74,7 @@ export default function Blogs() {
               </h1>
 
               <p className="text-base sm:text-lg text-[#4D6765] leading-relaxed font-sans max-w-2xl">
-                Essential analysis from the Agro Dairy commercial trade desk: Saurashtra peanut harvest estimates, sesame seed yield dynamics, DGFT export policy updates, and Red Sea ocean freight adjustments.
+                Essential analysis from the Agro Dairy commercial trade desk: Saurashtra peanut harvest estimates, chickpea &amp; pulse export dynamics, DGFT export policy updates, and Red Sea ocean freight adjustments.
               </p>
             </div>
 

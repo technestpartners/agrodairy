@@ -213,11 +213,11 @@ export default function Traceability() {
             </button>
             <button
               type="button"
-              onClick={() => setSampleBatch('AGRO-SES-2026-0419')}
+              onClick={() => setSampleBatch('AGRO-GHEE-2026-0419')}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#F4F9F8] hover:bg-[#E6F7F5] text-brand-primary font-mono font-bold transition-all border border-[#D4ECE9]"
             >
-              <span>AGRO-SES-2026-0419</span>
-              <span className="text-[10px] text-slate-500 uppercase font-sans">(Natural Sesame)</span>
+              <span>AGRO-GHEE-2026-0419</span>
+              <span className="text-[10px] text-slate-500 uppercase font-sans">(Pure Cow Ghee)</span>
             </button>
           </div>
         </div>
