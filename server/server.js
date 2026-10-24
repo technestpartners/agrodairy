@@ -80,7 +80,6 @@ app.use('/api/tools', toolsRouter);
 app.use('/api/company', companyRouter);
 app.use('/api/admin', adminRouter);
 
-const fs = require('fs');
 
 // Serve React frontend build if available locally
 const clientDistPath = path.join(__dirname, '../client/dist');
