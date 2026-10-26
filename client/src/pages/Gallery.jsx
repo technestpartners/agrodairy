@@ -1,54 +1,38 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Camera, Eye, ArrowRight, ShieldCheck, Ship, Factory, Leaf, 
-  Package, MapPin, CheckCircle2, X, ChevronLeft, ChevronRight,
-  Sparkles, FlaskConical, Container, Warehouse, Award, MessageCircle,
-  Layers
+  Camera, Eye, ArrowRight, ShieldCheck, X, ChevronLeft, ChevronRight,
+  Award, MessageCircle, Layers
 } from 'lucide-react';
 import { RealProductSectionFlanks, PageHeroDecorations } from '../components/ProductBackgroundDecorations';
 import { useSettings } from '../context/SettingsContext';
-import { GALLERY_ITEMS, GALLERY_CATEGORIES } from '../data/galleryData';
-
-const INITIAL_PAGE_SIZE = 16;
+import { GALLERY_ITEMS } from '../data/galleryData';
 
 export default function Gallery() {
   const { gallery: liveGallery } = useSettings();
-  const [activeCategory, setActiveCategory] = useState('All');
   const [selectedImage, setSelectedImage] = useState(null);
-  const [visibleCount, setVisibleCount] = useState(INITIAL_PAGE_SIZE);
 
   // Live gallery items synced automatically across sessions without refreshing
   const items = (liveGallery && liveGallery.length > 0) ? liveGallery : GALLERY_ITEMS;
 
-  const filteredItems = activeCategory === 'All'
-    ? items
-    : items.filter(item => item.category === activeCategory);
-
-  // Reset pagination when category changes
-  const handleCategoryChange = (cat) => {
-    setActiveCategory(cat);
-    setVisibleCount(INITIAL_PAGE_SIZE);
-  };
-
   // Lightbox Navigation
-  const currentIndex = selectedImage ? filteredItems.findIndex(i => i.id === selectedImage.id) : -1;
+  const currentIndex = selectedImage ? items.findIndex(i => i.id === selectedImage.id) : -1;
 
   const handlePrev = useCallback(() => {
     if (currentIndex > 0) {
-      setSelectedImage(filteredItems[currentIndex - 1]);
+      setSelectedImage(items[currentIndex - 1]);
     } else {
-      setSelectedImage(filteredItems[filteredItems.length - 1]);
+      setSelectedImage(items[items.length - 1]);
     }
-  }, [currentIndex, filteredItems]);
+  }, [currentIndex, items]);
 
   const handleNext = useCallback(() => {
-    if (currentIndex < filteredItems.length - 1) {
-      setSelectedImage(filteredItems[currentIndex + 1]);
+    if (currentIndex < items.length - 1) {
+      setSelectedImage(items[currentIndex + 1]);
     } else {
-      setSelectedImage(filteredItems[0]);
+      setSelectedImage(items[0]);
     }
-  }, [currentIndex, filteredItems]);
+  }, [currentIndex, items]);
 
   // Keyboard navigation for lightbox
   useEffect(() => {
@@ -69,7 +53,7 @@ export default function Gallery() {
       <RealProductSectionFlanks leftType="shelled-peanuts" rightType="pearl-millet" opacity="opacity-10 lg:opacity-15" />
 
       {/* ══════════════════════════════════════════════════════════════════════════
-          HERO BANNER: INFRASTRUCTURE & DISPATCH GALLERY (Clean, Minimal Home Palette)
+          HERO BANNER: INFRASTRUCTURE & DISPATCH GALLERY
           ══════════════════════════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden bg-[#F4F9F8] text-[#0C2422] pt-14 pb-16 sm:pt-18 sm:pb-20 lg:pt-20 lg:pb-24 border-b border-[#D4ECE9]">
         <PageHeroDecorations 
@@ -80,7 +64,7 @@ export default function Gallery() {
         />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Breadcrumb Navigation with generous top clearance */}
+          {/* Breadcrumb Navigation */}
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-[#4D6765] mb-6 font-mono">
             <Link to="/" className="hover:text-brand-primary transition-colors flex items-center gap-1">
               <span>Home</span>
@@ -130,126 +114,47 @@ export default function Gallery() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════════════
-          GALLERY CATEGORY TABS & IMAGE GRID (Clean, Minimal Home-Page Aesthetic)
+          PHOTO GALLERY GRID (Clean Pure Photos - No Names or Details)
           ══════════════════════════════════════════════════════════════════════════ */}
-      <section className="relative z-20 -mt-7 sm:-mt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-8">
+      <section className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-6">
         
-        {/* Floating Category Filter Dock */}
-        <div className="bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-4 shadow-lg border border-[#D4ECE9]">
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 custom-scrollbar">
-            {GALLERY_CATEGORIES.map(category => {
-              const count = category === 'All'
-                ? items.length
-                : items.filter(i => i.category === category).length;
-
-              return (
-                <button
-                  type="button"
-                  key={category}
-                  onClick={() => handleCategoryChange(category)}
-                  className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs font-ui font-bold transition-all shrink-0 flex items-center gap-2 ${
-                    activeCategory === category
-                      ? 'bg-brand-primary text-white shadow-sm'
-                      : 'bg-[#F4F9F8] hover:bg-[#E6F7F5] text-slate-700 border border-[#D4ECE9]'
-                  }`}
-                >
-                  <span>{category}</span>
-                  <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full ${
-                    activeCategory === category
-                      ? 'bg-white/20 text-white font-bold'
-                      : 'bg-white text-slate-500 border border-slate-200'
-                  }`}>
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
         {/* Total count indicator */}
         <div className="flex items-center justify-between text-xs text-[#4D6765] px-1 font-mono">
           <div className="flex items-center gap-2 font-medium">
             <Layers className="w-4 h-4 text-brand-primary" />
-            <span>Showing {Math.min(visibleCount, filteredItems.length)} of {filteredItems.length} Operational Photographs</span>
+            <span>Operational Photographs ({items.length})</span>
           </div>
-          {filteredItems.length > visibleCount && (
-            <button
-              onClick={() => setVisibleCount(filteredItems.length)}
-              className="text-brand-primary hover:underline font-bold font-ui"
-            >
-              Show all ({filteredItems.length})
-            </button>
-          )}
         </div>
 
-        {/* Responsive Photo-First Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredItems.slice(0, visibleCount).map((item) => (
+        {/* Responsive Photo-First Grid (Pure Photos Only) */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          {items.map((item, index) => (
             <div
-              key={item.id}
+              key={item.id || index}
               onClick={() => setSelectedImage(item)}
-              className="group relative aspect-[4/3] rounded-3xl overflow-hidden bg-slate-900 border border-[#D4ECE9] shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col justify-end"
+              className="group relative aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-100 border border-[#D4ECE9] shadow-sm hover:shadow-2xl transition-all duration-300 cursor-pointer"
             >
-              {/* Photo */}
+              {/* Pure Photo */}
               <img
                 src={item.image}
-                alt={item.title}
+                alt="Agro Dairy Operations"
                 loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = '/images/gallery/gallery-01.jpg';
                 }}
               />
 
-              {/* Gradient Scrim for crisp readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/30 opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
-
-              {/* Top Badges */}
-              <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-10">
-                <span className="bg-white/95 backdrop-blur-md text-[#0C2422] font-mono text-[10px] font-bold px-2.5 py-1 rounded-full border border-[#D4ECE9] shadow-xs">
-                  {item.category}
-                </span>
-
-                <span className="bg-brand-primary/90 backdrop-blur-md text-white text-[10px] font-mono font-bold px-2 py-0.5 rounded-full shadow-xs">
-                  #{item.id}
-                </span>
-              </div>
-
-              {/* Bottom Photo Caption */}
-              <div className="relative z-10 p-4 space-y-1">
-                <h3 className="font-display font-bold text-sm sm:text-base text-white group-hover:text-emerald-300 transition-colors line-clamp-1 drop-shadow-md">
-                  {item.title}
-                </h3>
-                {item.location && (
-                  <div className="flex items-center gap-1.5 text-[11px] text-white/80 font-mono">
-                    <MapPin className="w-3 h-3 text-[#F5B800] shrink-0" />
-                    <span className="truncate">{item.location}</span>
-                  </div>
-                )}
-                {item.desc && (
-                  <p className="text-[11px] text-slate-300 line-clamp-1 font-sans">
-                    {item.desc}
-                  </p>
-                )}
+              {/* Clean hover indicator with preview icon */}
+              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="w-11 h-11 rounded-full bg-white/95 backdrop-blur-sm text-brand-primary flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-100 transition-transform duration-300">
+                  <Eye className="w-5 h-5" />
+                </div>
               </div>
             </div>
           ))}
         </div>
-
-        {/* Load More Button */}
-        {filteredItems.length > visibleCount && (
-          <div className="mt-12 text-center">
-            <button
-              onClick={() => setVisibleCount(prev => Math.min(prev + 16, filteredItems.length))}
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-brand-primary hover:bg-[#008A82] text-white font-ui font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
-            >
-              <span>Load More Photographs ({filteredItems.length - visibleCount} remaining)</span>
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-        )}
 
         {/* Direct Trade Desk Card */}
         <div className="mt-12 bg-white rounded-3xl p-8 sm:p-10 border border-[#D4ECE9] shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
@@ -274,25 +179,25 @@ export default function Gallery() {
         </div>
       </section>
 
-      {/* Lightbox Modal with Next / Prev */}
+      {/* Lightbox Modal with Next / Prev (Pure Photo View - No Names or Details) */}
       {selectedImage && (
         <div 
           onClick={() => setSelectedImage(null)}
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 animate-in fade-in"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 animate-in fade-in"
         >
           {/* Modal Container */}
           <div 
             onClick={e => e.stopPropagation()}
-            className="bg-white rounded-3xl overflow-hidden max-w-4xl w-full shadow-2xl border border-white/20 relative flex flex-col max-h-[92vh]"
+            className="relative max-w-5xl w-full flex flex-col items-center justify-center"
           >
             {/* Modal Controls Bar */}
-            <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
-              <span className="text-xs font-mono font-bold text-white bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
-                {currentIndex + 1} / {filteredItems.length}
+            <div className="w-full flex items-center justify-between pb-3 px-1">
+              <span className="text-xs sm:text-sm font-mono font-bold text-white/90 bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20">
+                {currentIndex + 1} / {items.length}
               </span>
               <button
                 onClick={() => setSelectedImage(null)}
-                className="w-9 h-9 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center transition border border-white/20 shadow-lg"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition border border-white/20 shadow-lg cursor-pointer"
                 aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
@@ -300,17 +205,17 @@ export default function Gallery() {
             </div>
 
             {/* Modal Image Area */}
-            <div className="relative bg-black/95 flex items-center justify-center min-h-[50vh] max-h-[65vh] overflow-hidden group">
+            <div className="relative w-full bg-black/40 rounded-2xl sm:rounded-3xl overflow-hidden flex items-center justify-center min-h-[50vh] max-h-[75vh] border border-white/10 shadow-2xl">
               <img
                 src={selectedImage.image}
-                alt={selectedImage.title}
-                className="max-h-[65vh] max-w-full w-auto h-auto object-contain select-none"
+                alt="Agro Dairy Operations"
+                className="max-h-[75vh] max-w-full w-auto h-auto object-contain select-none rounded-xl"
               />
 
               {/* Prev Button */}
               <button
                 onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 hover:bg-brand-primary text-white flex items-center justify-center transition shadow-lg border border-white/10"
+                className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-black/60 hover:bg-brand-primary text-white flex items-center justify-center transition shadow-lg border border-white/20 cursor-pointer"
                 aria-label="Previous photo"
               >
                 <ChevronLeft className="w-6 h-6" />
@@ -319,82 +224,42 @@ export default function Gallery() {
               {/* Next Button */}
               <button
                 onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 hover:bg-brand-primary text-white flex items-center justify-center transition shadow-lg border border-white/10"
+                className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-black/60 hover:bg-brand-primary text-white flex items-center justify-center transition shadow-lg border border-white/20 cursor-pointer"
                 aria-label="Next photo"
               >
                 <ChevronRight className="w-6 h-6" />
               </button>
-
-              {/* Bottom Specs Bar inside Image */}
-              {selectedImage.specs && (
-                <div className="absolute bottom-4 left-4 right-4 hidden sm:flex items-center justify-between text-white text-xs font-mono bg-black/60 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10">
-                  <span className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-brand-gold animate-pulse" />
-                    <span>{selectedImage.specs}</span>
-                  </span>
-                  {selectedImage.badge && (
-                    <span className="text-white/70">{selectedImage.badge}</span>
-                  )}
-                </div>
-              )}
             </div>
 
-            {/* Modal Info Area */}
-            <div className="p-6 bg-white space-y-3 border-t border-slate-100 overflow-y-auto">
-              <div className="flex items-center gap-3 flex-wrap">
-                <span className="px-3 py-1 rounded-full bg-[#E6F7F5] border border-[#BBE5E1] text-brand-primary text-xs font-mono font-bold">
-                  {selectedImage.category}
-                </span>
-                {selectedImage.location && (
-                  <span className="text-xs text-[#4D6765] flex items-center gap-1 font-medium font-sans">
-                    <MapPin className="w-3.5 h-3.5 text-brand-primary" /> {selectedImage.location}
-                  </span>
-                )}
-                <span className="text-xs text-slate-400 font-mono">
-                  [Ref: #{selectedImage.id}]
-                </span>
-              </div>
-
-              <h2 className="font-display font-extrabold text-xl sm:text-2xl text-[#0C2422]">
-                {selectedImage.title}
-              </h2>
-
-              {selectedImage.desc && (
-                <p className="text-xs sm:text-sm text-[#4D6765] leading-relaxed font-sans">
-                  {selectedImage.desc}
-                </p>
-              )}
-
-              {/* Action Buttons */}
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-slate-100">
-                <div className="flex items-center gap-3 w-full sm:w-auto">
-                  <Link
-                    to="/rfq"
-                    onClick={() => setSelectedImage(null)}
-                    className="w-full sm:w-auto bg-brand-primary hover:bg-[#008A82] text-white font-ui font-bold text-xs px-6 py-3.5 rounded-full transition flex items-center justify-center gap-2 shadow-sm"
-                  >
-                    <span>Inquire for Export Consignment</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-white" />
-                  </Link>
-                  <a
-                    href="https://wa.me/919023363680?text=Hello%20Agro%20Dairy%20Export%20LLP,%20I%20am%20inquiring%20about%20your%20export%20facility%20and%20commodities."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:w-auto bg-[#25D366]/15 hover:bg-[#25D366] text-[#25D366] hover:text-white border border-[#25D366]/30 font-ui font-bold text-xs px-5 py-3.5 rounded-full transition flex items-center justify-center gap-2"
-                  >
-                    <MessageCircle className="w-4 h-4" />
-                    <span>WhatsApp</span>
-                  </a>
-                </div>
-
-                <button
-                  type="button"
+            {/* Bottom Action Bar (Pure actions, NO name or details text) */}
+            <div className="w-full pt-4 flex flex-wrap items-center justify-center sm:justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <Link
+                  to="/rfq"
                   onClick={() => setSelectedImage(null)}
-                  className="text-slate-400 hover:text-slate-700 text-xs font-mono"
+                  className="bg-brand-primary hover:bg-[#008A82] text-white font-ui font-bold text-xs px-5 py-2.5 rounded-full transition flex items-center gap-2 shadow-sm"
                 >
-                  Close Preview (Esc)
-                </button>
+                  <span>Request Container Quote</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-white" />
+                </Link>
+                <a
+                  href="https://wa.me/919023363680?text=Hello%20Agro%20Dairy%20Export%20LLP,%20I%20am%20inquiring%20about%20your%20export%20facility%20and%20commodities."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#25D366] hover:bg-[#20ba5a] text-white font-ui font-bold text-xs px-5 py-2.5 rounded-full transition flex items-center gap-2 shadow-sm"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>WhatsApp</span>
+                </a>
               </div>
+
+              <button
+                type="button"
+                onClick={() => setSelectedImage(null)}
+                className="text-white/60 hover:text-white text-xs font-mono transition cursor-pointer"
+              >
+                Close (Esc)
+              </button>
             </div>
           </div>
         </div>
