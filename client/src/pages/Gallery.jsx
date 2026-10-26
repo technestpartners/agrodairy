@@ -199,7 +199,7 @@ export default function Gallery() {
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = '/images/hero-commodities.jpg';
+                  e.target.src = '/images/gallery/gallery-01.jpg';
                 }}
               />
 
