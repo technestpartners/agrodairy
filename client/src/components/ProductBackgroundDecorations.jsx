@@ -44,6 +44,11 @@ export function getCommodityImage(type) {
     case 'dairy':
     case 'cow-ghee':
       return '/images/bg/real-ghee.jpg';
+    case 'sorghum':
+    case 'jowar':
+    case 'juvar':
+    case 'white-jowar':
+      return '/images/products/sorghum-jowar.jpg';
     case 'wheat':
     case 'grain':
     case 'grains':
@@ -71,36 +76,6 @@ export function HeroBgDecorations() {
       <div className="absolute -top-32 -right-32 w-[520px] h-[520px] bg-gradient-to-br from-[#00A79D]/12 via-[#5EEAD4]/08 to-transparent rounded-full blur-3xl" />
       <div className="absolute -bottom-32 -left-32 w-[460px] h-[460px] bg-gradient-to-tr from-[#F5B800]/12 via-amber-200/08 to-transparent rounded-full blur-3xl" />
 
-      {/* Top-Right: Golden Wheat Botanical Vignette (Subtle, feathered watermark) */}
-      <div className="absolute top-0 right-0 lg:right-6 w-64 sm:w-80 lg:w-92 h-64 sm:h-80 lg:h-92 pointer-events-none">
-        {/* Soft Golden Ambient Halo */}
-        <div className="absolute inset-8 bg-amber-100/30 rounded-full blur-3xl" />
-        {/* Subtle Architectural Orbit Ring */}
-        <div className="absolute inset-12 rounded-full border border-amber-300/20" />
-        <div 
-          className="relative w-full h-full mix-blend-multiply opacity-24 sm:opacity-28 lg:opacity-32 transform rotate-6"
-          style={{ 
-            maskImage: 'radial-gradient(circle at 55% 45%, black 28%, rgba(0,0,0,0.5) 55%, transparent 76%)',
-            WebkitMaskImage: 'radial-gradient(circle at 55% 45%, black 28%, rgba(0,0,0,0.5) 55%, transparent 76%)'
-          }}
-        >
-          <img src="/images/bg/real-grains.jpg" alt="Indian Wheat Grains" className="w-full h-full object-contain filter contrast-110" />
-        </div>
-      </div>
-
-      {/* Bottom-Left: Shelled Peanuts Watermark (Tucked comfortably in margin) */}
-      <div className="absolute -bottom-8 -left-8 sm:left-2 lg:left-6 w-56 sm:w-68 lg:w-80 h-56 sm:h-68 lg:h-80 pointer-events-none">
-        <div className="absolute inset-8 bg-amber-100/25 rounded-full blur-3xl" />
-        <div 
-          className="relative w-full h-full mix-blend-multiply opacity-20 sm:opacity-24 lg:opacity-28 transform -rotate-6"
-          style={{ 
-            maskImage: 'radial-gradient(circle at 45% 55%, black 28%, rgba(0,0,0,0.5) 55%, transparent 76%)',
-            WebkitMaskImage: 'radial-gradient(circle at 45% 55%, black 28%, rgba(0,0,0,0.5) 55%, transparent 76%)'
-          }}
-        >
-          <img src="/images/bg/shelled-peanuts.jpg" alt="Shelled Peanuts" className="w-full h-full object-contain filter contrast-110" />
-        </div>
-      </div>
     </div>
   );
 }

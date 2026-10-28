@@ -80,7 +80,10 @@ export function getProductFallback(product) {
   if (slug.includes('kabuli') || name.includes('kabuli') || slug.includes('chickpea') || slug.includes('chana') || category.includes('chickpea') || slug.includes('garbanzo')) {
     return '/images/products/kabuli-chickpeas.jpg';
   }
-  if (slug.includes('sorghum') || slug.includes('jowar') || slug.includes('wheat') || category.includes('grain')) {
+  if (slug.includes('sorghum') || slug.includes('jowar') || slug.includes('juvar') || name.includes('sorghum') || name.includes('jowar') || name.includes('juvar')) {
+    return '/images/products/sorghum-jowar.jpg';
+  }
+  if (slug.includes('wheat') || category.includes('grain')) {
     return '/images/bg/real-grains.jpg';
   }
   if (category.includes('pulses') || category.includes('lentil')) {
@@ -90,6 +93,11 @@ export function getProductFallback(product) {
 }
 
 export function getProductImage(product) {
+  const isJuvar = (product?.slug || '').includes('sorghum') || (product?.slug || '').includes('jowar') || (product?.slug || '').includes('juvar') || (product?.name || '').toLowerCase().includes('sorghum') || (product?.name || '').toLowerCase().includes('jowar') || (product?.name || '').toLowerCase().includes('juvar');
+  if (isJuvar && (!product?.main_image || product.main_image.includes('real-grains') || product.main_image.includes('wheat'))) {
+    return '/images/products/sorghum-jowar.jpg';
+  }
+
   if (product?.main_image && product.main_image.trim() && !product.main_image.includes('hero-commodities')) {
     return product.main_image.startsWith('http') || product.main_image.startsWith('/')
       ? product.main_image

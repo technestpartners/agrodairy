@@ -68,7 +68,7 @@ const PRODUCTS_STATIC = [
   { id: 'chickpeas', name: 'Desi Chickpeas', category_name: 'Pulses', slug: 'desi-chickpeas', short_description: 'Brown Desi Chickpeas, 5–7 mm / 6–8 mm. Purity 98–99%, moisture 12% max. 25 kg/50 kg PP or Jute bags.', origin: 'Gujarat, India', moq: 25, moq_unit: 'MT', grade_variety: 'Sortex Clean', is_featured: 0, main_image: '/images/products/desi-chickpeas.jpg' },
   { id: 'millet', name: 'Green Pearl Millet', category_name: 'Grains', slug: 'pearl-millet', short_description: 'Pearl Millet (Bajra) / Foxtail Millet. Machine & Sortex 99% purity, 11% moisture max. 24–25 MT in 20ft FCL.', origin: 'Saurashtra, Gujarat', moq: 24, moq_unit: 'MT', grade_variety: '99% Sortex', is_featured: 0, main_image: '/images/bg/pearl-millet.jpg' },
   { id: 'kabuli', name: 'Kabuli Chickpeas', category_name: 'Pulses', slug: 'kabuli-chickpeas', short_description: 'Cream Kabuli Chickpeas, count 38/40 to 75/80. 99% Sortex clean, moisture 12% max. Premium export grade.', origin: 'Rajasthan / MP', moq: 25, moq_unit: 'MT', grade_variety: '99% Sortex', is_featured: 0, main_image: '/images/products/kabuli-chickpeas.jpg' },
-  { id: 'sorghum', name: 'Sorghum (White Jowar)', category_name: 'Grains', slug: 'sorghum-jowar', short_description: 'White Sorghum. Machine 98–99%, Sortex 99% purity. Moisture 11% max. 25 kg/50 kg PP or Jute bags.', origin: 'Saurashtra, Gujarat', moq: 24, moq_unit: 'MT', grade_variety: '99% Sortex', is_featured: 0, main_image: '/images/bg/real-grains.jpg' },
+  { id: 'sorghum', name: 'Sorghum (White Jowar)', category_name: 'Grains', slug: 'sorghum-jowar', short_description: 'White Sorghum. Machine 98–99%, Sortex 99% purity. Moisture 11% max. 25 kg/50 kg PP or Jute bags.', origin: 'Saurashtra, Gujarat', moq: 24, moq_unit: 'MT', grade_variety: '99% Sortex', is_featured: 0, main_image: '/images/products/sorghum-jowar.jpg' },
   { id: 'maize', name: 'Yellow Maize (Corn)', category_name: 'Grains', slug: 'yellow-maize', short_description: 'Yellow & White Maize. Machine 98–99%, Sortex 99% purity. Moisture 11% max. 24 MT in 20ft FCL.', origin: 'Gujarat, India', moq: 24, moq_unit: 'MT', grade_variety: 'Export Grade', is_featured: 0, main_image: '/images/bg/yellow-corn.jpg' },
 ];
 
@@ -167,11 +167,11 @@ const STATS = [
     borderHover: 'hover:border-amber-400/40',
   },
   {
-    value: 40,
+    value: 22,
     suffix: '+',
     label: 'Countries Served',
     sub: 'GCC, SEA, Europe & Africa',
-    tag: '5 Continents',
+    tag: 'Global Reach',
     highlight: 'Worldwide Reach',
     icon: Globe2,
     glow: 'from-teal-400/20 via-teal-400/5 to-transparent',
@@ -554,174 +554,83 @@ export default function Home() {
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-accent/40 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
 
-        <div className="section-container relative">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
-            {/* Left Column: Heading, Subtext, CTAs (7 cols) */}
-            <div className="lg:col-span-7 space-y-6">
-              {/* Badge */}
-              {(settings.hero_show_badge !== '0' && settings.hero_show_badge !== 0 && settings.hero_show_badge !== false) && (
-                <div className="animate-fade-in inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E6F7F5] border border-[#BBE5E1] text-brand-primary text-xs font-ui font-semibold shadow-sm">
-                  <Leaf className="w-3.5 h-3.5 text-brand-primary shrink-0" />
-                  <span>{settings.hero_badge || 'Trusted Agro & Dairy Export Partner from India'}</span>
-                </div>
-              )}
+        <div className="section-container relative py-2 sm:py-4">
+          <div className="max-w-4xl space-y-6">
+            {/* Badge */}
+            {(settings.hero_show_badge !== '0' && settings.hero_show_badge !== 0 && settings.hero_show_badge !== false) && (
+              <div className="animate-fade-in inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E6F7F5] border border-[#BBE5E1] text-brand-primary text-xs font-ui font-semibold shadow-sm">
+                <Leaf className="w-3.5 h-3.5 text-brand-primary shrink-0" />
+                <span>{settings.hero_badge || 'Trusted Agro & Dairy Export Partner from India'}</span>
+              </div>
+            )}
 
-              {/* Main Headline */}
-              <h1 className="animate-fade-in-up font-display font-extrabold text-4xl sm:text-5xl lg:text-[3.25rem] leading-[1.14] tracking-tight text-[#0C2422]">
-                {settings.hero_title ? (
-                  <>
-                    {settings.hero_title} <span className="text-brand-primary">{settings.hero_highlight || 'Dairy Ghee'}</span>
-                  </>
-                ) : (
-                  <>
-                    Origin-Direct Peanuts,<br />
-                    Grains, Pulses &amp; Pure<br />
-                    <span className="text-brand-primary">Dairy Ghee</span>
-                  </>
+            {/* Main Headline */}
+            <h1 className="animate-fade-in-up font-display font-extrabold text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.12] tracking-tight text-[#0C2422]">
+              {settings.hero_title ? (
+                <>
+                  {settings.hero_title} <span className="text-brand-primary">{settings.hero_highlight || 'Dairy Ghee'}</span>
+                </>
+              ) : (
+                <>
+                  Origin-Direct Peanuts,<br />
+                  Grains, Pulses &amp; Pure<br />
+                  <span className="text-brand-primary">Dairy Ghee</span>
+                </>
+              )}
+            </h1>
+
+            {/* Subtitle */}
+            <p className="animate-fade-in-up delay-100 text-base sm:text-lg text-[#4D6765] leading-relaxed max-w-2xl font-sans">
+              {settings.hero_subtitle || 'We source, process and export premium quality agricultural commodities from India to global markets with consistent quality, competitive pricing and reliable supply.'}
+            </p>
+
+            {/* CTAs */}
+            {((settings.hero_show_primary_btn !== '0' && settings.hero_show_primary_btn !== 0 && settings.hero_show_primary_btn !== false) ||
+              (settings.hero_show_secondary_btn !== '0' && settings.hero_show_secondary_btn !== 0 && settings.hero_show_secondary_btn !== false)) && (
+              <div className="animate-fade-in-up delay-200 flex flex-wrap items-center gap-4 pt-2">
+                {(settings.hero_show_primary_btn !== '0' && settings.hero_show_primary_btn !== 0 && settings.hero_show_primary_btn !== false) && (
+                  <Link
+                    to={settings.hero_cta_primary_link || '/products'}
+                    id="hero-view-products-btn"
+                    className="px-7 py-3.5 rounded-full bg-brand-primary hover:bg-brand-primary-dark text-white font-ui font-bold text-sm shadow-md shadow-brand-primary/25 hover:shadow-lg transition-all flex items-center gap-2 group"
+                  >
+                    <span>{settings.hero_cta_primary_text || 'View Products'}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
                 )}
-              </h1>
-
-              {/* Subtitle */}
-              <p className="animate-fade-in-up delay-100 text-base sm:text-lg text-[#4D6765] leading-relaxed max-w-xl font-sans">
-                {settings.hero_subtitle || 'We source, process and export premium quality agricultural commodities from India to global markets with consistent quality, competitive pricing and reliable supply.'}
-              </p>
-
-              {/* CTAs */}
-              {((settings.hero_show_primary_btn !== '0' && settings.hero_show_primary_btn !== 0 && settings.hero_show_primary_btn !== false) ||
-                (settings.hero_show_secondary_btn !== '0' && settings.hero_show_secondary_btn !== 0 && settings.hero_show_secondary_btn !== false)) && (
-                <div className="animate-fade-in-up delay-200 flex flex-wrap items-center gap-4 pt-2">
-                  {(settings.hero_show_primary_btn !== '0' && settings.hero_show_primary_btn !== 0 && settings.hero_show_primary_btn !== false) && (
-                    <Link
-                      to={settings.hero_cta_primary_link || '/products'}
-                      id="hero-view-products-btn"
-                      className="px-7 py-3.5 rounded-full bg-brand-primary hover:bg-brand-primary-dark text-white font-ui font-bold text-sm shadow-md shadow-brand-primary/25 hover:shadow-lg transition-all flex items-center gap-2 group"
-                    >
-                      <span>{settings.hero_cta_primary_text || 'View Products'}</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  )}
-                  {(settings.hero_show_secondary_btn !== '0' && settings.hero_show_secondary_btn !== 0 && settings.hero_show_secondary_btn !== false) && (
-                    <a
-                      href={settings.hero_cta_secondary_link || '#rfq-section'}
-                      id="hero-get-quote-btn"
-                      className="px-7 py-3.5 rounded-full bg-white hover:bg-brand-accent text-brand-deep font-ui font-bold text-sm border-2 border-brand-deep transition-all shadow-sm"
-                    >
-                      {settings.hero_cta_secondary_text || 'Get a Quote'}
-                    </a>
-                  )}
-                </div>
-              )}
-
-              {/* Horizontal Trust Bar below CTAs */}
-              {(settings.hero_show_trust_bar !== '0' && settings.hero_show_trust_bar !== 0 && settings.hero_show_trust_bar !== false) && (
-              <div className="animate-fade-in-up delay-300 grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 sm:pt-8 mt-6 sm:mt-8 border-t border-[#D4ECE9]">
-                {[
-                  { Icon: Building2, title: 'Farm to Global Markets', sub: 'Direct Sourcing' },
-                  { Icon: Award, title: 'Premium Quality', sub: 'Certified Products' },
-                  { Icon: Truck, title: 'Timely Delivery', sub: 'Worldwide Shipping' },
-                  { Icon: HeartHandshake, title: 'Trusted by Importers', sub: 'Long-Term Partnerships' },
-                ].map(({ Icon, title, sub }, i) => (
-                  <div key={i} className="flex items-center gap-2.5">
-                    <div className="w-9 h-9 rounded-full bg-[#E6F7F5] text-brand-primary flex items-center justify-center shrink-0">
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="font-ui font-bold text-xs text-[#0C2422] leading-tight">{title}</div>
-                      <div className="text-[11px] text-[#4D6765]">{sub}</div>
-                    </div>
-                  </div>
-                ))}
+                {(settings.hero_show_secondary_btn !== '0' && settings.hero_show_secondary_btn !== 0 && settings.hero_show_secondary_btn !== false) && (
+                  <a
+                    href={settings.hero_cta_secondary_link || '#rfq-section'}
+                    id="hero-get-quote-btn"
+                    className="px-7 py-3.5 rounded-full bg-white hover:bg-brand-accent text-brand-deep font-ui font-bold text-sm border-2 border-brand-deep transition-all shadow-sm"
+                  >
+                    {settings.hero_cta_secondary_text || 'Get a Quote'}
+                  </a>
+                )}
               </div>
-              )}
+            )}
+
+            {/* Horizontal Trust Bar below CTAs */}
+            {(settings.hero_show_trust_bar !== '0' && settings.hero_show_trust_bar !== 0 && settings.hero_show_trust_bar !== false) && (
+            <div className="animate-fade-in-up delay-300 grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 sm:pt-8 mt-6 sm:mt-8 border-t border-[#D4ECE9]">
+              {[
+                { Icon: Building2, title: 'Farm to Global Markets', sub: 'Direct Sourcing' },
+                { Icon: Award, title: 'Premium Quality', sub: 'Certified Products' },
+                { Icon: Truck, title: 'Timely Delivery', sub: 'Worldwide Shipping' },
+                { Icon: HeartHandshake, title: 'Trusted by Importers', sub: 'Long-Term Partnerships' },
+              ].map(({ Icon, title, sub }, i) => (
+                <div key={i} className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-full bg-[#E6F7F5] text-brand-primary flex items-center justify-center shrink-0">
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="font-ui font-bold text-xs text-[#0C2422] leading-tight">{title}</div>
+                    <div className="text-[11px] text-[#4D6765]">{sub}</div>
+                  </div>
+                </div>
+              ))}
             </div>
-
-            {/* Right Column: Hero Visual with Pure India script & floating badges (5 cols) */}
-            <div className="lg:col-span-5 relative">
-              {/* Handwritten script note: "Pure India to the World" with smooth hand-drawn curved arrow */}
-              <div className="absolute -top-8 left-6 sm:left-10 z-20 flex flex-col items-center select-none pointer-events-none">
-                <span className="font-serif italic font-bold text-[#003732] text-base sm:text-lg tracking-wide drop-shadow-sm rotate-[-3deg] inline-flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#F5B800] animate-pulse" />
-                  <span>Pure India to the World</span>
-                </span>
-                <svg 
-                  className="w-12 h-8 text-[#00A79D] -mt-0.5 ml-6 drop-shadow-sm" 
-                  viewBox="0 0 50 36" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2.2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                >
-                  {/* Smooth curved swoop pointing down-right */}
-                  <path d="M 8 4 C 18 10, 28 20, 36 30" />
-                  {/* Crisp arrow tip pointing down-right */}
-                  <path d="M 27 28 L 36 30 L 34 20" />
-                </svg>
-              </div>
-
-              {/* Floating Pill Badges on Top Right */}
-              <div className="absolute top-2 -right-2 sm:-right-4 z-20 space-y-2 pointer-events-none">
-                {[
-                  { Icon: Leaf, text: '100% Natural & Pure' },
-                  { Icon: Award, text: 'Export Quality Standards' },
-                  { Icon: HeartHandshake, text: 'Trusted Global Partner' },
-                ].map(({ Icon, text }, i) => (
-                  <div key={i} className="bg-white/95 backdrop-blur-md rounded-full px-3.5 py-1.5 shadow-lg border border-[#D4ECE9] flex items-center gap-2 text-xs font-ui font-bold text-[#0C2422]">
-                    <div className="w-5 h-5 rounded-full bg-brand-accent text-brand-primary flex items-center justify-center">
-                      <Icon className="w-3 h-3" />
-                    </div>
-                    <span>{text}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Central Visual Image with Real Product Floating Chips */}
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white">
-                <img
-                  src={settings.hero_image || "/images/hero-commodities.jpg"}
-                  alt="Export quality peanuts, pulses, grains, and golden pure dairy ghee"
-                  className="w-full h-[380px] sm:h-[420px] object-cover"
-                />
-
-                {/* Floating Real Product Card: Pure Cow Ghee */}
-                <div className="hidden sm:flex absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-2.5 shadow-xl border border-[#D4ECE9] items-center gap-2.5 animate-bounce-gentle">
-                  <div className="w-11 h-11 rounded-xl overflow-hidden bg-amber-50 shrink-0 border border-amber-200">
-                    <img 
-                      src={settings.hero_chip_1_image || "/images/bg/real-ghee.jpg"} 
-                      alt="Pure Indian Cow Ghee" 
-                      className="w-full h-full object-cover" 
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = '/images/hero-commodities.jpg';
-                      }}
-                    />
-                  </div>
-                  <div className="pr-1">
-                    <div className="font-ui font-bold text-xs text-[#0C2422]">Pure Cow Ghee</div>
-                    <div className="text-[10px] text-amber-700 font-semibold">99.8% Milk Fat • FSSAI</div>
-                  </div>
-                </div>
-
-                {/* Floating Real Product Card: Bold Peanuts */}
-                <div className="absolute bottom-4 left-4 sm:left-4 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-2.5 shadow-xl border border-[#D4ECE9] flex items-center gap-2.5">
-                  <div className="w-11 h-11 rounded-xl overflow-hidden bg-brand-cream shrink-0 border border-brand-border">
-                    <img 
-                      src={settings.hero_chip_2_image || "/images/products/bold-peanuts.jpg"} 
-                      alt="Sortex Bold Peanuts 38/42" 
-                      className="w-full h-full object-cover" 
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = '/images/bg/shelled-peanuts.jpg';
-                      }}
-                    />
-                  </div>
-                  <div className="pr-1">
-                    <div className="font-ui font-bold text-xs text-[#0C2422]">Bold Peanuts 38/42</div>
-                    <div className="text-[10px] text-brand-primary font-semibold">99% Sortex Clean</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
@@ -750,11 +659,6 @@ export default function Home() {
                 />
               </div>
 
-              {/* Floating Top Port Gateway Tag */}
-              <div className="absolute top-5 left-5 bg-white/95 backdrop-blur-md text-[#0C2422] rounded-full px-4 py-1.5 shadow-md border border-[#D4ECE9] flex items-center gap-2 text-xs font-mono font-bold">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>MUNDRA &amp; KANDLA GATEWAY</span>
-              </div>
 
               {/* Floating Annual Volume Badge in Corner */}
               <div className="absolute bottom-6 left-6 right-6 sm:right-auto bg-[#0C2422]/95 backdrop-blur-md text-white rounded-2xl px-5 py-4 shadow-2xl border border-white/15 flex items-center gap-4">
@@ -762,8 +666,8 @@ export default function Home() {
                   <TrendingUp className="w-6 h-6 text-brand-gold" />
                 </div>
                 <div>
-                  <div className="font-display font-black text-2xl sm:text-3xl leading-none text-white tracking-tight">50,000+ <span className="text-sm font-ui font-semibold text-brand-gold">MT</span></div>
-                  <div className="text-xs font-ui text-emerald-200/90 mt-1">Exported Annually to 40+ Nations</div>
+                  <div className="font-display font-black text-2xl sm:text-3xl leading-none text-white tracking-tight">10,000+ <span className="text-sm font-ui font-semibold text-brand-gold">MT</span></div>
+                  <div className="text-xs font-ui text-emerald-200/90 mt-1">Exported Annually to 22+ Nations</div>
                 </div>
               </div>
             </div>
@@ -1541,7 +1445,7 @@ export default function Home() {
               {/* 4 Trade Highlights Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 {[
-                  { title: '50,000+ MT Export Capacity', desc: 'Annual multi-commodity volume' },
+                  { title: '10,000+ MT Export Capacity', desc: 'Annual multi-commodity volume' },
                   { title: 'APEDA & FSSAI Certified', desc: 'Accredited lab quality testing' },
                   { title: 'Mundra & Hazira Direct Loading', desc: 'Fast customs & port dispatch' },
                   { title: 'Mixed Containers Supported', desc: 'Peanuts, ghee & grains in 1 FCL' },
